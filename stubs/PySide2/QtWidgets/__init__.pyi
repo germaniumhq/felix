@@ -47,6 +47,9 @@ class QDialog:
     def show(self) -> None:
         pass
 
+    def hide(self) -> None:
+        pass
+
     def setWindowTitle(self, title: str) -> None:
         pass
 

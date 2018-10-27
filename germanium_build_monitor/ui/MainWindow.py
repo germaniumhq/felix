@@ -22,16 +22,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._last_widget: Optional[QWidget] = None
 
         self.set_current_widget(NewStartFrame())
-        self.set_current_widget(NewStartFrame())
 
     def set_current_widget(self,
                            widget: QWidget) -> None:
         if self._last_widget:
+            self._last_widget.deleteLater()
             self.current_view.removeWidget(self._last_widget)
-            self._last_widget.close()
 
-        self.current_view.addWidget(NewStartFrame())
-
+        self.current_view.addWidget(widget)
         self._last_widget = widget
 
     def closeEvent(self, event) -> None:

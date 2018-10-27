@@ -16,6 +16,7 @@ def main() -> None:
     app = QApplication(sys.argv)
 
     main_window = MainWindow()
+    main_window.show()
 
     def show_main_application():
         main_window.show()
