@@ -31,23 +31,41 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QToolButton" name="toolButton">
+           <widget class="QPushButton" name="add_server_button">
             <property name="text">
-             <string>...</string>
+             <string>Add Server</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_2">
+           <widget class="QPushButton" name="add_folder_button">
             <property name="text">
-             <string>...</string>
+             <string>Add Folder</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_3">
+           <widget class="QPushButton" name="add_job_button">
             <property name="text">
-             <string>...</string>
+             <string>Add Job</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -67,6 +85,19 @@
             </property>
            </spacer>
           </item>
+          <item>
+           <widget class="QPushButton" name="delete_item_button">
+            <property name="text">
+             <string>Delete</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -81,8 +112,10 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="widget" native="true"/>
      </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="current_view"/>
     </item>
    </layout>
   </widget>
@@ -95,8 +128,27 @@
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Fi&amp;le</string>
+    </property>
+    <addaction name="menu_minimize_to_tray_action"/>
+    <addaction name="separator"/>
+    <addaction name="menu_exit_action"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="menu_exit_action">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="menu_minimize_to_tray_action">
+   <property name="text">
+    <string>Minimize to Tray</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -20,6 +20,10 @@ def get_icon(icon_name: str) -> QtGui.QIcon:
     return icon
 
 
+def get_icon_path(icon_name: str) -> str:
+    return os.path.join(base_dir(), icon_name)
+
+
 def create_icon(icon_name: str) -> QtGui.QIcon:
     icon = QtGui.QIcon()
     icon_path = os.path.join(base_dir(), icon_name)

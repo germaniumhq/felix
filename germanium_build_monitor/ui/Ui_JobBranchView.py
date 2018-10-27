@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/JobBranchView.ui',
 # licensing of 'ui/JobBranchView.ui' applies.
 #
-# Created: Sat Oct 27 05:30:37 2018
+# Created: Sat Oct 27 10:22:33 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
