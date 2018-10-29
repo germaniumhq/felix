@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddBranchDialog.ui',
 # licensing of 'ui/AddBranchDialog.ui' applies.
 #
-# Created: Sat Oct 27 10:22:32 2018
+# Created: Mon Oct 29 18:18:54 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -90,7 +90,7 @@ class Ui_Dialog(object):
         self.cancel_button.setText(QtWidgets.QApplication.translate("Dialog", "Cancel", None, -1))
         self.add_button.setText(QtWidgets.QApplication.translate("Dialog", "Add", None, -1))
         self.lineEdit_2.setPlaceholderText(QtWidgets.QApplication.translate("Dialog", "/feature/some-branch-name", None, -1))
-        self.label.setText(QtWidgets.QApplication.translate("Dialog", "RegEx", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("Dialog", "RegEx <span style=\"color: red\">*</span>", None, -1))
         self.lineEdit.setPlaceholderText(QtWidgets.QApplication.translate("Dialog", ".*", None, -1))
         self.label_5.setText(QtWidgets.QApplication.translate("Dialog", "<html><head/><body><p>When will the system notifications be triggered. These will be considered only if the branch is being processed.</p></body></html>", None, -1))
         self.groupBox_2.setTitle(QtWidgets.QApplication.translate("Dialog", "Action", None, -1))

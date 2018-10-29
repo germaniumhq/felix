@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/MainWindow.ui',
 # licensing of 'ui/MainWindow.ui' applies.
 #
-# Created: Sat Oct 27 10:22:32 2018
+# Created: Mon Oct 29 18:18:54 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -55,6 +55,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.treeView.sizePolicy().hasHeightForWidth())
         self.treeView.setSizePolicy(sizePolicy)
+        self.treeView.setUniformRowHeights(True)
         self.treeView.setObjectName("treeView")
         self.verticalLayout.addWidget(self.treeView)
         self.horizontalLayout_2.addWidget(self.splitter)
@@ -65,10 +66,20 @@ class Ui_MainWindow(object):
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.menu_exit_action = QtWidgets.QAction(MainWindow)
+        self.menu_exit_action.setObjectName("menu_exit_action")
+        self.menu_minimize_to_tray_action = QtWidgets.QAction(MainWindow)
+        self.menu_minimize_to_tray_action.setObjectName("menu_minimize_to_tray_action")
+        self.menuFile.addAction(self.menu_minimize_to_tray_action)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.menu_exit_action)
+        self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -79,4 +90,7 @@ class Ui_MainWindow(object):
         self.add_folder_button.setText(QtWidgets.QApplication.translate("MainWindow", "Add Folder", None, -1))
         self.add_job_button.setText(QtWidgets.QApplication.translate("MainWindow", "Add Job", None, -1))
         self.delete_item_button.setText(QtWidgets.QApplication.translate("MainWindow", "Delete", None, -1))
+        self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "Fi&le", None, -1))
+        self.menu_exit_action.setText(QtWidgets.QApplication.translate("MainWindow", "Exit", None, -1))
+        self.menu_minimize_to_tray_action.setText(QtWidgets.QApplication.translate("MainWindow", "Minimize to Tray", None, -1))
 

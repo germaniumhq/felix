@@ -15,6 +15,7 @@ from germanium_build_monitor.model.operations import \
 
 class TestSerialization(unittest.TestCase):
     recorded_events = []
+    expected_events = ["wut"]
 
     """
     Tests if the serialization works as expected.
@@ -27,7 +28,7 @@ class TestSerialization(unittest.TestCase):
         root = RootModel()
 
         expected_events: List = []
-        root.on_event("server-new", expected_events.append)
+        root.on_event("server-new", self.register_new_server)
 
         server1 = server_add(root,
                              name="localhost",
@@ -73,6 +74,9 @@ class TestSerialization(unittest.TestCase):
                                name="Simple job 2 in folder 2",
                                url_part="/job/folder2/job/job2",
                                systray=True)
+
+        self.assertEqual(self.expected_events,
+                         self.recorded_events)
 
     def register_new_server(self, server: JenkinsServer) -> None:
         self.recorded_events.append("server-new")
