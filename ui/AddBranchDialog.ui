@@ -65,7 +65,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>RegEx</string>
+      <string>RegEx &lt;span style=&quot;color: red&quot;&gt;*&lt;/span&gt;</string>
      </property>
     </widget>
    </item>

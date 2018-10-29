@@ -22,7 +22,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Name</string>
+        <string>Name &lt;span style=&quot;color: red&quot;&gt;*&lt;/span&gt;</string>
        </property>
       </widget>
      </item>
@@ -32,7 +32,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>URL</string>
+        <string>URL &lt;span style=&quot;color: red&quot;&gt;*&lt;/span&gt;</string>
        </property>
       </widget>
      </item>
@@ -163,19 +163,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>formLayoutWidget</zorder>
-  <zorder>branch_move_up_button</zorder>
-  <zorder>branch_move_down_button</zorder>
-  <zorder>branch_add_after_button</zorder>
-  <zorder>branch_add_before_button</zorder>
-  <zorder>branch_delete_button</zorder>
-  <zorder>verticalSpacer</zorder>
-  <zorder>branch_add_after_button</zorder>
-  <zorder>monitored_branches_table</zorder>
-  <zorder>add_job_button</zorder>
-  <zorder>cancel_dialog_button</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>label_3</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -22,6 +22,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._last_widget: Optional[QWidget] = None
 
         self.set_current_widget(NewStartFrame())
+        self.set_current_widget(NewStartFrame())
 
     def set_current_widget(self,
                            widget: QWidget) -> None:

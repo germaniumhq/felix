@@ -1,17 +1,23 @@
-from germanium_build_monitor.model.Folder import Folder
+from .SystrayItem import SystrayItem
 
 
-class JenkinsJob(Folder):
+class JenkinsJob(SystrayItem):
     """
     A Jenkins monitored job.
     """
     def __init__(self,
+                 parent: 'Folder',
                  name: str,
                  url_part: str,
-                 systray_avaialable: bool) -> None:
-        super(Folder, self).__init__(name)
+                 systray: bool) -> None:
+        super().__init__(
+            systray=systray
+        )
 
+        self.name = name
+        self.parent = parent
         self.url_part = url_part
-        self.systray_avaialable = systray_avaialable
         self.branches = []
 
+
+from germanium_build_monitor.model.Folder import Folder

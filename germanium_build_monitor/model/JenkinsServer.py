@@ -1,7 +1,10 @@
 from typing import Optional
 
+from .JenkinsJob import JenkinsJob
+from .Folder import Folder
 
-class JenkinsServer:
+
+class JenkinsServer(Folder):
     """
     A Jenkins Server definition
     """
@@ -11,7 +14,11 @@ class JenkinsServer:
                  use_authentication: bool,
                  user: Optional[str],
                  password: Optional[str]) -> None:
-        self.name = name
+        super().__init__(
+            parent=None,
+            name=name,
+            systray=False)
+
         self.url = url
         self.use_authentication = use_authentication
         self.user = user
