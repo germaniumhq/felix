@@ -31,41 +31,32 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QPushButton" name="add_server_button">
+           <widget class="QToolButton" name="add_server_button">
             <property name="text">
-             <string>Add Server</string>
+             <string>Server</string>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="add_folder_button">
+           <widget class="QToolButton" name="add_folder_button">
             <property name="text">
-             <string>Add Folder</string>
+             <string>Folder</string>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="add_job_button">
+           <widget class="QToolButton" name="add_job_button">
             <property name="text">
-             <string>Add Job</string>
+             <string>Build Job</string>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
             </property>
            </widget>
           </item>
@@ -86,31 +77,46 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="delete_item_button">
+           <widget class="QToolButton" name="delete_item_button">
             <property name="text">
              <string>Delete</string>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTreeView" name="treeView">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QTreeWidget" name="treeWidget">
+          <property name="columnCount">
+           <number>3</number>
           </property>
-          <property name="uniformRowHeights">
-           <bool>true</bool>
-          </property>
+          <attribute name="headerCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="headerDefaultSectionSize">
+           <number>48</number>
+          </attribute>
+          <attribute name="headerHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string notr="true">1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string notr="true">2</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string notr="true">3</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -144,12 +150,12 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="menu_exit_action">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Exit</string>
    </property>
   </action>
   <action name="menu_minimize_to_tray_action">
    <property name="text">
-    <string>Minimize to Tray</string>
+    <string>&amp;Minimize to Tray</string>
    </property>
   </action>
  </widget>

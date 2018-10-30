@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/MainWindow.ui',
 # licensing of 'ui/MainWindow.ui' applies.
 #
-# Created: Mon Oct 29 18:18:54 2018
+# Created: Mon Oct 29 18:25:06 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,22 +30,22 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.add_server_button = QtWidgets.QPushButton(self.layoutWidget)
-        self.add_server_button.setIconSize(QtCore.QSize(24, 24))
+        self.add_server_button = QtWidgets.QToolButton(self.layoutWidget)
+        self.add_server_button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
         self.add_server_button.setObjectName("add_server_button")
         self.horizontalLayout.addWidget(self.add_server_button)
-        self.add_folder_button = QtWidgets.QPushButton(self.layoutWidget)
-        self.add_folder_button.setIconSize(QtCore.QSize(24, 24))
+        self.add_folder_button = QtWidgets.QToolButton(self.layoutWidget)
+        self.add_folder_button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
         self.add_folder_button.setObjectName("add_folder_button")
         self.horizontalLayout.addWidget(self.add_folder_button)
-        self.add_job_button = QtWidgets.QPushButton(self.layoutWidget)
-        self.add_job_button.setIconSize(QtCore.QSize(24, 24))
+        self.add_job_button = QtWidgets.QToolButton(self.layoutWidget)
+        self.add_job_button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
         self.add_job_button.setObjectName("add_job_button")
         self.horizontalLayout.addWidget(self.add_job_button)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.delete_item_button = QtWidgets.QPushButton(self.layoutWidget)
-        self.delete_item_button.setIconSize(QtCore.QSize(24, 24))
+        self.delete_item_button = QtWidgets.QToolButton(self.layoutWidget)
+        self.delete_item_button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
         self.delete_item_button.setObjectName("delete_item_button")
         self.horizontalLayout.addWidget(self.delete_item_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -86,11 +86,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Germanium Build Watcher", None, -1))
-        self.add_server_button.setText(QtWidgets.QApplication.translate("MainWindow", "Add Server", None, -1))
-        self.add_folder_button.setText(QtWidgets.QApplication.translate("MainWindow", "Add Folder", None, -1))
+        self.add_server_button.setText(QtWidgets.QApplication.translate("MainWindow", "Server", None, -1))
+        self.add_folder_button.setText(QtWidgets.QApplication.translate("MainWindow", "Folder", None, -1))
         self.add_job_button.setText(QtWidgets.QApplication.translate("MainWindow", "Add Job", None, -1))
         self.delete_item_button.setText(QtWidgets.QApplication.translate("MainWindow", "Delete", None, -1))
         self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "Fi&le", None, -1))
-        self.menu_exit_action.setText(QtWidgets.QApplication.translate("MainWindow", "Exit", None, -1))
-        self.menu_minimize_to_tray_action.setText(QtWidgets.QApplication.translate("MainWindow", "Minimize to Tray", None, -1))
+        self.menu_exit_action.setText(QtWidgets.QApplication.translate("MainWindow", "&Exit", None, -1))
+        self.menu_minimize_to_tray_action.setText(QtWidgets.QApplication.translate("MainWindow", "&Minimize to Tray", None, -1))
 

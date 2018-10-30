@@ -1,4 +1,4 @@
-from typing import Dict, Callable, Any
+from typing import Dict, Callable, Any, List
 
 import uuid
 
@@ -20,7 +20,7 @@ class Observable():
 
     def on_event(self,
                  event_name: str,
-                 callback: Callable[[Any], Any]) -> RegistrationHandler:
+                 callback: Callable[..., Any]) -> RegistrationHandler:
 
         listener_map = self._listeners.get(event_name, None)
 
@@ -35,11 +35,11 @@ class Observable():
 
     def notify_observers(self,
                          event_name: str,
-                         data: Any) -> None:
+                         *data: List[Any]) -> None:
         listener_map = self._listeners.get(event_name, None)
 
         if not listener_map:
             return
 
         for k, callback in listener_map.items():
-            callback(data)
+            callback(*data)

@@ -9,12 +9,14 @@ class JenkinsServer(Folder):
     A Jenkins Server definition
     """
     def __init__(self,
+                 root: 'RootModel',
                  name: str,
                  url: str,
                  use_authentication: bool,
                  user: Optional[str],
                  password: Optional[str]) -> None:
         super().__init__(
+            root=root,
             parent=None,
             name=name,
             systray=False)

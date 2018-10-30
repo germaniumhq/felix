@@ -16,6 +16,7 @@ def server_add(root: RootModel,
     Create a new server into the root model.
     """
     server = JenkinsServer(
+        root=root,
         name=name,
         url=url,
         use_authentication=use_authentication,
@@ -36,12 +37,20 @@ def folder_add(parent: Folder,
     """
 
     folder = Folder(
+        root=parent.root,
         parent=parent,
         name=name,
         systray=systray)
 
     parent.folders.append(folder)
     parent.notify_observers("folder-new", folder)
+
+    if folder.systray:
+        parent.root.systray_items.append(folder)
+        parent.root.notify_observers(
+            "systray-item-new",
+            folder,
+            len(parent.root.systray_items) - 1)
 
     return folder
 
@@ -61,6 +70,13 @@ def job_add(parent: Folder,
 
     parent.jobs.append(job)
     parent.notify_observers("job-new", job)
+
+    if job.systray:
+        parent.root.systray_items.append(job)
+        parent.root.notify_observers(
+            "systray-item-new",
+            job,
+            len(parent.root.systray_items) - 1)
 
     return job
 
