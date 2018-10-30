@@ -8,6 +8,9 @@ from germanium_build_monitor.resources import icons
 from .NewStartFrame import NewStartFrame
 
 
+main_window = None
+
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
@@ -36,4 +39,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, event) -> None:
         event.ignore()
         self.hide()
+
+    @staticmethod
+    def instance() -> 'MainWindow':
+        global main_window
+        main_window = MainWindow()
+
+        return main_window
 

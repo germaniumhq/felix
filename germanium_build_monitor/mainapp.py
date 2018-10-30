@@ -15,12 +15,6 @@ def exit_application():
 def main() -> None:
     app = QApplication(sys.argv)
 
-    main_window = MainWindow()
-    main_window.show()
-
-    def show_main_application():
-        main_window.show()
-
     tray_icon = QSystemTrayIcon()
     tray_icon.setIcon(icons.get_icon("favicon.ico"))
     tray_icon.show()
@@ -42,7 +36,7 @@ def main() -> None:
 
     menu = QMenu()
     menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
-        .triggered.connect(show_main_application)
+        .triggered.connect(MainWindow.instance().show)
 
     menu.addSeparator()
 
