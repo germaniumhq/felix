@@ -30,8 +30,10 @@ class TestSerialization(unittest.TestCase):
 
         expected_events: List = []
         root.on_event("server-new", self.register_new_server)
+        root.on_event("server-update", self.register_update_server)
         root.on_event("server-delete", self.register_delete_server)
         root.on_event("systray-item-new", self.register_new_systray_item)
+        root.on_event("systray-item-update", self.register_update_systray_item)
         root.on_event("systray-item-delete", self.register_delete_systray_item)
 
         server1 = server_add(root,
@@ -99,9 +101,14 @@ class TestSerialization(unittest.TestCase):
         self.recorded_events.append("server-new")
 
         server.on_event("folder-new", self.register_new_folder)
+        server.on_event("folder-update", self.register_update_folder)
         server.on_event("folder-delete", self.register_delete_folder)
         server.on_event("job-new", self.register_new_job)
+        server.on_event("job-update", self.register_update_folder)
         server.on_event("job-delete", self.register_delete_job)
+
+    def register_update_server(self, server: JenkinsServer) -> None:
+        self.recorded_events.append("server-update")
 
     def register_delete_server(self, server: JenkinsServer) -> None:
         self.recorded_events.append("server-delete")
@@ -111,6 +118,10 @@ class TestSerialization(unittest.TestCase):
                                   index: int) -> None:
         self.recorded_events.append(f"systray-item-new:{index}")
 
+    def register_update_systray_item(self,
+                                     item: SystrayItem) -> None:
+        self.recorded_events.append("systray-item-update")
+
     def register_delete_systray_item(self,
                                      item: SystrayItem) -> None:
         self.recorded_events.append("systray-item-delete")
@@ -119,9 +130,14 @@ class TestSerialization(unittest.TestCase):
         self.recorded_events.append("folder-new")
 
         folder.on_event("folder-new", self.register_new_folder)
+        folder.on_event("folder-update", self.register_update_folder)
         folder.on_event("folder-delete", self.register_delete_folder)
         folder.on_event("job-new", self.register_new_job)
+        folder.on_event("job-update", self.register_update_folder)
         folder.on_event("job-delete", self.register_delete_job)
+
+    def register_update_folder(self, folder: Folder) -> None:
+        self.recorded_events.append("folder-update")
 
     def register_delete_folder(self, folder: Folder) -> None:
         self.recorded_events.append("folder-delete")
@@ -131,8 +147,12 @@ class TestSerialization(unittest.TestCase):
 
         folder.on_event("branch-new", self.register_new_branch)
         folder.on_event("branch-delete", self.register_delete_branch)
+        folder.on_event("branch-update", self.register_update_branch)
         folder.on_event("branch-move-up", self.register_move_up_branch)
         folder.on_event("branch-move-down", self.register_move_down_branch)
+
+    def register_update_job(self, job: JenkinsJob) -> None:
+        self.recorded_events.append("job-update")
 
     def register_delete_job(self, job: JenkinsJob) -> None:
         self.recorded_events.append("job-delete")
@@ -140,6 +160,10 @@ class TestSerialization(unittest.TestCase):
     def register_new_branch(self,
                             branch: JenkinsJobBranch) -> None:
         self.recorded_events.append("branch-new")
+
+    def register_update_branch(self,
+                               branch: JenkinsJobBranch) -> None:
+        self.recorded_events.append("branch-update")
 
     def register_delete_branch(self,
                                branch: JenkinsJobBranch) -> None:
