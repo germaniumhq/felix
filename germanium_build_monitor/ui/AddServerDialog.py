@@ -50,6 +50,7 @@ class AddServerDialog(QDialog, Ui_Dialog):
 
         update_auth_status()
         
+        print(self.model.name)
         self.name_edit.setText(self.model.name)
         self.url_edit.setText(self.model.url)
         self.auth_check_box.setChecked(self.model.use_authentication)

@@ -18,16 +18,18 @@ class JenkinsServer(Folder):
                  use_authentication: bool,
                  user: Optional[str] = None,
                  password: Optional[str] = None) -> None:
+        super().__init__(
+            root=root,
+            parent=None,
+            name=name,
+            systray=False
+        )
 
-        self.name = name,
         self.url = url
-        self.root = root,
-        self.parent = None,
 
         self.folders: List['Folder'] = []
         self.jobs: List[JenkinsJob] = []
 
-        self.systray = False
         self.use_authentication = use_authentication
         self.user = user
         self.password = password

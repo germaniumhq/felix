@@ -10,10 +10,10 @@ def open_create_jenkins_server_dialog():
     AddServerDialog(
         JenkinsServer(
             root=model,
-            name=u"a",
-            url=u"http://localhost:8080/",
+            name="a",
+            url="http://localhost:8080/",
             use_authentication=False,
-            user=u"",
-            password=u""
+            user="",
+            password=""
         ),
         MainWindow.instance()).show()
