@@ -2,9 +2,11 @@ from typing import Optional, List
 
 from mopyx import model
 
+from .SystrayItem import SystrayItem
+
 
 @model
-class Folder:
+class Folder(SystrayItem):
     """
     A user defined folder.
     """
@@ -13,10 +15,10 @@ class Folder:
                  parent: Optional['Folder'],
                  name: str,
                  systray: bool) -> None:
-        self.systray = systray
+        super().__init__(systray=systray)
 
         self.name = name
-        self.root: 'RootModel' = root
+        self.root: RootModel = root
         self.parent = parent
 
         self.folders: List['Folder'] = []
@@ -24,4 +26,3 @@ class Folder:
 
 
 from .JenkinsJob import JenkinsJob
-from .RootModel import RootModel

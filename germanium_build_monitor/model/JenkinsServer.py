@@ -3,10 +3,11 @@ from typing import Optional, List
 from mopyx import model
 
 from .RootModel import RootModel
+from .Folder import Folder
 
 
 @model
-class JenkinsServer:
+class JenkinsServer(Folder):
     """
     A Jenkins Server definition
     """
@@ -33,4 +34,3 @@ class JenkinsServer:
 
 
 from .JenkinsJob import JenkinsJob
-from .Folder import Folder

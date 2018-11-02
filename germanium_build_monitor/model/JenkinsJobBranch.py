@@ -18,4 +18,3 @@ class JenkinsJobBranch:
         self.expression = expression
         self.action = action
         self.notification = notification
-

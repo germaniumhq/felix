@@ -10,13 +10,15 @@ class RootModel:
     """
 
     def __init__(self) -> None:
+        super().__init__()
+
         self.servers: List[JenkinsServer] = []
         self.systray_items: List[SystrayItem] = []
 
         self.tree_selection = None
 
-
 model = RootModel()
+
 
 from .JenkinsServer import JenkinsServer
 from .SystrayItem import SystrayItem
