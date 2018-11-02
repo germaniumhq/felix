@@ -1,11 +1,14 @@
 from typing import Optional
 
+from mopyx import action
+
 from .RootModel import RootModel
 from .JenkinsServer import JenkinsServer
 from .Folder import Folder
 from .JenkinsJob import JenkinsJob
 
 
+@action
 def server_add(root: RootModel,
                name: str,
                url: str,
@@ -29,6 +32,7 @@ def server_add(root: RootModel,
     return server
 
 
+@action
 def folder_add(parent: Folder,
                name: str,
                systray: bool) -> Folder:
@@ -55,6 +59,7 @@ def folder_add(parent: Folder,
     return folder
 
 
+@action
 def job_add(parent: Folder,
             name: str,
             url_part: str,

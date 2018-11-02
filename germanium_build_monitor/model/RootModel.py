@@ -1,18 +1,33 @@
 from typing import List
 
-from .JenkinsServer import JenkinsServer
-from .Observable import Observable
-from .SystrayItem import SystrayItem
+from mopyx import model
 
 
-class RootModel(Observable):
+@model
+class RootModel:
     """
     Root model of the application.
     """
 
     def __init__(self) -> None:
-        super().__init__()
-
         self.servers: List[JenkinsServer] = []
         self.systray_items: List[SystrayItem] = []
+
+        self.tree_selection = None
+
+
+model = RootModel()
+
+from .JenkinsServer import JenkinsServer
+from .SystrayItem import SystrayItem
+
+model.servers.append(
+    JenkinsServer(
+        root=model,
+        name='bmbzl',
+        url='http://jenkins:30000',
+        use_authentication=True,
+        user="raptor",
+        password="wut"
+    ))
 

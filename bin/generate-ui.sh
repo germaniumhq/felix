@@ -7,3 +7,4 @@ pyside2-uic ui/AddFolderDialog.ui > germanium_build_monitor/ui/Ui_AddFolderDialo
 pyside2-uic ui/JobBranchView.ui > germanium_build_monitor/ui/Ui_JobBranchView.py
 
 pyside2-uic ui/NewStartFrame.ui > germanium_build_monitor/ui/Ui_NewStartFrame.py
+pyside2-uic ui/NoSelectionFrame.ui > germanium_build_monitor/ui/Ui_NoSelectionFrame.py

@@ -1,9 +1,8 @@
-from .Observable import Observable
+from mopyx import model
 
 
-class SystrayItem(Observable):
+@model
+class SystrayItem:
     def __init__(self, systray: bool) -> None:
-        super().__init__()
-
         self.systray = systray
 

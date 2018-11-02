@@ -2,10 +2,14 @@ from typing import Optional
 
 from PySide2.QtWidgets import QMainWindow, QWidget
 
+from mopyx import render
+
 from germanium_build_monitor.ui.Ui_MainWindow import Ui_MainWindow
 from germanium_build_monitor.resources import icons
+from germanium_build_monitor.model.RootModel import model
 
 from .NewStartFrame import NewStartFrame
+from .NoSelectionFrame import NoSelectionFrame
 
 
 main_window = None
@@ -24,8 +28,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self._last_widget: Optional[QWidget] = None
 
-        self.set_current_widget(NewStartFrame())
-        self.set_current_widget(NewStartFrame())
+        self.update_current_view()
+        self.update_buttons_status()
+
+    @render
+    def update_current_view(self):
+        if not model.servers:
+            self.set_current_widget(NewStartFrame())
+        elif not model.tree_selection:
+            self.set_current_widget(NoSelectionFrame())
+
+    @render
+    def update_buttons_status(self):
+        self.delete_item_button.setEnabled(model.tree_selection is not None)
 
     def set_current_widget(self,
                            widget: QWidget) -> None:
@@ -43,7 +58,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @staticmethod
     def instance() -> 'MainWindow':
         global main_window
-        main_window = MainWindow()
+
+        if not main_window:
+            main_window = MainWindow()
+            main_window.show()
 
         return main_window
 

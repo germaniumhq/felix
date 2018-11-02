@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/NewStartFrame.ui',
 # licensing of 'ui/NewStartFrame.ui' applies.
 #
-# Created: Mon Oct 29 18:25:06 2018
+# Created: Fri Nov  2 05:24:32 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

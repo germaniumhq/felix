@@ -1,7 +1,8 @@
-from .SystrayItem import SystrayItem
+from mopyx import model
 
 
-class JenkinsJob(SystrayItem):
+@model
+class JenkinsJob:
     """
     A Jenkins monitored job.
     """
@@ -10,14 +11,11 @@ class JenkinsJob(SystrayItem):
                  name: str,
                  url_part: str,
                  systray: bool) -> None:
-        super().__init__(
-            systray=systray
-        )
-
+        self.systray = systray
         self.name = name
         self.parent = parent
         self.url_part = url_part
         self.branches = []
 
 
-from germanium_build_monitor.model.Folder import Folder
+from .Folder import Folder

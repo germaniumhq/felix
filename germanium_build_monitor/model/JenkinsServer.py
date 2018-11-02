@@ -1,10 +1,12 @@
-from typing import Optional
+from typing import Optional, List
 
-from .JenkinsJob import JenkinsJob
-from .Folder import Folder
+from mopyx import model
+
+from .RootModel import RootModel
 
 
-class JenkinsServer(Folder):
+@model
+class JenkinsServer:
     """
     A Jenkins Server definition
     """
@@ -15,15 +17,19 @@ class JenkinsServer(Folder):
                  use_authentication: bool,
                  user: Optional[str],
                  password: Optional[str]) -> None:
-        super().__init__(
-            root=root,
-            parent=None,
-            name=name,
-            systray=False)
-
         self.url = url
+        self.root = root,
+        self.parent = None,
+
+        self.folders: List['Folder'] = []
+        self.jobs: List[JenkinsJob] = []
+
+        self.name = name,
+        self.systray = False
         self.use_authentication = use_authentication
         self.user = user
         self.password = password
-        pass
 
+
+from .JenkinsJob import JenkinsJob
+from .Folder import Folder

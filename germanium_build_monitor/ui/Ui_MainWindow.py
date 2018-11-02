@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/MainWindow.ui',
 # licensing of 'ui/MainWindow.ui' applies.
 #
-# Created: Mon Oct 29 18:25:06 2018
+# Created: Fri Nov  2 05:24:32 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -49,15 +49,16 @@ class Ui_MainWindow(object):
         self.delete_item_button.setObjectName("delete_item_button")
         self.horizontalLayout.addWidget(self.delete_item_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.treeView = QtWidgets.QTreeView(self.layoutWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.treeView.sizePolicy().hasHeightForWidth())
-        self.treeView.setSizePolicy(sizePolicy)
-        self.treeView.setUniformRowHeights(True)
-        self.treeView.setObjectName("treeView")
-        self.verticalLayout.addWidget(self.treeView)
+        self.treeWidget = QtWidgets.QTreeWidget(self.layoutWidget)
+        self.treeWidget.setColumnCount(3)
+        self.treeWidget.setObjectName("treeWidget")
+        self.treeWidget.headerItem().setText(0, "1")
+        self.treeWidget.headerItem().setText(1, "2")
+        self.treeWidget.headerItem().setText(2, "3")
+        self.treeWidget.header().setCascadingSectionResizes(False)
+        self.treeWidget.header().setDefaultSectionSize(48)
+        self.treeWidget.header().setHighlightSections(False)
+        self.verticalLayout.addWidget(self.treeWidget)
         self.horizontalLayout_2.addWidget(self.splitter)
         self.current_view = QtWidgets.QVBoxLayout()
         self.current_view.setObjectName("current_view")
@@ -88,7 +89,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Germanium Build Watcher", None, -1))
         self.add_server_button.setText(QtWidgets.QApplication.translate("MainWindow", "Server", None, -1))
         self.add_folder_button.setText(QtWidgets.QApplication.translate("MainWindow", "Folder", None, -1))
-        self.add_job_button.setText(QtWidgets.QApplication.translate("MainWindow", "Add Job", None, -1))
+        self.add_job_button.setText(QtWidgets.QApplication.translate("MainWindow", "Build Job", None, -1))
         self.delete_item_button.setText(QtWidgets.QApplication.translate("MainWindow", "Delete", None, -1))
         self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "Fi&le", None, -1))
         self.menu_exit_action.setText(QtWidgets.QApplication.translate("MainWindow", "&Exit", None, -1))

@@ -1,10 +1,11 @@
+from mopyx import model
+
 from germanium_build_monitor.model.ActionType import ActionType
 from germanium_build_monitor.model.NotificationStrategy import NotificationStrategy
 
-from .Observable import Observable
 
-
-class JenkinsJobBranch(Observable):
+@model
+class JenkinsJobBranch:
     """
     A branch in Jenkins
     """
