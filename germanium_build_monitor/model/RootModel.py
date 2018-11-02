@@ -21,13 +21,13 @@ model = RootModel()
 from .JenkinsServer import JenkinsServer
 from .SystrayItem import SystrayItem
 
-model.servers.append(
-    JenkinsServer(
-        root=model,
-        name='bmbzl',
-        url='http://jenkins:30000',
-        use_authentication=True,
-        user="raptor",
-        password="wut"
-    ))
+# model.servers.append(
+#     JenkinsServer(
+#         root=model,
+#         name='bmbzl',
+#         url='http://jenkins:30000',
+#         use_authentication=True,
+#         user="raptor",
+#         password="wut"
+#     ))
 

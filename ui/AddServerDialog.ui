@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Add Server...</string>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
     <widget class="QLabel" name="label">
@@ -39,16 +42,16 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QLineEdit" name="lineEdit_2"/>
+    <widget class="QLineEdit" name="url_edit"/>
    </item>
    <item row="0" column="1">
-    <widget class="QLineEdit" name="lineEdit"/>
+    <widget class="QLineEdit" name="name_edit"/>
    </item>
    <item row="5" column="1">
-    <widget class="QLineEdit" name="lineEdit_4"/>
+    <widget class="QLineEdit" name="password_edit"/>
    </item>
    <item row="4" column="1">
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="user_edit">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -65,7 +68,7 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="auth_check_box">
      <property name="text">
       <string>Authentication</string>
      </property>

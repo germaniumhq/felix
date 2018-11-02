@@ -15,8 +15,10 @@ class JenkinsServer:
                  name: str,
                  url: str,
                  use_authentication: bool,
-                 user: Optional[str],
-                 password: Optional[str]) -> None:
+                 user: Optional[str] = None,
+                 password: Optional[str] = None) -> None:
+
+        self.name = name,
         self.url = url
         self.root = root,
         self.parent = None,
@@ -24,7 +26,6 @@ class JenkinsServer:
         self.folders: List['Folder'] = []
         self.jobs: List[JenkinsJob] = []
 
-        self.name = name,
         self.systray = False
         self.use_authentication = use_authentication
         self.user = user

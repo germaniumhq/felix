@@ -8,10 +8,6 @@ from germanium_build_monitor.ui.Ui_MainWindow import Ui_MainWindow
 from germanium_build_monitor.resources import icons
 from germanium_build_monitor.model.RootModel import model
 
-from .NewStartFrame import NewStartFrame
-from .NoSelectionFrame import NoSelectionFrame
-
-
 main_window = None
 
 
@@ -65,3 +61,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         return main_window
 
+
+from .NewStartFrame import NewStartFrame
+from .NoSelectionFrame import NoSelectionFrame
