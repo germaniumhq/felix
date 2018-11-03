@@ -24,8 +24,7 @@ class Invoker(QObject):
         self.queue = Queue()
 
     def invoke(self, func, *args):
-        f = lambda: func(*args)
-        self.queue.put(f)
+        self.queue.put(lambda: func(*args))
         QMetaObject.invokeMethod(self, "handler", Qt.QueuedConnection)
 
     @Slot()
