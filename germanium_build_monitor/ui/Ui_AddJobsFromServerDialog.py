@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddJobsFromServer.ui',
 # licensing of 'ui/AddJobsFromServer.ui' applies.
 #
-# Created: Sat Nov  3 15:17:55 2018
+# Created: Sat Nov  3 20:05:16 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,15 +14,15 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(394, 538)
+        Dialog.setModal(True)
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.server_name_label = QtWidgets.QLabel(Dialog)
         self.server_name_label.setObjectName("server_name_label")
         self.verticalLayout.addWidget(self.server_name_label)
-        self.treeWidget = QtWidgets.QTreeWidget(Dialog)
-        self.treeWidget.setObjectName("treeWidget")
-        self.treeWidget.headerItem().setText(0, "1")
-        self.verticalLayout.addWidget(self.treeWidget)
+        self.content_holder = QtWidgets.QVBoxLayout()
+        self.content_holder.setObjectName("content_holder")
+        self.verticalLayout.addLayout(self.content_holder)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)

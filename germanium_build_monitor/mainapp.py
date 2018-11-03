@@ -27,7 +27,7 @@ def main() -> None:
         def show_msg():
             tray_icon.showMessage("WEBUI",
                                   message,
-                                  icons.get_icon('success128.png'),
+                                  icons.get_icon('fail24.png'),
                                   4000)
 
         return show_msg
@@ -42,7 +42,7 @@ def main() -> None:
                    "GermaniumSB")\
         .triggered.connect(show_custom_message("build failed"))
     menu.addAction(icons.get_icon("success128.png"),
-                   "\u2610\u2611\u2612\u2611 Wutinston")\
+                   "\u2610\u2611\u2612\u2611 Wutinston feature/PMIA-1141-add-new-bmbzling-feature")\
         .triggered.connect(show_custom_message("build failed"))
 
     menu.addSeparator()

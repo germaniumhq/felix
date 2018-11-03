@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddServerDialog.ui',
 # licensing of 'ui/AddServerDialog.ui' applies.
 #
-# Created: Sat Nov  3 15:17:54 2018
+# Created: Sat Nov  3 20:05:16 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

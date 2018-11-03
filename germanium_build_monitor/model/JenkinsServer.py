@@ -1,38 +1,35 @@
-from typing import Optional, List
-
 from mopyx import model
 
-from .RootModel import RootModel
-from .Folder import Folder
+from .JenkinsFolder import JenkinsFolder
 
 
 @model
-class JenkinsServer(Folder):
-    """
-    A Jenkins Server definition
-    """
-    def __init__(self,
-                 root: 'RootModel',
-                 name: str,
-                 url: str,
-                 use_authentication: bool,
-                 user: Optional[str] = None,
-                 password: Optional[str] = None) -> None:
-        super().__init__(
-            root=root,
-            parent=None,
-            name=name,
-            systray=False
-        )
+class JenkinsServer(JenkinsFolder):
+    def __init__(
+            self,
+            name: str = "",
+            url: str = "http://localhost:8080/",
+            use_authentication: bool = False,
+            user: str = "",
+            password: str = ""):
+
+        super().__init__(name=name)
 
         self.url = url
-
-        self.folders: List['Folder'] = []
-        self.jobs: List[JenkinsJob] = []
-
         self.use_authentication = use_authentication
         self.user = user
         self.password = password
 
+    def as_dict(self):
+        return {
+            "name": self.name,
+            "type": "JenkinsServer",
 
-from .JenkinsJob import JenkinsJob
+            "url": self.url,
+            "use_authentication": self.use_authentication,
+            "user": self.user,
+            "password": self.password,
+
+            "folders": [x.as_dict() for x in self.folders],
+            "jobs": [x.as_dict() for x in self.jobs],
+        }

@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Select jobs...</string>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="server_name_label">
@@ -22,13 +25,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeWidget" name="treeWidget">
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-    </widget>
+    <layout class="QVBoxLayout" name="content_holder"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

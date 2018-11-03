@@ -7,8 +7,6 @@ from PySide2.QtWidgets import QDialog, QMessageBox, QWidget
 from germanium_build_monitor.ui.Ui_AddServerDialog import Ui_Dialog
 
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
-from germanium_build_monitor.model.operations import server_add
-from germanium_build_monitor.model.RootModel import model as root_model
 
 
 def not_empty(s: str) -> bool:
@@ -88,8 +86,7 @@ class AddServerDialog(QDialog, Ui_Dialog):
         self.password_edit.setText(self.model.password)
 
     def add_server(self):
-        server_add(root_model, self.model)
-        self.hide()
+        self.close()
 
     def test_server(self):
         try:
@@ -115,4 +112,3 @@ class AddServerDialog(QDialog, Ui_Dialog):
             error_message.setIcon(QMessageBox.Critical)
 
             error_message.exec_()
-

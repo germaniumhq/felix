@@ -1,26 +1,22 @@
 from mopyx import model
 
-from .SystrayItem import SystrayItem
-
 
 @model
-class JenkinsJob(SystrayItem):
-    """
-    A Jenkins monitored job.
-    """
+class JenkinsJob:
     def __init__(self,
-                 parent: 'Folder',
                  name: str,
-                 url_part: str,
-                 systray: bool) -> None:
-        super().__init__(
-            systray=systray
-        )
-
+                 full_name: str,
+                 url: str):
+        super().__init__()
         self.name = name
-        self.parent = parent
-        self.url_part = url_part
-        self.branches = []
+        self.full_name = full_name
+        self.url = url
 
+    def as_dict(self):
+        return {
+            "type": "JenkinsJob",
+            "full_name": self.full_name,
+            "name": self.name,
+            "url": self.url
+        }
 
-from germanium_build_monitor.model.Folder import Folder
