@@ -1,8 +1,9 @@
 import sys
 
-from PySide2.QtWidgets import QApplication, QSystemTrayIcon, QMenu
+from PySide2.QtWidgets import QSystemTrayIcon, QMenu
 
 from germanium_build_monitor.ui.MainDialog import MainDialog
+from germanium_build_monitor.ui.core import create_qt_application
 import germanium_build_monitor.resources.icons as icons
 
 
@@ -11,7 +12,7 @@ def exit_application():
 
 
 def main() -> None:
-    app = QApplication(sys.argv)
+    app = create_qt_application()
 
     tray_icon = QSystemTrayIcon()
     tray_icon.setIcon(icons.get_icon("favicon.ico"))

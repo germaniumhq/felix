@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/SelectJobsFrame.ui',
 # licensing of 'ui/SelectJobsFrame.ui' applies.
 #
-# Created: Sat Nov  3 20:05:17 2018
+# Created: Sat Nov  3 21:10:57 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,6 +15,7 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(400, 300)
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, -1)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.treeWidget = QtWidgets.QTreeWidget(Form)
         self.treeWidget.setObjectName("treeWidget")
