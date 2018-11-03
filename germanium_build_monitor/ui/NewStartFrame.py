@@ -13,8 +13,3 @@ class NewStartFrame(QWidget, Ui_Form):
 
         self.add_server_button.setIcon(icons.get_icon("server24.png"))
         self.add_server_button.clicked.connect(open_create_jenkins_server_dialog)
-
-        self.destroyed.connect(lambda: self.cleanup())
-
-    def cleanup(self) -> None:
-        print("cleanup")

@@ -1,6 +1,8 @@
 from mopyx import render_call
+import jenkins
+import traceback
 
-from PySide2.QtWidgets import QDialog
+from PySide2.QtWidgets import QDialog, QMessageBox, QWidget
 
 from germanium_build_monitor.ui.Ui_AddServerDialog import Ui_Dialog
 
@@ -16,16 +18,27 @@ def not_empty(s: str) -> bool:
 class AddServerDialog(QDialog, Ui_Dialog):
     def __init__(self,
                  model: JenkinsServer,
-                 *args,
-                 **kw) -> None:
-        super().__init__(*args, **kw)
+                 main_window: QWidget,
+                 edit_mode: bool = False,
+                 ) -> None:
+        super().__init__(main_window)
 
         self.model = model
+        self.edit_mode = edit_mode  # are we adding, or editing?
 
         self.setupUi(self)
 
+        self.update_labels()
+
         self.wire_signals()
         self.update_from_model()
+
+    def update_labels(self):
+        if not self.edit_mode:
+            return
+
+        self.add_button.hide()
+        self.setWindowTitle("Edit server...")
 
     def wire_signals(self):
         self.name_edit.textEdited.connect(self.update_name)
@@ -76,7 +89,30 @@ class AddServerDialog(QDialog, Ui_Dialog):
 
     def add_server(self):
         server_add(root_model, self.model)
+        self.hide()
 
     def test_server(self):
-        pass
+        try:
+            if self.model.use_authentication:
+                server = jenkins.Jenkins(self.model.url,
+                                         username=self.model.user,
+                                         password=self.model.password)
+            else:
+                server = jenkins.Jenkins(self.model.url)
+
+            server.get_whoami()
+            version = server.get_version()
+
+            QMessageBox.information(self,
+                                    "Success",
+                                    f"User {self.model.user} connected. Jenkins version {version}.")
+        except Exception as e:
+            error_message = QMessageBox()
+
+            error_message.setWindowTitle(self.tr("Server Unavailable"))
+            error_message.setText(self.tr("Error: ") + str(e))
+            error_message.setDetailedText(traceback.format_exc())
+            error_message.setIcon(QMessageBox.Critical)
+
+            error_message.exec_()
 

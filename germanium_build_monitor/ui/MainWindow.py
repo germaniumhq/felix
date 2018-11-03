@@ -8,6 +8,7 @@ from germanium_build_monitor.ui.Ui_MainWindow import Ui_MainWindow
 from germanium_build_monitor.resources import icons
 from germanium_build_monitor.model.RootModel import model
 
+
 main_window = None
 
 
@@ -19,7 +20,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(icons.get_icon("favicon.ico"))
 
         self.add_server_button.setIcon(icons.get_icon("server24.png"))
+        self.add_server_button.clicked.connect(open_create_jenkins_server_dialog)
+
         self.add_folder_button.setIcon(icons.get_icon("folder24.png"))
+
         self.add_job_button.setIcon(icons.get_icon("job24.png"))
 
         self._last_widget: Optional[QWidget] = None
@@ -64,3 +68,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 from .NewStartFrame import NewStartFrame
 from .NoSelectionFrame import NoSelectionFrame
+
+from germanium_build_monitor.actions.new_jenkins_server import open_create_jenkins_server_dialog

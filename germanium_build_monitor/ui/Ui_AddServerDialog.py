@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddServerDialog.ui',
 # licensing of 'ui/AddServerDialog.ui' applies.
 #
-# Created: Sat Nov  3 04:30:26 2018
+# Created: Sat Nov  3 05:02:24 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,6 +33,7 @@ class Ui_Dialog(object):
         self.name_edit.setObjectName("name_edit")
         self.gridLayout.addWidget(self.name_edit, 0, 1, 1, 1)
         self.password_edit = QtWidgets.QLineEdit(Dialog)
+        self.password_edit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_edit.setObjectName("password_edit")
         self.gridLayout.addWidget(self.password_edit, 5, 1, 1, 1)
         self.user_edit = QtWidgets.QLineEdit(Dialog)

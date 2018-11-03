@@ -29,12 +29,6 @@ class TestSerialization(unittest.TestCase):
         root = RootModel()
 
         expected_events: List = []
-        root.on_event("server-new", self.register_new_server)
-        root.on_event("server-update", self.register_update_server)
-        root.on_event("server-delete", self.register_delete_server)
-        root.on_event("systray-item-new", self.register_new_systray_item)
-        root.on_event("systray-item-update", self.register_update_systray_item)
-        root.on_event("systray-item-delete", self.register_delete_systray_item)
 
         server1 = server_add(root,
                              name="localhost",
@@ -94,92 +88,6 @@ class TestSerialization(unittest.TestCase):
         self.assertEqual(6, len(root.systray_items),
                          "Systray item count is different.")
 
-        self.assertEqual(self.expected_events,
-                         self.recorded_events)
-
-    def register_new_server(self, server: JenkinsServer) -> None:
-        self.recorded_events.append("server-new")
-
-        server.on_event("folder-new", self.register_new_folder)
-        server.on_event("folder-update", self.register_update_folder)
-        server.on_event("folder-delete", self.register_delete_folder)
-        server.on_event("job-new", self.register_new_job)
-        server.on_event("job-update", self.register_update_folder)
-        server.on_event("job-delete", self.register_delete_job)
-
-    def register_update_server(self, server: JenkinsServer) -> None:
-        self.recorded_events.append("server-update")
-
-    def register_delete_server(self, server: JenkinsServer) -> None:
-        self.recorded_events.append("server-delete")
-
-    def register_new_systray_item(self,
-                                  item: SystrayItem,
-                                  index: int) -> None:
-        self.recorded_events.append(f"systray-item-new:{index}")
-
-    def register_update_systray_item(self,
-                                     item: SystrayItem) -> None:
-        self.recorded_events.append("systray-item-update")
-
-    def register_delete_systray_item(self,
-                                     item: SystrayItem) -> None:
-        self.recorded_events.append("systray-item-delete")
-
-    def register_new_folder(self, folder: Folder) -> None:
-        self.recorded_events.append("folder-new")
-
-        folder.on_event("folder-new", self.register_new_folder)
-        folder.on_event("folder-update", self.register_update_folder)
-        folder.on_event("folder-delete", self.register_delete_folder)
-        folder.on_event("job-new", self.register_new_job)
-        folder.on_event("job-update", self.register_update_folder)
-        folder.on_event("job-delete", self.register_delete_job)
-
-    def register_update_folder(self, folder: Folder) -> None:
-        self.recorded_events.append("folder-update")
-
-    def register_delete_folder(self, folder: Folder) -> None:
-        self.recorded_events.append("folder-delete")
-
-    def register_new_job(self, folder: JenkinsJob) -> None:
-        self.recorded_events.append("job-new")
-
-        folder.on_event("branch-new", self.register_new_branch)
-        folder.on_event("branch-delete", self.register_delete_branch)
-        folder.on_event("branch-update", self.register_update_branch)
-        folder.on_event("branch-move-up", self.register_move_up_branch)
-        folder.on_event("branch-move-down", self.register_move_down_branch)
-
-    def register_update_job(self, job: JenkinsJob) -> None:
-        self.recorded_events.append("job-update")
-
-    def register_delete_job(self, job: JenkinsJob) -> None:
-        self.recorded_events.append("job-delete")
-
-    def register_new_branch(self,
-                            branch: JenkinsJobBranch) -> None:
-        self.recorded_events.append("branch-new")
-
-    def register_update_branch(self,
-                               branch: JenkinsJobBranch) -> None:
-        self.recorded_events.append("branch-update")
-
-    def register_delete_branch(self,
-                               branch: JenkinsJobBranch) -> None:
-        self.recorded_events.append("branch-delete")
-
-    def register_move_up_branch(self,
-                                branch: JenkinsJobBranch,
-                                old_index: int,
-                                new_index: int) -> None:
-        self.recorded_events.append(f"branch-move-up:{old_index}-{new_index}")
-
-    def register_move_down_branch(self,
-                                  branch: JenkinsJobBranch,
-                                  old_index: int,
-                                  new_index: int) -> None:
-        self.recorded_events.append(f"branch-move-down:{old_index}-{new_index}")
 
 if __name__ == '__main__':
     unittest.main()
