@@ -1,10 +1,8 @@
 import sys
-import os
 
-from PySide2 import QtGui
-from PySide2.QtWidgets import QMainWindow, QApplication, QLabel, QMenu, QAction, QMessageBox, QSystemTrayIcon, QMenu
+from PySide2.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
-from germanium_build_monitor.ui.MainWindow import MainWindow
+from germanium_build_monitor.ui.MainDialog import MainDialog
 import germanium_build_monitor.resources.icons as icons
 
 
@@ -36,7 +34,7 @@ def main() -> None:
 
     menu = QMenu()
     menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
-        .triggered.connect(MainWindow.instance().show)
+        .triggered.connect(MainDialog.instance().show)
 
     menu.addSeparator()
 
@@ -44,7 +42,7 @@ def main() -> None:
                    "GermaniumSB")\
         .triggered.connect(show_custom_message("build failed"))
     menu.addAction(icons.get_icon("success128.png"),
-                   "Wutinston")\
+                   "\u2610\u2611\u2612\u2611 Wutinston")\
         .triggered.connect(show_custom_message("build failed"))
 
     menu.addSeparator()

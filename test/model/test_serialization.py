@@ -28,8 +28,6 @@ class TestSerialization(unittest.TestCase):
         """
         root = RootModel()
 
-        expected_events: List = []
-
         server1 = server_add(root,
                              name="localhost",
                              url="http://jenkins:30000/",
