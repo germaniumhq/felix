@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddBranchDialog.ui',
 # licensing of 'ui/AddBranchDialog.ui' applies.
 #
-# Created: Fri Nov  2 05:58:57 2018
+# Created: Sat Nov  3 04:30:26 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,6 +83,14 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.lineEdit, self.lineEdit_2)
+        Dialog.setTabOrder(self.lineEdit_2, self.action_monitor_radio_button)
+        Dialog.setTabOrder(self.action_monitor_radio_button, self.action_ignore_radio_button)
+        Dialog.setTabOrder(self.action_ignore_radio_button, self.notification_never_radio_button)
+        Dialog.setTabOrder(self.notification_never_radio_button, self.notification_state_change_radio_button)
+        Dialog.setTabOrder(self.notification_state_change_radio_button, self.notification_each_build_radio_button)
+        Dialog.setTabOrder(self.notification_each_build_radio_button, self.add_button)
+        Dialog.setTabOrder(self.add_button, self.cancel_button)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtWidgets.QApplication.translate("Dialog", "Add Branch", None, -1))
@@ -99,7 +107,7 @@ class Ui_Dialog(object):
         self.label_3.setText(QtWidgets.QApplication.translate("Dialog", "<span style=\"color:green\">matches</span>", None, -1))
         self.label_4.setText(QtWidgets.QApplication.translate("Dialog", "<html><head/><body><p>What will happen if the name matches. If the action is set to &quot;Monitor&quot;, it is included in the Job status.</p></body></html>", None, -1))
         self.groupBox.setTitle(QtWidgets.QApplication.translate("Dialog", "Notification", None, -1))
-        self.notification_never_radio_button.setText(QtWidgets.QApplication.translate("Dialog", "Never", None, -1))
+        self.notification_never_radio_button.setText(QtWidgets.QApplication.translate("Dialog", "&Never", None, -1))
         self.notification_state_change_radio_button.setText(QtWidgets.QApplication.translate("Dialog", "On Change", None, -1))
         self.notification_each_build_radio_button.setText(QtWidgets.QApplication.translate("Dialog", "Alwa&ys", None, -1))
 

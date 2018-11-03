@@ -73,6 +73,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>branch_filter_input</tabstop>
+  <tabstop>edit_button</tabstop>
+  <tabstop>view_site_button</tabstop>
+  <tabstop>tableView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

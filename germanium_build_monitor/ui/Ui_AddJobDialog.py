@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddJobDialog.ui',
 # licensing of 'ui/AddJobDialog.ui' applies.
 #
-# Created: Fri Nov  2 05:58:57 2018
+# Created: Sat Nov  3 04:30:26 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,6 +83,17 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.lineEdit, self.lineEdit_2)
+        Dialog.setTabOrder(self.lineEdit_2, self.checkBox)
+        Dialog.setTabOrder(self.checkBox, self.branch_move_up_button)
+        Dialog.setTabOrder(self.branch_move_up_button, self.branch_move_down_button)
+        Dialog.setTabOrder(self.branch_move_down_button, self.branch_edit_button)
+        Dialog.setTabOrder(self.branch_edit_button, self.branch_add_before_button)
+        Dialog.setTabOrder(self.branch_add_before_button, self.branch_add_after_button)
+        Dialog.setTabOrder(self.branch_add_after_button, self.branch_delete_button)
+        Dialog.setTabOrder(self.branch_delete_button, self.monitored_branches_table)
+        Dialog.setTabOrder(self.monitored_branches_table, self.add_job_button)
+        Dialog.setTabOrder(self.add_job_button, self.cancel_dialog_button)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtWidgets.QApplication.translate("Dialog", "Add Job", None, -1))

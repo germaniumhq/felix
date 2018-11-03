@@ -164,6 +164,20 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>branch_move_up_button</tabstop>
+  <tabstop>branch_move_down_button</tabstop>
+  <tabstop>branch_edit_button</tabstop>
+  <tabstop>branch_add_before_button</tabstop>
+  <tabstop>branch_add_after_button</tabstop>
+  <tabstop>branch_delete_button</tabstop>
+  <tabstop>monitored_branches_table</tabstop>
+  <tabstop>add_job_button</tabstop>
+  <tabstop>cancel_dialog_button</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

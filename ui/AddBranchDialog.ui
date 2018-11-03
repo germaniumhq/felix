@@ -151,7 +151,7 @@
       <item>
        <widget class="QRadioButton" name="notification_never_radio_button">
         <property name="text">
-         <string>Never</string>
+         <string>&amp;Never</string>
         </property>
        </widget>
       </item>
@@ -177,6 +177,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>action_monitor_radio_button</tabstop>
+  <tabstop>action_ignore_radio_button</tabstop>
+  <tabstop>notification_never_radio_button</tabstop>
+  <tabstop>notification_state_change_radio_button</tabstop>
+  <tabstop>notification_each_build_radio_button</tabstop>
+  <tabstop>add_button</tabstop>
+  <tabstop>cancel_button</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

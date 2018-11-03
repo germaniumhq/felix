@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddFolderDialog.ui',
 # licensing of 'ui/AddFolderDialog.ui' applies.
 #
-# Created: Fri Nov  2 05:58:57 2018
+# Created: Sat Nov  3 04:30:26 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -41,6 +41,9 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.lineEdit, self.checkBox)
+        Dialog.setTabOrder(self.checkBox, self.pushButton_2)
+        Dialog.setTabOrder(self.pushButton_2, self.pushButton)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtWidgets.QApplication.translate("Dialog", "Add Folder...", None, -1))

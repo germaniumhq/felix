@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>401</width>
+    <height>324</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,22 +20,19 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>URL</string>
+      <string>URL &lt;span style=&quot;color:red&quot;&gt;*&lt;/span&gt;</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Name</string>
+      <string>Name &lt;span style=&quot;color:red&quot;&gt;*&lt;/span&gt;</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QLabel" name="password_label">
      <property name="text">
       <string>Password</string>
      </property>
@@ -51,17 +48,10 @@
     <widget class="QLineEdit" name="password_edit"/>
    </item>
    <item row="4" column="1">
-    <widget class="QLineEdit" name="user_edit">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="QLineEdit" name="user_edit"/>
    </item>
    <item row="4" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QLabel" name="user_label">
      <property name="text">
       <string>User</string>
      </property>
@@ -76,6 +66,13 @@
    </item>
    <item row="7" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="test_server_button">
+       <property name="text">
+        <string>Test</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -120,6 +117,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>name_edit</tabstop>
+  <tabstop>url_edit</tabstop>
+  <tabstop>auth_check_box</tabstop>
+  <tabstop>user_edit</tabstop>
+  <tabstop>password_edit</tabstop>
+  <tabstop>add_button</tabstop>
+  <tabstop>close_button</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

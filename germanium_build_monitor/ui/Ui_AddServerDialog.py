@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddServerDialog.ui',
 # licensing of 'ui/AddServerDialog.ui' applies.
 #
-# Created: Fri Nov  2 05:58:57 2018
+# Created: Sat Nov  3 04:30:26 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(400, 300)
+        Dialog.resize(401, 324)
         Dialog.setModal(True)
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
@@ -23,10 +23,9 @@ class Ui_Dialog(object):
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-        self.label_5 = QtWidgets.QLabel(Dialog)
-        self.label_5.setEnabled(False)
-        self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 5, 0, 1, 1)
+        self.password_label = QtWidgets.QLabel(Dialog)
+        self.password_label.setObjectName("password_label")
+        self.gridLayout.addWidget(self.password_label, 5, 0, 1, 1)
         self.url_edit = QtWidgets.QLineEdit(Dialog)
         self.url_edit.setObjectName("url_edit")
         self.gridLayout.addWidget(self.url_edit, 1, 1, 1, 1)
@@ -37,18 +36,19 @@ class Ui_Dialog(object):
         self.password_edit.setObjectName("password_edit")
         self.gridLayout.addWidget(self.password_edit, 5, 1, 1, 1)
         self.user_edit = QtWidgets.QLineEdit(Dialog)
-        self.user_edit.setEnabled(False)
         self.user_edit.setObjectName("user_edit")
         self.gridLayout.addWidget(self.user_edit, 4, 1, 1, 1)
-        self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setEnabled(False)
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 4, 0, 1, 1)
+        self.user_label = QtWidgets.QLabel(Dialog)
+        self.user_label.setObjectName("user_label")
+        self.gridLayout.addWidget(self.user_label, 4, 0, 1, 1)
         self.auth_check_box = QtWidgets.QCheckBox(Dialog)
         self.auth_check_box.setObjectName("auth_check_box")
         self.gridLayout.addWidget(self.auth_check_box, 2, 1, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.test_server_button = QtWidgets.QPushButton(Dialog)
+        self.test_server_button.setObjectName("test_server_button")
+        self.horizontalLayout.addWidget(self.test_server_button)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.close_button = QtWidgets.QPushButton(Dialog)
@@ -63,14 +63,21 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.name_edit, self.url_edit)
+        Dialog.setTabOrder(self.url_edit, self.auth_check_box)
+        Dialog.setTabOrder(self.auth_check_box, self.user_edit)
+        Dialog.setTabOrder(self.user_edit, self.password_edit)
+        Dialog.setTabOrder(self.password_edit, self.add_button)
+        Dialog.setTabOrder(self.add_button, self.close_button)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtWidgets.QApplication.translate("Dialog", "Add Server...", None, -1))
-        self.label.setText(QtWidgets.QApplication.translate("Dialog", "URL", None, -1))
-        self.label_2.setText(QtWidgets.QApplication.translate("Dialog", "Name", None, -1))
-        self.label_5.setText(QtWidgets.QApplication.translate("Dialog", "Password", None, -1))
-        self.label_4.setText(QtWidgets.QApplication.translate("Dialog", "User", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("Dialog", "URL <span style=\"color:red\">*</span>", None, -1))
+        self.label_2.setText(QtWidgets.QApplication.translate("Dialog", "Name <span style=\"color:red\">*</span>", None, -1))
+        self.password_label.setText(QtWidgets.QApplication.translate("Dialog", "Password", None, -1))
+        self.user_label.setText(QtWidgets.QApplication.translate("Dialog", "User", None, -1))
         self.auth_check_box.setText(QtWidgets.QApplication.translate("Dialog", "Authentication", None, -1))
+        self.test_server_button.setText(QtWidgets.QApplication.translate("Dialog", "Test", None, -1))
         self.close_button.setText(QtWidgets.QApplication.translate("Dialog", "Close", None, -1))
         self.add_button.setText(QtWidgets.QApplication.translate("Dialog", "Add", None, -1))
 

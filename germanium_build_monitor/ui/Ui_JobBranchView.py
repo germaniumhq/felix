@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/JobBranchView.ui',
 # licensing of 'ui/JobBranchView.ui' applies.
 #
-# Created: Fri Nov  2 05:58:57 2018
+# Created: Sat Nov  3 04:30:27 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -42,6 +42,9 @@ class Ui_Frame(object):
 
         self.retranslateUi(Frame)
         QtCore.QMetaObject.connectSlotsByName(Frame)
+        Frame.setTabOrder(self.branch_filter_input, self.edit_button)
+        Frame.setTabOrder(self.edit_button, self.view_site_button)
+        Frame.setTabOrder(self.view_site_button, self.tableView)
 
     def retranslateUi(self, Frame):
         Frame.setWindowTitle(QtWidgets.QApplication.translate("Frame", "Frame", None, -1))
