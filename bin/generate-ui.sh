@@ -15,4 +15,5 @@ pyside2-uic ui/NewStartFrame.ui > germanium_build_monitor/ui/generated/Ui_NewSta
 pyside2-uic ui/ServersOverviewFrame.ui > germanium_build_monitor/ui/generated/Ui_ServersOverviewFrame.py
 pyside2-uic ui/SelectJobsFrame.ui > germanium_build_monitor/ui/generated/Ui_SelectJobsFrame.py
 pyside2-uic ui/LoadingFrame.ui > germanium_build_monitor/ui/generated/Ui_LoadingFrame.py
+pyside2-uic ui/ErrorFrame.ui > germanium_build_monitor/ui/generated/Ui_ErrorFrame.py
 #pyside2-uic ui/NoSelectionFrame.ui > germanium_build_monitor/ui/Ui_NoSelectionFrame.py
