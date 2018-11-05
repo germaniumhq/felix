@@ -1,10 +1,12 @@
-from PySide2.QtWidgets import QDialog, QWidget
+from PySide2.QtWidgets import QDialog
 from mopyx import render
 
-from germanium_build_monitor.ui.Ui_MainDialog import Ui_Dialog
+from germanium_build_monitor.ui.generated.Ui_MainDialog import Ui_Dialog
+
 from germanium_build_monitor.model.RootModel import model
 
 from .WidgetSwitcher import WidgetSwitcher
+from .NewStartFrame import NewStartFrame
 
 main_dialog = None
 
@@ -36,10 +38,5 @@ class MainDialog(QDialog, Ui_Dialog):
 
         return main_dialog
 
-    def closeEvent(self, event) -> None:
-        event.ignore()
-        self.hide()
 
-
-from .NewStartFrame import NewStartFrame
 from .ServersOverviewFrame import ServersOverviewFrame

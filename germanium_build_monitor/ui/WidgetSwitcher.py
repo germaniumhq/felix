@@ -1,11 +1,13 @@
-from PySide2.QtWidgets import QDialog, QWidget
+from typing import Optional
+
+from PySide2.QtWidgets import QLayout, QWidget
 
 
 class WidgetSwitcher:
     def __init__(self,
-                 widget_holder: QWidget):
+                 widget_holder: QLayout):
         self.widget_holder = widget_holder
-        self._last_widget = None
+        self._last_widget: Optional[QWidget] = None
 
     def set(self, widget: QWidget):
         if self._last_widget:

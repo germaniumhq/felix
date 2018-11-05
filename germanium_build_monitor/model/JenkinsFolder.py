@@ -1,7 +1,7 @@
 from typing import List
 from mopyx import model
 
-from .JenkinsJob import JenkinsJob
+from .JenkinsJob import JenkinsJob, Selection
 
 
 @model
@@ -11,6 +11,7 @@ class JenkinsFolder:
 
         self.name = name
 
+        self.selected = Selection.SELECTED
         self.folders: List['JenkinsFolder'] = []
         self.jobs: List[JenkinsJob] = []
 

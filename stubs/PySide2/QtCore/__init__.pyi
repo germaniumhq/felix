@@ -1,4 +1,6 @@
-from typing import Callable, Any
+from typing import Callable, Any, TypeVar
+
+T = TypeVar('T')
 
 
 class QEvent:
@@ -16,3 +18,14 @@ class QTimer:
     def stop(self) -> None:
         pass
 
+
+class QMetaObject:
+    pass
+
+
+class QObject:
+    pass
+
+
+def Slot() -> Callable[..., Callable[..., T]]:
+    pass

@@ -1,9 +1,8 @@
 from PySide2.QtWidgets import QWidget
 
-from germanium_build_monitor.ui.Ui_NewStartFrame import Ui_Form
+from germanium_build_monitor.ui.generated.Ui_NewStartFrame import Ui_Form
 from germanium_build_monitor.resources import icons
 
-from germanium_build_monitor.actions.new_jenkins_server import open_create_jenkins_server_dialog
 from germanium_build_monitor.actions.new_jenkins_server import select_jobs_from_jenkins_server_dialog
 
 

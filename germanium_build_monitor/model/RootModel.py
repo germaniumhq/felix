@@ -21,5 +21,5 @@ class RootModel:
         self.tree_selection = None
 
 
-model = RootModel()
+model = RootModel()  # type: ignore
 

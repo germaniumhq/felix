@@ -25,3 +25,12 @@ class QSyntaxHighlighter:
 
 class QFont:
     pass
+
+
+class QMovie:
+    def __init__(self,
+                 movie_path: str) -> None:
+        pass
+
+    def start(self) -> None:
+        pass

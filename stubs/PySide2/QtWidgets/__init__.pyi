@@ -1,5 +1,5 @@
-from typing import Optional, List, Union
-from PySide2.QtCore import QEvent
+from typing import Optional, List, Union, Any
+from PySide2.QtCore import QEvent, Qt
 from PySide2.QtGui import QIcon
 
 
@@ -8,7 +8,33 @@ class QObject:
 
 
 class QWidget:
-    pass
+    def deleteLater(self):
+        pass
+
+
+class QLayout:
+    def addWidget(self, widget: QWidget):
+        pass
+
+    def removeWidget(self, widget: QWidget):
+        pass
+
+
+class QTreeWidgetItem:
+    def setFlags(self, flags: int) -> None:
+        pass
+
+    def flags(self) -> int:
+        pass
+
+    def setCheckState(self, column_index: int, state: Qt.CheckState):
+        pass
+
+    def setData(self, column_index: int, role: int, data: Any) -> None:
+        pass
+
+    def data(self, column_index):
+        pass
 
 
 class QSystemTrayIcon:
@@ -40,7 +66,8 @@ class QSystemTrayIcon:
 
 
 class QDialog:
-    def __init__(self):
+    def __init__(self,
+                 parent: Optional['QDialog'] = None):
         self.modal: bool
         self.sizeGripEnabled: bool
 

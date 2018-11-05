@@ -1,4 +1,11 @@
 from mopyx import model
+from enum import Enum
+
+
+class Selection(Enum):
+    UNSELECTED = 'unselected'
+    SELECTED = 'selected'
+    PARTIAL = 'partial'
 
 
 @model
@@ -11,6 +18,7 @@ class JenkinsJob:
         self.name = name
         self.full_name = full_name
         self.url = url
+        self.selected = Selection.SELECTED
 
     def as_dict(self):
         return {

@@ -2,9 +2,9 @@ from mopyx import render_call
 import jenkins
 import traceback
 
-from PySide2.QtWidgets import QDialog, QMessageBox, QWidget
+from PySide2.QtWidgets import QDialog, QMessageBox
 
-from germanium_build_monitor.ui.Ui_AddServerDialog import Ui_Dialog
+from germanium_build_monitor.ui.generated.Ui_AddServerDialog import Ui_Dialog
 
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 
@@ -16,7 +16,7 @@ def not_empty(s: str) -> bool:
 class AddServerDialog(QDialog, Ui_Dialog):
     def __init__(self,
                  model: JenkinsServer,
-                 main_window: QWidget,
+                 main_window: QDialog,
                  edit_mode: bool = False,
                  ) -> None:
         super().__init__(main_window)

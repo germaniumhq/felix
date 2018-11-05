@@ -3,17 +3,19 @@ from mopyx import model, render
 import jenkins
 import threading
 
-from PySide2.QtWidgets import QDialog, QWidget
+from PySide2.QtWidgets import QDialog
 
-from germanium_build_monitor.ui.Ui_AddJobsFromServerDialog import Ui_Dialog
+from germanium_build_monitor.ui.generated.Ui_AddJobsFromServerDialog import Ui_Dialog
+
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
 from germanium_build_monitor.model.JenkinsJob import JenkinsJob
 
-from .WidgetSwitcher import WidgetSwitcher
-from .LoadingFrame import LoadingFrame
+from germanium_build_monitor.ui.WidgetSwitcher import WidgetSwitcher
+from germanium_build_monitor.ui.LoadingFrame import LoadingFrame
+from germanium_build_monitor.ui.core import ui_thread_call
+
 from .SelectJobsFrame import SelectJobsFrame
-from .core import ui_thread_call
 
 
 @model
@@ -82,7 +84,7 @@ def load_server(model: ServerDialogModel):
 class AddJobsFromServerDialog(QDialog, Ui_Dialog):
     def __init__(self,
                  model: JenkinsServer,
-                 main_window: QWidget,
+                 main_window: QDialog,
                  edit_mode: bool = False,
                  ) -> None:
         super().__init__(main_window)
