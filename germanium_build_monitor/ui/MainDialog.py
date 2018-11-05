@@ -5,9 +5,6 @@ from germanium_build_monitor.ui.generated.Ui_MainDialog import Ui_Dialog
 
 from germanium_build_monitor.model.RootModel import model
 
-from .WidgetSwitcher import WidgetSwitcher
-from .NewStartFrame import NewStartFrame
-
 main_dialog = None
 
 
@@ -40,3 +37,6 @@ class MainDialog(QDialog, Ui_Dialog):
 
 
 from .ServersOverviewFrame import ServersOverviewFrame
+from .WidgetSwitcher import WidgetSwitcher
+from .NewStartFrame import NewStartFrame
+
