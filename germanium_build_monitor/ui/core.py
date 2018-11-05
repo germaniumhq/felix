@@ -1,12 +1,13 @@
-from typing import Callable
+from typing import Callable, TypeVar
 
+import functools
 import sys
-import threading
 from PySide2.QtWidgets import QApplication
-from PySide2.QtCore import QMetaObject, QObject, Qt, QThread, Slot
+from PySide2.QtCore import QMetaObject, QObject, Qt, Slot
 from queue import Queue
 
 app = None
+T = TypeVar('T')
 
 
 def create_qt_application() -> QApplication:
@@ -36,20 +37,12 @@ class Invoker(QObject):
 invoker = Invoker()
 
 
-def invoke_in_main_thread(func, *args):
-    invoker.invoke(func, *args)
+def ui_thread_call(f: Callable[..., T]) -> Callable[..., T]:
+    """
+    Will call the given function on the PySide UI Thread.
+    """
+    @functools.wraps(f)
+    def wrapper(*args, **kw) -> T:
+        return invoker.invoke(f, *args, **kw)
 
-
-class GeThread(threading.Thread):
-    def __init__(self,
-                 target: Callable,
-                 done: Callable) -> None:
-        super().__init__()
-
-        self.target = target
-        self.done = done
-
-    def run(self):
-        self.target()
-        invoke_in_main_thread(self.done)
-
+    return wrapper()

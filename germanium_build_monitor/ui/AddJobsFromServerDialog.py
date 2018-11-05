@@ -1,10 +1,9 @@
-from typing import Dict, Set, Callable, Optional
+from typing import Dict, Set
 from mopyx import model, render
 import jenkins
 import threading
 
 from PySide2.QtWidgets import QDialog, QWidget
-from PySide2.QtCore import QThread, Signal, QTimer, QMetaObject
 
 from germanium_build_monitor.ui.Ui_AddJobsFromServerDialog import Ui_Dialog
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
@@ -14,9 +13,7 @@ from germanium_build_monitor.model.JenkinsJob import JenkinsJob
 from .WidgetSwitcher import WidgetSwitcher
 from .LoadingFrame import LoadingFrame
 from .SelectJobsFrame import SelectJobsFrame
-from .core import GeThread
-
-import time
+from .core import ui_thread_call
 
 
 @model
@@ -30,8 +27,6 @@ class ServerDialogModel:
 def load_server(model: ServerDialogModel):
     found_urls: Set[str] = set()
     server = model.server
-
-    time.sleep(1)
 
     if server.use_authentication:
         jenkins_server = jenkins.Jenkins(server.url,
@@ -76,8 +71,12 @@ def load_server(model: ServerDialogModel):
         else:
             print(f"Unprocessed: {entry['_class']}")
 
-    for entry in result:
-        process(server, entry)
+    @ui_thread_call
+    def update_model():
+        for entry in result:
+            process(server, entry)
+
+        model.loaded = True
 
 
 class AddJobsFromServerDialog(QDialog, Ui_Dialog):
@@ -97,17 +96,13 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
         self.update_from_model()
         self.reactive_update_from_model()
 
-        GeThread(target=lambda: load_server(self.model),
-                 done=self.set_loaded).start()
+        threading.Thread(target=lambda: load_server(self.model)).start()
 
     def wire_signals(self):
         self.close_button.clicked.connect(self.close)
 
     def update_from_model(self):
         self.server_name_label.setText(self.model.server.name)
-
-    def set_loaded(self):
-        self.model.loaded = True
 
     @render
     def reactive_update_from_model(self):
@@ -116,5 +111,5 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
         if not self.model.loaded:
             self.content.set(LoadingFrame())
         else:
-            self.content.set(SelectJobsFrame())
+            self.content.set(SelectJobsFrame(self.model.server))
 

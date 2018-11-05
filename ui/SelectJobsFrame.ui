@@ -27,7 +27,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTreeWidget" name="treeWidget">
+    <widget class="QTreeWidget" name="tree_widget">
      <column>
       <property name="text">
        <string notr="true">1</string>
