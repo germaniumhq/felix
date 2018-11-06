@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ErrorFrame.ui',
 # licensing of 'ui/ErrorFrame.ui' applies.
 #
-# Created: Mon Nov  5 20:21:03 2018
+# Created: Tue Nov  6 04:40:48 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

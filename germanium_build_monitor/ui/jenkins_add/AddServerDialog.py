@@ -1,16 +1,30 @@
-from mopyx import render_call
+from typing import Optional
+
+from mopyx import render_call, model
 import jenkins
 import traceback
+import threading
 
-from PySide2.QtWidgets import QDialog, QMessageBox
+from PySide2.QtWidgets import QDialog, QMessageBox, QFrame
+
+from germanium_build_monitor.ui.core import ui_thread_call
 
 from germanium_build_monitor.ui.generated.Ui_AddServerDialog import Ui_Dialog
+from germanium_build_monitor.ui.WidgetSwitcher import WidgetSwitcher
+from germanium_build_monitor.ui.LoadingFrame import LoadingFrame
+from germanium_build_monitor.ui.ErrorFrame import Error
 
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 
 
 def not_empty(s: str) -> bool:
     return bool(s and s.strip())
+
+
+@model
+class AddServerDialogModel:
+    def __init__(self):
+        self.loading = False
 
 
 class AddServerDialog(QDialog, Ui_Dialog):
@@ -20,11 +34,13 @@ class AddServerDialog(QDialog, Ui_Dialog):
                  edit_mode: bool = False,
                  ) -> None:
         super().__init__(main_window)
+        self.setupUi(self)
 
         self.model = model
-        self.edit_mode = edit_mode  # are we adding, or editing?
+        self.dialog_model = AddServerDialogModel()
 
-        self.setupUi(self)
+        self.loading_content = WidgetSwitcher(self.loading_content_holder)
+        self.edit_mode = edit_mode  # are we adding, or editing?
 
         self.update_labels()
 
@@ -65,18 +81,31 @@ class AddServerDialog(QDialog, Ui_Dialog):
         self.model.password = self.password_edit.text()
 
     def update_from_model(self):
+        @render_call
         def update_auth_status():
             self.user_edit.setEnabled(self.model.use_authentication)
             self.password_edit.setEnabled(self.model.use_authentication)
             self.user_label.setEnabled(self.model.use_authentication)
             self.password_label.setEnabled(self.model.use_authentication)
 
-        render_call(update_auth_status)
+        @render_call
+        def set_add_button_enabled():
+            enabled = not_empty(self.model.name) and \
+                not_empty(self.model.url) and \
+                not self.dialog_model.loading
+            self.add_button.setEnabled(enabled)
 
-        render_call(lambda: self.add_button.setEnabled(
-            not_empty(self.model.name) and not_empty(self.model.url)))
+        @render_call
+        def set_test_server_button_enabled():
+            enabled = not_empty(self.model.url) and not self.dialog_model.loading
+            self.test_server_button.setEnabled(enabled)
 
-        render_call(lambda: self.test_server_button.setEnabled(not_empty(self.model.url)))
+        @render_call
+        def loading_bar():
+            if self.dialog_model.loading:
+                self.loading_content.set(LoadingFrame())
+            else:
+                self.loading_content.set(QFrame())
 
         # no need to be reactive from these ones
         self.name_edit.setText(self.model.name)
@@ -89,6 +118,13 @@ class AddServerDialog(QDialog, Ui_Dialog):
         self.close()
 
     def test_server(self):
+        self.dialog_model.loading = True
+        threading.Thread(target=self.invoke_test_server).start()
+
+    def invoke_test_server(self):
+        error: Optional[Error] = None
+        result: Optional[str] = None
+
         try:
             if self.model.use_authentication:
                 server = jenkins.Jenkins(self.model.url,
@@ -100,15 +136,24 @@ class AddServerDialog(QDialog, Ui_Dialog):
             server.get_whoami()
             version = server.get_version()
 
-            QMessageBox.information(self,
-                                    "Success",
-                                    f"User {self.model.user} connected. Jenkins version {version}.")
+            result = f"User {self.model.user} connected. Jenkins version {version}."
+
         except Exception as e:
-            error_message = QMessageBox()
+            error = Error(self.tr("Error: ") + str(e), traceback.format_exc())
 
-            error_message.setWindowTitle(self.tr("Server Unavailable"))
-            error_message.setText(self.tr("Error: ") + str(e))
-            error_message.setDetailedText(traceback.format_exc())
-            error_message.setIcon(QMessageBox.Critical)
+        @ui_thread_call
+        def show_result():
+            self.dialog_model.loading = False
 
-            error_message.exec_()
+            if error:
+                error_message = QMessageBox()
+
+                error_message.setWindowTitle(self.tr("Server Unavailable"))
+                error_message.setText(error.name)
+                error_message.setDetailedText(error.stack)
+                error_message.setIcon(QMessageBox.Critical)
+
+                error_message.exec_()
+            else:
+                QMessageBox.information(self, "Success", result)
+

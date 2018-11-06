@@ -1,6 +1,6 @@
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 
-from germanium_build_monitor.ui.AddServerDialog import AddServerDialog
+from germanium_build_monitor.ui.jenkins_add.AddServerDialog import AddServerDialog
 from germanium_build_monitor.ui.jobs_from_server.AddJobsFromServerDialog import AddJobsFromServerDialog
 from germanium_build_monitor.ui.MainDialog import MainDialog
 
