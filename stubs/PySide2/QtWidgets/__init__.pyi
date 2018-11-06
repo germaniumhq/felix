@@ -27,13 +27,16 @@ class QTreeWidgetItem:
     def flags(self) -> int:
         pass
 
+    def checkState(self, column_index: int) -> Qt.CheckState:
+        pass
+
     def setCheckState(self, column_index: int, state: Qt.CheckState):
         pass
 
     def setData(self, column_index: int, role: int, data: Any) -> None:
         pass
 
-    def data(self, column_index):
+    def data(self, column_index: int, role: int) -> Any:
         pass
 
 

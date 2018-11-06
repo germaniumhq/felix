@@ -27,7 +27,7 @@ def select_jobs_from_jenkins_server_dialog():
 
     server = JenkinsServer(
         name="jenkins",
-        url="http://jenkins:30001/",
+        url="http://jenkins:30000/",
         use_authentication=False,
         user="admin",
         password="admin"

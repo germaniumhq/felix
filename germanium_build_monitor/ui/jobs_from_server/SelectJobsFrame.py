@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 from mopyx import render, render_call, action
 from PySide2.QtWidgets import QWidget
 
@@ -10,6 +10,7 @@ from germanium_build_monitor.resources.icons import get_icon
 
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder, Selection
+from germanium_build_monitor.model.JenkinsJob import JenkinsJob
 
 
 def as_qt_selection(value: Selection):
@@ -40,26 +41,27 @@ class SelectJobsFrame(QWidget, Ui_Form):
 
         self.setupUi(self)
 
-        self.wire_signals()
         self.update_from_model()
+        self.wire_signals()
 
     def wire_signals(self):
-        def set_selection_down(node, selection):
-            print(f"setting {node.name} as {selection}")
-            node.selection = selection
+        def set_selection_down(node: JenkinsFolder, selected: Selection):
+            print(f"setting folder {node.name}({node}) as {selected}")
+            node.selected = selected
 
             if isinstance(node, JenkinsFolder):
                 for folder in node.folders:
-                    set_selection_down(folder)
+                    set_selection_down(folder, selected)
 
                 for job in node.jobs:
-                    job.selection = selection
+                    print(f"setting job {job.name}({job}) as {selected}")
+                    job.selected = selected
 
         @action
-        def item_changed(item, index):
+        def item_changed(item: QTreeWidgetItem, index: int):
             node = item.data(1, 0)
-            selection = as_selection(item.checkState(index))
-            set_selection_down(node, selection)
+            selected = as_selection(item.checkState(index))
+            set_selection_down(node, selected)
 
         self.tree_widget.itemChanged.connect(item_changed)
 
@@ -73,26 +75,15 @@ class SelectJobsFrame(QWidget, Ui_Form):
             child_node = create_node(sub_folder)
 
             self.tree_widget.addTopLevelItem(child_node)
+            self.update_node_data(child_node, sub_folder)
 
-            def update_node_data():
-                child_node.setText(0, sub_folder.name)
-                child_node.setIcon(0, get_icon("folder24.png"))
-                child_node.setCheckState(0, as_qt_selection(sub_folder.selected))
-
-            render_call(update_node_data, ignore_updates=True)
             self.update_folder_level(child_node, sub_folder)
 
         for job in self.model.jobs:
             child_node = create_node(job)
 
             self.tree_widget.addTopLevelItem(child_node)
-
-            def update_node_data():
-                child_node.setText(0, job.name)
-                child_node.setIcon(0, get_icon("job24.png"))
-                child_node.setCheckState(0, as_qt_selection(job.selected))
-
-            render_call(update_node_data, ignore_updates=True)
+            self.update_node_data(child_node, job)
 
     @render
     def update_folder_level(self,
@@ -102,26 +93,25 @@ class SelectJobsFrame(QWidget, Ui_Form):
             child_node = create_node(sub_folder)
             parent_node.addChild(child_node)
 
-            def update_node_data():
-                child_node.setText(0, sub_folder.name)
-                child_node.setIcon(0, get_icon("folder24.png"))
-                child_node.setCheckState(0, as_qt_selection(sub_folder.selected))
-
-            render_call(update_node_data, ignore_updates=True)
+            self.update_node_data(child_node, sub_folder)
 
         for job in folder.jobs:
             child_node = create_node(job)
             parent_node.addChild(child_node)
 
-            def update_node_data():
-                child_node.setText(0, job.name)
-                child_node.setIcon(0, get_icon("job24.png"))
-                child_node.setCheckState(0, as_qt_selection(job.selected))
+            self.update_node_data(child_node, job)
 
-            render_call(update_node_data, ignore_updates=True)
+    @render
+    def update_node_data(self,
+                         child_node: QTreeWidgetItem,
+                         item: Union[JenkinsJob, JenkinsFolder]):
+        icon = "job24.png" if isinstance(item, JenkinsJob) else "folder24.png"
+        child_node.setText(0, item.name)
+        child_node.setIcon(0, get_icon(icon))
+        child_node.setCheckState(0, as_qt_selection(item.selected))
 
 
-def create_node(item: Any):
+def create_node(item: Any) -> QTreeWidgetItem:
     child_node = QTreeWidgetItem()
     child_node.setFlags(child_node.flags() | Qt.ItemIsUserCheckable)
     child_node.setCheckState(0, Qt.CheckState.Checked)
