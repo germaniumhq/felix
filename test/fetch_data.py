@@ -20,4 +20,4 @@ server = jenkins.Jenkins("http://localhost:8080",
 
 
 result = server.get_job_info("jenkins-demo", depth="2")
-dump_data("model/jd_build_initial.json", result)
+dump_data("model/remote/jenkins/jd_a_feature_wut_rerun.json", result)

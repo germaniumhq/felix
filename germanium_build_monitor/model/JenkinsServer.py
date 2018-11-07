@@ -1,11 +1,9 @@
 
 from mopyx import model
 
-from .JenkinsFolder import JenkinsFolder
-
 
 @model
-class JenkinsServer(JenkinsFolder):
+class JenkinsServer:
     def __init__(
             self,
             name: str = "",
@@ -14,10 +12,7 @@ class JenkinsServer(JenkinsFolder):
             user: str = "",
             password: str = ""):
 
-        super().__init__(
-            parent=None,
-            name=name)
-
+        self.name = name
         self.url = url
         self.use_authentication = use_authentication
         self.user = user
@@ -33,6 +28,4 @@ class JenkinsServer(JenkinsFolder):
             "user": self.user,
             "password": self.password,
 
-            "folders": [x.as_dict() for x in self.folders],
-            "jobs": [x.as_dict() for x in self.jobs],
         }

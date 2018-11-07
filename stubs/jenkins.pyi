@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Any
 
 
 class Jenkins:
@@ -9,4 +9,7 @@ class Jenkins:
         pass
 
     def get_all_jobs(self):
+        pass
+
+    def get_job_info(self, name: str, depth: Optional[str] = None) -> Any:
         pass

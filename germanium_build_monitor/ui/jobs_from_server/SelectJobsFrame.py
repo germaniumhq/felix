@@ -36,10 +36,13 @@ def as_selection(value: 'Qt.CheckState'):
 
 
 class SelectJobsFrame(QWidget, Ui_Form):
-    def __init__(self, server: JenkinsServer) -> None:
+    def __init__(self,
+                 server: JenkinsServer,
+                 root: JenkinsFolder) -> None:
         super().__init__()
 
-        self.model = server
+        self.model = root
+        self.server = server
 
         self.setupUi(self)
 

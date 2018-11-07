@@ -6,6 +6,7 @@ from PySide2.QtWidgets import QDialog
 from germanium_build_monitor.ui.generated.Ui_AddJobsFromServerDialog import Ui_Dialog
 
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
 
 from germanium_build_monitor.ui.WidgetSwitcher import WidgetSwitcher
 from germanium_build_monitor.ui.LoadingFrame import LoadingFrame
@@ -23,7 +24,10 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
                  ) -> None:
         super().__init__(main_window)
 
-        self.model = ServerDialogModel(model)
+        self.model = ServerDialogModel(
+            server=model,
+            root_folder=JenkinsFolder(parent=None, name="__root__"))
+
         self.setupUi(self)
 
         self.content = WidgetSwitcher(self.content_holder)
@@ -48,7 +52,10 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
         elif not self.model.loaded:
             self.content.set(LoadingFrame())
         else:
-            self.content.set(SelectJobsFrame(self.model.server))
+            self.content.set(
+                SelectJobsFrame(
+                    self.model.server,
+                    self.model.root_folder))
 
     def load_content_from_server(self):
         @action

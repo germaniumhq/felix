@@ -15,15 +15,20 @@ from germanium_build_monitor.ui.ErrorFrame import Error
 @model
 class ServerDialogModel:
     def __init__(self,
-                 server: JenkinsServer):
+                 server: JenkinsServer,
+                 root_folder: JenkinsFolder):
         self.server: JenkinsServer = server
+        self.root_folder: JenkinsFolder = root_folder
         self.loaded = False
         self.error: Optional[Error] = None
 
 
 def load_server(model: ServerDialogModel):
     found_urls: Set[str] = set()
+
     server = model.server
+    root_folder = model.root_folder
+
     error = None
 
     try:
@@ -59,7 +64,7 @@ def load_server(model: ServerDialogModel):
             folder.jobs.append(job)
 
         def process_workflow_job(folder: JenkinsFolder, entry: Dict):
-            if "/" not in entry["fullname"] or not isinstance(folder, JenkinsServer):
+            if "/" not in entry["fullname"] or not folder.parent:
                 process_job(folder, entry)
 
         def process(folder: JenkinsFolder, entry: Dict):
@@ -81,7 +86,7 @@ def load_server(model: ServerDialogModel):
             return
 
         for entry in result:
-            process(server, entry)
+            process(root_folder, entry)
 
         model.loaded = True
 
