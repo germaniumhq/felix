@@ -1,5 +1,7 @@
-from typing import Any, Union
-from mopyx import render, render_call, action
+from typing import Any, Union, Optional
+from mopyx import render, action
+import itertools
+
 from PySide2.QtWidgets import QWidget
 
 from PySide2.QtWidgets import QTreeWidgetItem
@@ -45,8 +47,7 @@ class SelectJobsFrame(QWidget, Ui_Form):
         self.wire_signals()
 
     def wire_signals(self):
-        def set_selection_down(node: JenkinsFolder, selected: Selection):
-            print(f"setting folder {node.name}({node}) as {selected}")
+        def set_selection_down(node: Union[JenkinsFolder, JenkinsJob], selected: Selection):
             node.selected = selected
 
             if isinstance(node, JenkinsFolder):
@@ -54,14 +55,35 @@ class SelectJobsFrame(QWidget, Ui_Form):
                     set_selection_down(folder, selected)
 
                 for job in node.jobs:
-                    print(f"setting job {job.name}({job}) as {selected}")
                     job.selected = selected
+
+        def set_selection_up(node: Union[JenkinsFolder, JenkinsJob]):
+            parent = node.parent
+            if not parent:
+                return
+
+            status: Optional[Selection] = None
+
+            for child in itertools.chain(parent.folders, parent.jobs):
+                if status is None:
+                    status = child.selected
+                    continue
+
+                if child.selected != status:
+                    parent.selected = Selection.PARTIAL
+                    set_selection_up(parent)
+                    return
+
+            assert status
+            parent.selected = status
+            set_selection_up(parent)
 
         @action
         def item_changed(item: QTreeWidgetItem, index: int):
             node = item.data(1, 0)
             selected = as_selection(item.checkState(index))
             set_selection_down(node, selected)
+            set_selection_up(node)
 
         self.tree_widget.itemChanged.connect(item_changed)
 
@@ -101,7 +123,7 @@ class SelectJobsFrame(QWidget, Ui_Form):
 
             self.update_node_data(child_node, job)
 
-    @render
+    @render(ignore_updates=True)
     def update_node_data(self,
                          child_node: QTreeWidgetItem,
                          item: Union[JenkinsJob, JenkinsFolder]):

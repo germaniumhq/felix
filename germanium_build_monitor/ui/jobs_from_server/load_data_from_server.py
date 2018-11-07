@@ -37,7 +37,8 @@ def load_server(model: ServerDialogModel):
         result = jenkins_server.get_all_jobs()
 
         def process_folder(folder: JenkinsFolder, entry: Dict):
-            f = JenkinsFolder(entry['name'])
+            f = JenkinsFolder(parent=folder,
+                              name=entry['name'])
             folder.folders.append(f)
 
             for job in entry['jobs']:
@@ -51,7 +52,8 @@ def load_server(model: ServerDialogModel):
 
             found_urls.add(url)
 
-            job = JenkinsJob(name=entry['name'],
+            job = JenkinsJob(parent=folder,
+                             name=entry['name'],
                              full_name=entry['fullname'],
                              url=url)
             folder.jobs.append(job)

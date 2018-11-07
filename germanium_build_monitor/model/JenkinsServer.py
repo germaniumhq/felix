@@ -1,3 +1,5 @@
+from typing import Optional
+
 from mopyx import model
 
 from .JenkinsFolder import JenkinsFolder
@@ -13,7 +15,9 @@ class JenkinsServer(JenkinsFolder):
             user: str = "",
             password: str = ""):
 
-        super().__init__(name=name)
+        super().__init__(
+            parent=None,
+            name=name)
 
         self.url = url
         self.use_authentication = use_authentication

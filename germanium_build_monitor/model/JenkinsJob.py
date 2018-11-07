@@ -1,5 +1,9 @@
+from typing import Optional
+
 from mopyx import model
 from enum import Enum
+
+from .JenkinsFolder import JenkinsFolder
 
 
 class Selection(Enum):
@@ -11,10 +15,14 @@ class Selection(Enum):
 @model
 class JenkinsJob:
     def __init__(self,
+                 parent: Optional[JenkinsFolder],
                  name: str,
                  full_name: str,
                  url: str):
         super().__init__()
+
+        self.parent = parent
+
         self.name = name
         self.full_name = full_name
         self.url = url

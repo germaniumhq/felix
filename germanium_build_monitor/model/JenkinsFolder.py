@@ -1,15 +1,18 @@
+from typing import Optional
+
 from typing import List
 from mopyx import model
-
-from .JenkinsJob import JenkinsJob, Selection
 
 
 @model
 class JenkinsFolder:
-    def __init__(self, name: str):
+    def __init__(self,
+                 parent: Optional['JenkinsFolder'],
+                 name: str) -> None:
         super().__init__()
 
         self.name = name
+        self.parent = parent
 
         self.selected = Selection.SELECTED
         self.folders: List['JenkinsFolder'] = []
@@ -22,3 +25,6 @@ class JenkinsFolder:
             "folders": [x.as_dict() for x in self.folders],
             "jobs": [x.as_dict() for x in self.jobs],
         }
+
+
+from .JenkinsJob import JenkinsJob, Selection
