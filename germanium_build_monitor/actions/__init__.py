@@ -8,7 +8,7 @@ def open_create_jenkins_server_dialog():
     AddServerDialog(
         JenkinsServer(
             name="jenkins",
-            url="http://localhost:8080/",
+            url="http://jenkins:30000/",
             use_authentication=False,
             user="",
             password=""

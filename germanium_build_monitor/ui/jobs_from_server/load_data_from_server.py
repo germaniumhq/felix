@@ -1,10 +1,9 @@
 from typing import Optional
 
 from mopyx import model
-import jenkins
 import traceback
 
-from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
 
 from germanium_build_monitor.model.jenkins.remote.read_job_tree import process
@@ -31,14 +30,8 @@ def load_server(model: ServerDialogModel):
     error = None
 
     try:
-        if server.use_authentication:
-            jenkins_server = jenkins.Jenkins(server.url,
-                                             username=server.user,
-                                             password=server.password)
-        else:
-            jenkins_server = jenkins.Jenkins(server.url)
-
-        result = jenkins_server.get_all_jobs()
+        jenkins_api = jenkins_server(server)
+        result = jenkins_api.get_all_jobs()
     except Exception as e:
         error = Error(str(e), traceback.format_exc())
 

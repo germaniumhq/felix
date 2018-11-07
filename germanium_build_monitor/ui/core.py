@@ -60,10 +60,10 @@ def ui_thread_call(f: Callable[..., T]) -> Callable[..., T]:
     return wrapper()
 
 
-def show_notifications(title: str,
-                       message: str,
-                       icon: QIcon,
-                       delay: int = 4000) -> None:
+def show_notification(title: str,
+                      message: str,
+                      icon: QIcon,
+                      delay: int = 4000) -> None:
     global tray_icon
     assert tray_icon
     tray_icon.showMessage(title, message, icon, delay)

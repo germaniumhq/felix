@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from mopyx import model
 
 from .JenkinsJobBranch import JenkinsJobBranch
@@ -11,5 +11,5 @@ class JenkinsMonitoredJob:
                  full_name: str):
         self.name: str = name
         self.full_name: str = full_name
-        self.branches: List[JenkinsJobBranch] = []
+        self.branches: Optional[List[JenkinsJobBranch]] = None
 

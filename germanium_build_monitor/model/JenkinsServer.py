@@ -1,5 +1,6 @@
 from typing import List
 from mopyx import model
+import jenkins
 
 from .JenkinsMonitoredJob import JenkinsMonitoredJob
 
@@ -32,4 +33,12 @@ class JenkinsServer:
             "user": self.user,
             "password": self.password,
         }
+
+
+def jenkins_server(server: JenkinsServer) -> jenkins.Jenkins:
+    if server.use_authentication:
+        return jenkins.Jenkins(server.url,
+                               username=server.user,
+                               password=server.password)
+    return jenkins.Jenkins(server.url)
 

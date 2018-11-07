@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ErrorFrame.ui',
 # licensing of 'ui/ErrorFrame.ui' applies.
 #
-# Created: Wed Nov  7 05:48:37 2018
+# Created: Wed Nov  7 20:10:54 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,6 +30,7 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.retry_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.error_name_label = QtWidgets.QLabel(Form)
+        self.error_name_label.setWordWrap(True)
         self.error_name_label.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.error_name_label.setObjectName("error_name_label")
         self.verticalLayout.addWidget(self.error_name_label)

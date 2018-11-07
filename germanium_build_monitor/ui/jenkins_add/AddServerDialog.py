@@ -1,7 +1,6 @@
 from typing import Optional
 
 from mopyx import render_call, model
-import jenkins
 import traceback
 import threading
 
@@ -14,7 +13,7 @@ from germanium_build_monitor.ui.WidgetSwitcher import WidgetSwitcher
 from germanium_build_monitor.ui.LoadingFrame import LoadingFrame
 from germanium_build_monitor.ui.ErrorFrame import Error
 
-from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
 
 from germanium_build_monitor.actions import select_jobs_from_jenkins_server_dialog
 
@@ -129,13 +128,7 @@ class AddServerDialog(QDialog, Ui_Dialog):
         result: Optional[str] = None
 
         try:
-            if self.model.use_authentication:
-                server = jenkins.Jenkins(self.model.url,
-                                         username=self.model.user,
-                                         password=self.model.password)
-            else:
-                server = jenkins.Jenkins(self.model.url)
-
+            server = jenkins_server(self.model)
             server.get_whoami()
             version = server.get_version()
 

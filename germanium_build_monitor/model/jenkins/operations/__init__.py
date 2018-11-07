@@ -26,6 +26,15 @@ def compare_branches(initial_branches: List[JenkinsJobBranch],
             last_build = get_last_finished_build(updated_branch)
             if last_build.status == BuildStatus.SUCCESS or last_build.status == BuildStatus.FAILURE:
                 notifications.append(Notification(updated_branch, last_build))  # FIXME: state changes only?
+            continue
+
+        # FIXME: foreach on the branch builds?
+        if updated_branch.builds:  # same number of builds, maybe some of it finished
+            last_known_build = get_last_finished_build(initial_branch)
+            last_updated_build = get_last_finished_build(updated_branch)
+
+            if last_known_build.status != last_updated_build.status:
+                notifications.append(Notification(updated_branch, last_updated_build))
 
     return notifications
 
