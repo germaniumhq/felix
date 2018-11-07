@@ -1,3 +1,4 @@
+from typing import List
 from mopyx import render, action, render_call
 import threading
 
@@ -7,11 +8,10 @@ from germanium_build_monitor.ui.generated.Ui_AddJobsFromServerDialog import Ui_D
 
 from germanium_build_monitor.model.RootModel import model as root_model
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.model.JenkinsMonitoredJob import JenkinsMonitoredJob
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
+from germanium_build_monitor.model.JenkinsJob import JenkinsJob
 from germanium_build_monitor.model.Selection import Selection
-
-from germanium_build_monitor.model.BuildStatus import BuildStatus
-from germanium_build_monitor.model.SystrayItem import SystrayItem
 
 from germanium_build_monitor.ui.WidgetSwitcher import WidgetSwitcher
 from germanium_build_monitor.ui.LoadingFrame import LoadingFrame
@@ -49,10 +49,35 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
     def update_from_model(self):
         self.server_name_label.setText(self.model.server.name)
 
+    @action
     def add_server_and_jobs(self):
-        root_model.systray_items.append(
-            SystrayItem(BuildStatus.SUCCESS, "wut", None)
-        )
+        server = self.model.server
+
+        def find_selected_jobs(folder: JenkinsFolder) -> List[JenkinsJob]:
+            result = []
+
+            for sub_folder in folder.folders:
+                if sub_folder.selected != Selection.UNSELECTED:
+                    result.extend(find_selected_jobs(sub_folder))
+
+            for job in folder.jobs:
+                if job.selected == Selection.SELECTED:
+                    result.append(job)
+
+            return result
+
+        selected_jobs = find_selected_jobs(self.model.root_folder)
+
+        for job in selected_jobs:
+            monitored_job = JenkinsMonitoredJob(
+                name=job.name,
+                full_name=job.full_name
+            )
+            server.monitored_jobs.append(monitored_job)
+
+        root_model.servers.append(server)
+
+        self.close()
 
     @render
     def reactive_update_from_model(self):
