@@ -11,6 +11,9 @@ from germanium_build_monitor.model.BuildStatus import BuildStatus
 import germanium_build_monitor.resources.icons as icons
 
 
+menu = None
+
+
 def exit_application():
     sys.exit(0)
 
@@ -21,8 +24,6 @@ def main() -> None:
     tray_icon = create_qt_tray_icon()
     tray_icon.setIcon(icons.get_icon("favicon.ico"))
     tray_icon.show()
-
-    global menu
 
     @render_call
     def render_context_menu():
