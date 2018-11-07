@@ -16,7 +16,7 @@ class JenkinsFolder:
         self.name = name
         self.parent = parent
 
-        self.selected = Selection.SELECTED
+        self.selected = Selection.UNSELECTED
         self.folders: List['JenkinsFolder'] = []
         self.jobs: List[JenkinsJob] = []
 

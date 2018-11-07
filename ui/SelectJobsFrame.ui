@@ -28,6 +28,9 @@
    </property>
    <item>
     <widget class="QTreeWidget" name="tree_widget">
+     <property name="headerHidden">
+      <bool>true</bool>
+     </property>
      <column>
       <property name="text">
        <string notr="true">1</string>

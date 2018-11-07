@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/AddJobsFromServer.ui',
 # licensing of 'ui/AddJobsFromServer.ui' applies.
 #
-# Created: Tue Nov  6 04:40:47 2018
+# Created: Wed Nov  7 05:48:36 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

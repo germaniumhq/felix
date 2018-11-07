@@ -20,7 +20,7 @@ class JenkinsJob:
         self.name = name
         self.full_name = full_name
         self.url = url
-        self.selected = Selection.SELECTED
+        self.selected = Selection.UNSELECTED
 
     def as_dict(self):
         return {
