@@ -19,5 +19,7 @@ server = jenkins.Jenkins("http://localhost:8080",
                          password="test")
 
 
-result = server.get_job_info("jenkins-demo", depth="2")
-dump_data("model/remote/jenkins/jd_a_feature_wut_rerun.json", result)
+# result = server.get_job_info("jenkins-demo", depth="2")
+result = server.get_all_jobs()
+
+dump_data("model/remote/jenkins/all_jobs.json", result)

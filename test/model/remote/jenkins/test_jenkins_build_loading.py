@@ -4,7 +4,7 @@ import unittest
 import json
 import os
 
-from germanium_build_monitor.model.remote.jenkins import read_job_builds
+from germanium_build_monitor.model.remote.jenkins.read_build_jobs import read_build_job_branches
 from germanium_build_monitor.model.BuildStatus import BuildStatus
 
 
@@ -23,7 +23,7 @@ class TestJenkinsJobLoading(unittest.TestCase):
         Try to fetch the builds from one of dem previously saved JSON files.
         """
         result = load_result("jd_build_initial.json")
-        branches = read_job_builds(result)
+        branches = read_build_job_branches(result)
 
         self.assertTrue(branches)
         self.assertEqual(2, len(branches))
@@ -41,7 +41,7 @@ class TestJenkinsJobLoading(unittest.TestCase):
         Try to fetch the builds from one of dem previously saved JSON files.
         """
         result = load_result("jd_build_a_feature_wut_rerun.json")
-        branches = read_job_builds(result)
+        branches = read_build_job_branches(result)
 
         self.assertTrue(branches)
         self.assertEqual(2, len(branches))
@@ -59,7 +59,7 @@ class TestJenkinsJobLoading(unittest.TestCase):
         Try to fetch the builds from one of dem previously saved JSON files.
         """
         result = load_result("ww_build_initial.json")
-        branches = read_job_builds(result)
+        branches = read_build_job_branches(result)
 
         self.assertTrue(branches)
         self.assertEqual(1, len(branches))
@@ -73,7 +73,7 @@ class TestJenkinsJobLoading(unittest.TestCase):
         Try to fetch the builds from one of dem previously saved JSON files.
         """
         result = load_result("x_build_initial.json")
-        branches = read_job_builds(result)
+        branches = read_build_job_branches(result)
 
         self.assertTrue(branches)
         self.assertEqual(1, len(branches))

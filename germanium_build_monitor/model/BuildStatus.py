@@ -6,3 +6,4 @@ class BuildStatus(enum.Enum):
     FAILURE = "failure"
     RUNNING = "running"
     NEVER = "never"
+
