@@ -4,7 +4,7 @@ import unittest
 import json
 import os
 
-from germanium_build_monitor.model.remote.jenkins.read_build_jobs import read_build_job_branches
+from germanium_build_monitor.model.jenkins.remote.read_build_jobs import read_build_job_branches
 from germanium_build_monitor.model.BuildStatus import BuildStatus
 
 

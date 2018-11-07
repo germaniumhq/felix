@@ -2,7 +2,7 @@ import unittest
 
 from .test_jenkins_build_loading import load_result
 
-from germanium_build_monitor.model.remote.jenkins.read_job_tree import process
+from germanium_build_monitor.model.jenkins.remote.read_job_tree import process
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
 
 

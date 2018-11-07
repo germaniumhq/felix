@@ -7,7 +7,7 @@ import traceback
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
 
-from germanium_build_monitor.model.remote.jenkins.read_job_tree import process
+from germanium_build_monitor.model.jenkins.remote.read_job_tree import process
 
 from germanium_build_monitor.ui.core import ui_thread_call
 from germanium_build_monitor.ui.ErrorFrame import Error
