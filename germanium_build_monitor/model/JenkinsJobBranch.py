@@ -15,5 +15,5 @@ class JenkinsJobBranch:
         self.branch_name = branch_name
         self.decoded_branch_name = urllib.parse.unquote(branch_name)
         self.status = status
-        self.known_builds: List[JenkinsJobBranchBuild] = []
+        self.builds: List[JenkinsJobBranchBuild] = []
 

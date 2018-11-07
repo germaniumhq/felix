@@ -18,7 +18,7 @@ class TestJenkinsJobLoading(unittest.TestCase):
     Tests if we can load the builds correctly
     """
 
-    def test_jenkins_job_loading(self):
+    def test_jenkins_multibranch_job_loading(self):
         """
         Try to fetch the builds from one of dem previously saved JSON files.
         """
@@ -30,8 +30,25 @@ class TestJenkinsJobLoading(unittest.TestCase):
 
         self.assertEqual("feature/wut", branches[0].decoded_branch_name)
         self.assertEqual(BuildStatus.FAILURE, branches[0].status)
+        self.assertEqual(1, len(branches[0].builds))
+
         self.assertEqual("master", branches[1].decoded_branch_name)
         self.assertEqual(BuildStatus.SUCCESS, branches[1].status)
+        self.assertEqual(17, len(branches[1].builds))
+
+    def test_basic_loading(self):
+        """
+        Try to fetch the builds from one of dem previously saved JSON files.
+        """
+        result = load_result("ww_build_initial.json")
+        branches = read_job_builds(result)
+
+        self.assertTrue(branches)
+        self.assertEqual(1, len(branches))
+
+        self.assertEqual("ww", branches[0].decoded_branch_name)
+        self.assertEqual(BuildStatus.SUCCESS, branches[0].status)
+        self.assertEqual(3, len(branches[0].builds))
 
 
 if __name__ == '__main__':
