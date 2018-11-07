@@ -2,11 +2,14 @@ from typing import Callable, TypeVar
 
 import functools
 import sys
-from PySide2.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication, QSystemTrayIcon
 from PySide2.QtCore import QMetaObject, QObject, Qt, Slot
+from PySide2.QtGui import QIcon
 from queue import Queue
 
 app = None
+tray_icon = None
+
 T = TypeVar('T')
 
 
@@ -17,6 +20,15 @@ def create_qt_application() -> QApplication:
         app = QApplication(sys.argv)
 
     return app
+
+
+def create_qt_tray_icon() -> QSystemTrayIcon:
+    global tray_icon
+
+    if not tray_icon:
+        tray_icon = QSystemTrayIcon()
+
+    return tray_icon
 
 
 class Invoker(QObject):
@@ -46,3 +58,13 @@ def ui_thread_call(f: Callable[..., T]) -> Callable[..., T]:
         return invoker.invoke(f, *args, **kw)
 
     return wrapper()
+
+
+def show_notifications(title: str,
+                       message: str,
+                       icon: QIcon,
+                       delay: int = 4000) -> None:
+    global tray_icon
+    assert tray_icon
+    tray_icon.showMessage(title, message, icon, delay)
+

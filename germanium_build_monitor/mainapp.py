@@ -1,10 +1,10 @@
 import sys
 from mopyx import render_call
 
-from PySide2.QtWidgets import QSystemTrayIcon, QMenu
+from PySide2.QtWidgets import QMenu
 
 from germanium_build_monitor.ui.MainDialog import MainDialog
-from germanium_build_monitor.ui.core import create_qt_application
+from germanium_build_monitor.ui.core import create_qt_application, create_qt_tray_icon
 from germanium_build_monitor.model.RootModel import model as root_model
 from germanium_build_monitor.model.BuildStatus import BuildStatus
 
@@ -18,27 +18,19 @@ def exit_application():
 def main() -> None:
     app = create_qt_application()
 
-    tray_icon = QSystemTrayIcon()
+    tray_icon = create_qt_tray_icon()
     tray_icon.setIcon(icons.get_icon("favicon.ico"))
     tray_icon.show()
-    tray_icon.showMessage("WEBUI",
-                          "bugfix/12.2/WEBUI-123-fix-the-bug-with-the-other-bug",
-                          icons.get_icon('fail24.png'),
-                          4000)
 
-    tray_icon.setIcon(icons.get_icon("favicon.ico"))
-
-    def show_custom_message(message: str):
-        def show_msg():
-            tray_icon.showMessage("WEBUI",
-                                  message,
-                                  icons.get_icon('fail24.png'),
-                                  4000)
-
-        return show_msg
+    global menu
 
     @render_call
     def render_context_menu():
+        global menu
+
+        if menu:
+            menu.close()
+
         menu = QMenu()
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
             .triggered.connect(MainDialog.instance().show)
