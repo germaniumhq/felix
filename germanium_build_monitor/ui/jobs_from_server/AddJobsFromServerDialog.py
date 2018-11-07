@@ -1,12 +1,17 @@
-from mopyx import render, action
+from mopyx import render, action, render_call
 import threading
 
 from PySide2.QtWidgets import QDialog
 
 from germanium_build_monitor.ui.generated.Ui_AddJobsFromServerDialog import Ui_Dialog
 
+from germanium_build_monitor.model.RootModel import model as root_model
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
+from germanium_build_monitor.model.Selection import Selection
+
+from germanium_build_monitor.model.BuildStatus import BuildStatus
+from germanium_build_monitor.model.SystrayItem import SystrayItem
 
 from germanium_build_monitor.ui.WidgetSwitcher import WidgetSwitcher
 from germanium_build_monitor.ui.LoadingFrame import LoadingFrame
@@ -39,13 +44,22 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
 
     def wire_signals(self):
         self.close_button.clicked.connect(self.close)
+        self.select_button.clicked.connect(self.add_server_and_jobs)
 
     def update_from_model(self):
         self.server_name_label.setText(self.model.server.name)
 
+    def add_server_and_jobs(self):
+        root_model.systray_items.append(
+            SystrayItem(BuildStatus.SUCCESS, "wut", None)
+        )
+
     @render
     def reactive_update_from_model(self):
-        self.select_button.setEnabled(self.model.loaded)
+        @render_call
+        def select_button_enabled():
+            enabled = self.model.loaded and self.model.root_folder.selected != Selection.UNSELECTED
+            self.select_button.setEnabled(enabled)
 
         if self.model.error:
             self.content.set(ErrorFrame(self.model.error, self.load_content_from_server))

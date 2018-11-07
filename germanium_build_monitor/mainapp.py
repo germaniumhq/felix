@@ -1,9 +1,13 @@
 import sys
+from mopyx import render_call
 
 from PySide2.QtWidgets import QSystemTrayIcon, QMenu
 
 from germanium_build_monitor.ui.MainDialog import MainDialog
 from germanium_build_monitor.ui.core import create_qt_application
+from germanium_build_monitor.model.RootModel import model as root_model
+from germanium_build_monitor.model.BuildStatus import BuildStatus
+
 import germanium_build_monitor.resources.icons as icons
 
 
@@ -33,24 +37,29 @@ def main() -> None:
 
         return show_msg
 
-    menu = QMenu()
-    menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
-        .triggered.connect(MainDialog.instance().show)
+    @render_call
+    def render_context_menu():
+        menu = QMenu()
+        menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
+            .triggered.connect(MainDialog.instance().show)
 
-    menu.addSeparator()
+        if root_model.systray_items:
+            menu.addSeparator()
 
-    menu.addAction(icons.get_icon("failed128.png"),
-                   "GermaniumSB")\
-        .triggered.connect(show_custom_message("build failed"))
-    menu.addAction(icons.get_icon("success128.png"),
-                   "\u2610\u2611\u2612\u2611 Wutinston feature/PMIA-1141-add-new-bmbzling-feature")\
-        .triggered.connect(show_custom_message("build failed"))
+            for systray_item in root_model.systray_items:
+                if systray_item.status == BuildStatus.SUCCESS:
+                    icon = icons.get_icon("success128.png")
+                else:
+                    icon = icons.get_icon("failed128.png")
 
-    menu.addSeparator()
-    menu.addAction("Exit")\
-        .triggered.connect(exit_application)
+                menu.addAction(icon, systray_item.text)\
+                    .triggered.connect(systray_item.action)
 
-    tray_icon.setContextMenu(menu)
+        menu.addSeparator()
+        menu.addAction("Exit")\
+            .triggered.connect(exit_application)
+
+        tray_icon.setContextMenu(menu)
 
     sys.exit(app.exec_())
 
