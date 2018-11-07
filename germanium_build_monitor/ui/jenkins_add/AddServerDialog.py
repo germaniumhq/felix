@@ -16,6 +16,8 @@ from germanium_build_monitor.ui.ErrorFrame import Error
 
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 
+from germanium_build_monitor.actions.new_jenkins_server import select_jobs_from_jenkins_server_dialog
+
 
 def not_empty(s: str) -> bool:
     return bool(s and s.strip())
@@ -116,6 +118,7 @@ class AddServerDialog(QDialog, Ui_Dialog):
 
     def add_server(self):
         self.close()
+        select_jobs_from_jenkins_server_dialog(self.model)
 
     def test_server(self):
         self.dialog_model.loading = True
