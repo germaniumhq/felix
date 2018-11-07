@@ -1,15 +1,9 @@
 from typing import Optional
 
 from mopyx import model
-from enum import Enum
 
 from .JenkinsFolder import JenkinsFolder
-
-
-class Selection(Enum):
-    UNSELECTED = 'unselected'
-    SELECTED = 'selected'
-    PARTIAL = 'partial'
+from .Selection import Selection
 
 
 @model

@@ -20,6 +20,10 @@ class QLayout:
         pass
 
 
+def QFrame(QWidget):
+    pass
+
+
 class QTreeWidgetItem:
     def setFlags(self, flags: int) -> None:
         pass
@@ -34,6 +38,12 @@ class QTreeWidgetItem:
         pass
 
     def setData(self, column_index: int, role: int, data: Any) -> None:
+        pass
+
+    def setText(self, column_index: int, text: str) -> None:
+        pass
+
+    def setIcon(self, column_index: int, icon: QIcon) -> None:
         pass
 
     def data(self, column_index: int, role: int) -> Any:

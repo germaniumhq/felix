@@ -3,7 +3,7 @@ from PySide2.QtWidgets import QWidget
 from germanium_build_monitor.ui.generated.Ui_NewStartFrame import Ui_Form
 from germanium_build_monitor.resources import icons
 
-from germanium_build_monitor.actions.new_jenkins_server import open_create_jenkins_server_dialog
+from germanium_build_monitor.actions import open_create_jenkins_server_dialog
 
 
 class NewStartFrame(QWidget, Ui_Form):

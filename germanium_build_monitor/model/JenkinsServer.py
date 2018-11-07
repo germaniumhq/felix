@@ -1,5 +1,3 @@
-from typing import Optional
-
 from mopyx import model
 
 from .JenkinsFolder import JenkinsFolder

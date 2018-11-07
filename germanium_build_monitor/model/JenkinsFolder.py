@@ -3,6 +3,8 @@ from typing import Optional
 from typing import List
 from mopyx import model
 
+from .Selection import Selection
+
 
 @model
 class JenkinsFolder:
@@ -27,4 +29,4 @@ class JenkinsFolder:
         }
 
 
-from .JenkinsJob import JenkinsJob, Selection
+from .JenkinsJob import JenkinsJob
