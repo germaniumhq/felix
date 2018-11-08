@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>317</width>
+    <height>160</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="project_name_label">
+     <property name="text">
+      <string>project</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="branch_name_label">
+     <property name="text">
+      <string>branch</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="build_status_label">
+     <property name="text">
+      <string>build status</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

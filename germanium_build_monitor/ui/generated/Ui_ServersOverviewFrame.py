@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ServersOverviewFrame.ui',
 # licensing of 'ui/ServersOverviewFrame.ui' applies.
 #
-# Created: Wed Nov  7 20:10:54 2018
+# Created: Thu Nov  8 06:45:57 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,10 +15,11 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(400, 300)
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.gridLayout = QtWidgets.QGridLayout()
-        self.gridLayout.setObjectName("gridLayout")
-        self.horizontalLayout.addLayout(self.gridLayout)
+        self.content = QtWidgets.QVBoxLayout()
+        self.content.setObjectName("content")
+        self.horizontalLayout.addLayout(self.content)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

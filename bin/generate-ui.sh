@@ -17,3 +17,8 @@ pyside2-uic ui/SelectJobsFrame.ui > germanium_build_monitor/ui/generated/Ui_Sele
 pyside2-uic ui/LoadingFrame.ui > germanium_build_monitor/ui/generated/Ui_LoadingFrame.py
 pyside2-uic ui/ErrorFrame.ui > germanium_build_monitor/ui/generated/Ui_ErrorFrame.py
 #pyside2-uic ui/NoSelectionFrame.ui > germanium_build_monitor/ui/Ui_NoSelectionFrame.py
+
+pyside2-uic ui/JenkinsServerFrame.ui > germanium_build_monitor/ui/generated/Ui_JenkinsServerFrame.py
+pyside2-uic ui/LoadingJobFrame.ui > germanium_build_monitor/ui/generated/Ui_LoadingJobFrame.py
+pyside2-uic ui/JenkinsBuildBranchFrame.ui > germanium_build_monitor/ui/generated/Ui_JenkinsBuildBranchFrame.py
+

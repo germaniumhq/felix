@@ -11,8 +11,8 @@ class WidgetSwitcher:
 
     def set(self, widget: QWidget):
         if self._last_widget:
-            self._last_widget.deleteLater()
             self.widget_holder.removeWidget(self._last_widget)
+            self._last_widget.deleteLater()
 
         self.widget_holder.addWidget(widget)
         self._last_widget = widget
