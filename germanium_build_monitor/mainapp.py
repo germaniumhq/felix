@@ -73,10 +73,12 @@ class JobMonitorThread(threading.Thread):
 
                         systray_item = SystrayItem(
                             notification.branch.status,
-                            f"{notification.branch.project_name} {notification.branch.decoded_branch_name}",
-                            lambda: subprocess.Popen(["xdg-open", notification.build.url])
+                            f"{notification.branch.project_name} {notification.branch.decoded_branch_name} {notification.build.name}",
+                            lambda: subprocess.Popen(["google-chrome", notification.build.url])
                         )
-                        root_model.systray_items.append(systray_item)
+                        root_model.systray_items.insert(0, systray_item)
+                        if len(root_model.systray_items) > 2:
+                            del root_model.systray_items[2:]
 
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
@@ -96,8 +98,6 @@ def main() -> None:
 
     @render_call
     def render_context_menu():
-        print("rendering new context menu")
-
         menu.clear()
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
             .triggered.connect(MainDialog.instance().show)
@@ -113,13 +113,10 @@ def main() -> None:
 
                 menu.addAction(icon, systray_item.text)\
                     .triggered.connect(systray_item.action)
-                systray_item.action()
 
         menu.addSeparator()
         menu.addAction("Exit")\
             .triggered.connect(exit_application)
-
-        print("all is good")
 
     tray_icon.setContextMenu(menu)
 
