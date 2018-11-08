@@ -73,7 +73,7 @@ class JobMonitorThread(threading.Thread):
 
                         systray_item = SystrayItem(
                             notification.branch.status,
-                            f"{notification.branch.project_name} {notification.branch.decoded_branch_name} {notification.build.name}",
+                            f"{notification.branch.project_name} ({notification.branch.decoded_branch_name}) {notification.build.name}",
                             lambda: subprocess.Popen(["google-chrome", notification.build.url])
                         )
                         root_model.systray_items.insert(0, systray_item)
