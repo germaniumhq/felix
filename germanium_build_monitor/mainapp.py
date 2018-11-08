@@ -11,7 +11,7 @@ from germanium_build_monitor.ui.core import \
     create_qt_application, \
     create_qt_tray_icon, \
     show_notification, \
-    ui_thread_call
+    ui_thread
 
 from germanium_build_monitor.model.RootModel import root_model
 from germanium_build_monitor.model.BuildStatus import BuildStatus
@@ -48,16 +48,16 @@ class JobMonitorThread(threading.Thread):
                 result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
                 updated_branches = read_build_job_branches(job.name, result)
 
-                # run on UI
-                @ui_thread_call
+                @ui_thread
                 @action
-                def update_results() -> None:
+                def update_results(job, updated_branches) -> None:
                     if job.branches is None:
                         job.branches = updated_branches
                         return
 
                     notifications = compare_branches(job.branches, updated_branches)
                     job.branches = updated_branches
+                    print(f"updated branches for {job.name}")
 
                     for notification in notifications:
                         if notification.branch.status == BuildStatus.SUCCESS:
@@ -79,6 +79,8 @@ class JobMonitorThread(threading.Thread):
                         root_model.systray_items.insert(0, systray_item)
                         if len(root_model.systray_items) > 2:
                             del root_model.systray_items[2:]
+
+                update_results(job, updated_branches)
 
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
