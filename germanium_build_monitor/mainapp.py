@@ -43,7 +43,7 @@ class JobMonitorThread(threading.Thread):
     def run(self) -> None:
         print(f"Server {self.server.name} is being monitored")
         while self.server in monitoring_threads:
-            for job in self.server.monitored_jobs.copy():
+            for job in self.server.monitored_jobs:
                 print(f"scanning: {job.name}")
                 result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
                 updated_branches = read_build_job_branches(job.name, result)
@@ -57,7 +57,6 @@ class JobMonitorThread(threading.Thread):
 
                     notifications = compare_branches(job.branches, updated_branches)
                     job.branches = updated_branches
-                    print(f"updated branches for {job.name}")
 
                     for notification in notifications:
                         if notification.branch.status == BuildStatus.SUCCESS:
@@ -67,13 +66,15 @@ class JobMonitorThread(threading.Thread):
 
                         show_notification(
                             notification.branch.project_name,
-                            notification.branch.branch_name,
+                            notification.branch.decoded_branch_name,
                             icon
                         )
 
                         systray_item = SystrayItem(
                             notification.branch.status,
-                            f"{notification.branch.project_name} ({notification.branch.decoded_branch_name}) {notification.build.name}",
+                            f"{notification.branch.project_name} "
+                            f"({notification.branch.decoded_branch_name}) "
+                            f"{notification.build.name}",
                             lambda: subprocess.Popen(["google-chrome", notification.build.url])
                         )
                         root_model.systray_items.insert(0, systray_item)
@@ -125,14 +126,12 @@ def main() -> None:
     @render_call
     def start_monitoring_threads():
         for server in root_model.servers:
-            @render_call
-            def start_monitoring_jobs_for_server():
-                if server in monitoring_threads:
-                    return
+            if server in monitoring_threads:
+                return
 
-                thread = JobMonitorThread(server)
-                monitoring_threads[server] = thread
-                thread.start()
+            thread = JobMonitorThread(server)
+            monitoring_threads[server] = thread
+            thread.start()
 
     sys.exit(app.exec_())
 

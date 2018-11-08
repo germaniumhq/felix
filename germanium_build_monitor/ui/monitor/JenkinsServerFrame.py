@@ -30,8 +30,6 @@ class JenkinsServerFrame(QWidget, Ui_Form):
             not_loaded_jobs = []
             build_branches = []
 
-            print("clear")
-
             while True:
                 layout_item = self.content.takeAt(0)
                 if not layout_item:
