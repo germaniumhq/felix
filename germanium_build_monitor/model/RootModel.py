@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, cast
 
 from mopyx import model
 
@@ -21,5 +21,5 @@ class RootModel:
         self.tree_selection = None
 
 
-model = RootModel()  # type: ignore
+root_model = cast(RootModel, RootModel())
 

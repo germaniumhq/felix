@@ -14,7 +14,9 @@ def compare_branches(initial_branches: List[JenkinsJobBranch],
         if not find_branch(initial_branches, branch):
             if branch.status == BuildStatus.SUCCESS or branch.status == BuildStatus.FAILURE:
                 last_build = get_last_finished_build(branch)
-                notifications.append(Notification(branch, last_build))
+
+                if last_build:
+                    notifications.append(Notification(branch, last_build))
 
     for initial_branch in initial_branches:
         updated_branch = find_branch(updated_branches, initial_branch)
@@ -24,14 +26,22 @@ def compare_branches(initial_branches: List[JenkinsJobBranch],
 
         if len(updated_branch.builds) != len(initial_branch.builds):
             last_build = get_last_finished_build(updated_branch)
+            assert last_build
+
             if last_build.status == BuildStatus.SUCCESS or last_build.status == BuildStatus.FAILURE:
                 notifications.append(Notification(updated_branch, last_build))  # FIXME: state changes only?
+
             continue
 
-        # FIXME: foreach on the branch builds?
+        # FIXME: foreach on the branch builds, matching on build number?
         if updated_branch.builds:  # same number of builds, maybe some of it finished
             last_known_build = get_last_finished_build(initial_branch)
             last_updated_build = get_last_finished_build(updated_branch)
+
+            if not last_known_build:
+                continue
+
+            assert last_updated_build
 
             if last_known_build.status != last_updated_build.status:
                 notifications.append(Notification(updated_branch, last_updated_build))
@@ -49,6 +59,9 @@ def find_branch(branch_list: List[JenkinsJobBranch],
     return None
 
 
-def get_last_finished_build(branch: JenkinsJobBranch) -> JenkinsJobBranchBuild:
+def get_last_finished_build(branch: JenkinsJobBranch) -> Optional[JenkinsJobBranchBuild]:
+    if not branch.builds:
+        return None
+
     return branch.builds[0]
 

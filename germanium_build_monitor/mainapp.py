@@ -1,7 +1,8 @@
 from typing import Dict, Any
 
-from mopyx import render_call
+from mopyx import render_call, action
 import sys
+import subprocess
 
 from PySide2.QtWidgets import QMenu
 
@@ -12,8 +13,9 @@ from germanium_build_monitor.ui.core import \
     show_notification, \
     ui_thread_call
 
-from germanium_build_monitor.model.RootModel import model as root_model
+from germanium_build_monitor.model.RootModel import root_model
 from germanium_build_monitor.model.BuildStatus import BuildStatus
+from germanium_build_monitor.model.SystrayItem import SystrayItem
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
 
 from germanium_build_monitor.model.jenkins.remote.read_build_jobs import read_build_job_branches
@@ -22,9 +24,6 @@ from germanium_build_monitor.model.jenkins.operations import compare_branches
 import germanium_build_monitor.resources.icons as icons
 import threading
 import time
-
-
-menu = None
 
 
 monitoring_threads: Dict[JenkinsServer, Any] = dict()
@@ -44,13 +43,14 @@ class JobMonitorThread(threading.Thread):
     def run(self) -> None:
         print(f"Server {self.server.name} is being monitored")
         while self.server in monitoring_threads:
-            for job in self.server.monitored_jobs:
+            for job in self.server.monitored_jobs.copy():
                 print(f"scanning: {job.name}")
                 result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
                 updated_branches = read_build_job_branches(job.name, result)
 
                 # run on UI
                 @ui_thread_call
+                @action
                 def update_results() -> None:
                     if job.branches is None:
                         job.branches = updated_branches
@@ -60,7 +60,6 @@ class JobMonitorThread(threading.Thread):
                     job.branches = updated_branches
 
                     for notification in notifications:
-
                         if notification.branch.status == BuildStatus.SUCCESS:
                             icon = icons.get_icon("success128.png")
                         else:
@@ -72,8 +71,18 @@ class JobMonitorThread(threading.Thread):
                             icon
                         )
 
+                        systray_item = SystrayItem(
+                            notification.branch.status,
+                            f"{notification.branch.project_name} {notification.branch.decoded_branch_name}",
+                            lambda: subprocess.Popen(["xdg-open", notification.build.url])
+                        )
+                        root_model.systray_items.append(systray_item)
+
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
+
+
+menu = None
 
 
 def main() -> None:
@@ -83,14 +92,13 @@ def main() -> None:
     tray_icon.setIcon(icons.get_icon("favicon.ico"))
     tray_icon.show()
 
+    menu = QMenu()
+
     @render_call
     def render_context_menu():
-        global menu
+        print("rendering new context menu")
 
-        if menu:
-            menu.close()
-
-        menu = QMenu()
+        menu.clear()
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
             .triggered.connect(MainDialog.instance().show)
 
@@ -105,12 +113,15 @@ def main() -> None:
 
                 menu.addAction(icon, systray_item.text)\
                     .triggered.connect(systray_item.action)
+                systray_item.action()
 
         menu.addSeparator()
         menu.addAction("Exit")\
             .triggered.connect(exit_application)
 
-        tray_icon.setContextMenu(menu)
+        print("all is good")
+
+    tray_icon.setContextMenu(menu)
 
     @render_call
     def start_monitoring_threads():

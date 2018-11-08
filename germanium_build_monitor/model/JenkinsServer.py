@@ -3,6 +3,7 @@ from mopyx import model
 import jenkins
 
 from .JenkinsMonitoredJob import JenkinsMonitoredJob
+from .JenkinsJobBranch import JenkinsJobBranch
 
 
 @model
@@ -22,6 +23,7 @@ class JenkinsServer:
         self.password = password
 
         self.monitored_jobs: List[JenkinsMonitoredJob] = []
+        self.last_builds: List[JenkinsJobBranch] = []
 
     def as_dict(self):
         return {
