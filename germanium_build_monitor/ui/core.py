@@ -60,6 +60,14 @@ def ui_thread_call(f: Callable[..., T]) -> Callable[..., T]:
     return wrapper()
 
 
+def ui_thread(f: Callable[..., T]) -> Callable[..., T]:
+    @functools.wraps(f)
+    def wrapper(*args, **kw) -> T:
+        return invoker.invoke(f, *args, **kw)
+
+    return wrapper
+
+
 def show_notification(title: str,
                       message: str,
                       icon: QIcon,
