@@ -3,7 +3,7 @@ from typing import List, cast
 from mopyx import model
 
 from .JenkinsServer import JenkinsServer
-from .SystrayItem import SystrayItem
+from .Systray import Systray
 
 
 @model
@@ -16,7 +16,7 @@ class RootModel:
         super().__init__()
 
         self.servers: List[JenkinsServer] = []
-        self.systray_items: List[SystrayItem] = []
+        self.systray: Systray = Systray()
 
         self.tree_selection = None
 

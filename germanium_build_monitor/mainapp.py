@@ -71,14 +71,18 @@ class JobMonitorThread(threading.Thread):
                             icon
                         )
 
+                        key = f"{notification.branch.project_name} "\
+                              f"({notification.branch.decoded_branch_name}) "
                         systray_item = SystrayItem(
+                            key,
                             notification.branch.status,
-                            f"{notification.branch.project_name} ({notification.branch.decoded_branch_name}) {notification.build.name}",
+                            f"{key}{notification.build.name}",
                             lambda: subprocess.Popen(["google-chrome", notification.build.url])
                         )
-                        root_model.systray_items.insert(0, systray_item)
-                        if len(root_model.systray_items) > 2:
-                            del root_model.systray_items[2:]
+
+                        root_model.systray.add_request(systray_item)
+
+                    root_model.systray.flush_requests()
 
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
@@ -102,10 +106,10 @@ def main() -> None:
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
             .triggered.connect(MainDialog.instance().show)
 
-        if root_model.systray_items:
+        if root_model.systray.items:
             menu.addSeparator()
 
-            for systray_item in root_model.systray_items:
+            for systray_item in root_model.systray.items:
                 if systray_item.status == BuildStatus.SUCCESS:
                     icon = icons.get_icon("success128.png")
                 else:
