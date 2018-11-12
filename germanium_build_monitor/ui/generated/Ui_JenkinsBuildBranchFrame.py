@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/JenkinsBuildBranchFrame.ui',
 # licensing of 'ui/JenkinsBuildBranchFrame.ui' applies.
 #
-# Created: Thu Nov  8 06:45:58 2018
+# Created: Mon Nov 12 05:52:56 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,6 +15,7 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(317, 160)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.project_name_label = QtWidgets.QLabel(Form)
         self.project_name_label.setObjectName("project_name_label")
