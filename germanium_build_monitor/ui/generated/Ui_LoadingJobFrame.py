@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/LoadingJobFrame.ui',
 # licensing of 'ui/LoadingJobFrame.ui' applies.
 #
-# Created: Mon Nov 12 05:52:56 2018
+# Created: Mon Nov 12 06:20:13 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
