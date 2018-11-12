@@ -3,9 +3,6 @@
 block_cipher = None
 
 import os
-import germaniumdrivers
-
-import germanium
 
 
 ALLOWED_EXTENSIONS=['.js', '.html', '.png', '.chm']
