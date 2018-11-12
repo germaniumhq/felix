@@ -15,5 +15,6 @@ class ServersOverviewFrame(QWidget, Ui_Form):
 
     @render
     def load_from_model(self):
+        print("new server")
         for server in root_model.servers:
             self.content.addWidget(JenkinsServerFrame(server))

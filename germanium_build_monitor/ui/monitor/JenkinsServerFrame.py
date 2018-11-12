@@ -27,6 +27,7 @@ class JenkinsServerFrame(QWidget, Ui_Form):
 
         @render_call
         def update_branches() -> None:
+            print("update branches called")
             not_loaded_jobs = []
             build_branches = []
 
@@ -35,6 +36,7 @@ class JenkinsServerFrame(QWidget, Ui_Form):
                 if not layout_item:
                     break
 
+                print("removed widget")
                 layout_item.widget().deleteLater()
 
             for job in self.server.monitored_jobs:

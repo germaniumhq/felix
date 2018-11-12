@@ -3,6 +3,9 @@ from typing import Dict, Any
 from mopyx import render_call, action
 import sys
 import subprocess
+import traceback
+import threading
+import time
 
 from PySide2.QtWidgets import QMenu
 
@@ -22,8 +25,6 @@ from germanium_build_monitor.model.jenkins.remote.read_build_jobs import read_bu
 from germanium_build_monitor.model.jenkins.operations import compare_branches
 
 import germanium_build_monitor.resources.icons as icons
-import threading
-import time
 
 
 monitoring_threads: Dict[JenkinsServer, Any] = dict()
@@ -51,37 +52,40 @@ class JobMonitorThread(threading.Thread):
                 @ui_thread
                 @action
                 def update_results(job, updated_branches) -> None:
-                    if job.branches is None:
+                    try:
+                        if job.branches is None:
+                            job.branches = updated_branches
+                            return
+
+                        notifications = compare_branches(job.branches, updated_branches)
                         job.branches = updated_branches
-                        return
 
-                    notifications = compare_branches(job.branches, updated_branches)
-                    job.branches = updated_branches
+                        for notification in notifications:
+                            if notification.branch.status == BuildStatus.SUCCESS:
+                                icon = icons.get_icon("success128.png")
+                            else:
+                                icon = icons.get_icon("failed128.png")
 
-                    for notification in notifications:
-                        if notification.branch.status == BuildStatus.SUCCESS:
-                            icon = icons.get_icon("success128.png")
-                        else:
-                            icon = icons.get_icon("failed128.png")
+                            show_notification(
+                                notification.branch.project_name,
+                                notification.branch.decoded_branch_name,
+                                icon
+                            )
 
-                        show_notification(
-                            notification.branch.project_name,
-                            notification.branch.decoded_branch_name,
-                            icon
-                        )
+                            key = f"{notification.branch.project_name} "\
+                                  f"({notification.branch.decoded_branch_name}) "
+                            systray_item = SystrayItem(
+                                key,
+                                notification.branch.status,
+                                f"{key}{notification.build.name}",
+                                lambda: subprocess.Popen(["google-chrome", notification.build.url])
+                            )
 
-                        key = f"{notification.branch.project_name} "\
-                              f"({notification.branch.decoded_branch_name}) "
-                        systray_item = SystrayItem(
-                            key,
-                            notification.branch.status,
-                            f"{key}{notification.build.name}",
-                            lambda: subprocess.Popen(["google-chrome", notification.build.url])
-                        )
+                            root_model.systray.add_request(systray_item)
 
-                        root_model.systray.add_request(systray_item)
-
-                    root_model.systray.flush_requests()
+                        root_model.systray.flush_requests()
+                    except Exception:
+                        traceback.print_exc()
 
                 update_results(job, updated_branches)
 
@@ -100,6 +104,9 @@ def main() -> None:
     tray_icon.show()
 
     menu = QMenu()
+
+    # We need to create the instance outside so it gets its own renderer
+    MainDialog.instance()
 
     @render_call
     def render_context_menu():
