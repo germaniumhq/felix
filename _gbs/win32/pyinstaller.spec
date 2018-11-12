@@ -25,6 +25,8 @@ def add_files(module_path, module_name):
             #print(full_path)
             datas.append( (full_path, os.path.join(module_name + root[len(module_path):]) ) )
 
+datas = []
+
 
 datas.append(('germanium_build_monitor/resources/favicon.ico', 'germanium_build_monitor/resources/'))
 add_files("germanium_build_monitor", "germanium_build_monitor")
