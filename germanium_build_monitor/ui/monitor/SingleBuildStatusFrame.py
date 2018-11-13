@@ -14,12 +14,12 @@ class SingleBuildStatusFrame(QWidget, Ui_Form):
                  build: JenkinsJobBranchBuild) -> None:
         super().__init__()
 
-        self.build = build
+        self.build: JenkinsJobBranchBuild = build
 
         self.setupUi(self)
 
         @render_call
         def update_label():
             pixmap = build_status_icon(self.build.status).pixmap(QSize(16, 16))
-            self.build_status_label.setText("")
-            self.build_status_label.setPixmap(pixmap)
+            self.icon.setPixmap(pixmap)
+            self.icon.setToolTip(self.build.name)
