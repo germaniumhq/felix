@@ -4,6 +4,7 @@ from PySide2.QtWidgets import QWidget
 
 from germanium_build_monitor.ui.generated.Ui_JenkinsServerFrame import Ui_Form
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.ui.core import clear_layout
 
 from .LoadingJobFrame import LoadingJobFrame
 from .JenkinsBuildBranchFrame import JenkinsBuildBranchFrame
@@ -31,13 +32,7 @@ class JenkinsServerFrame(QWidget, Ui_Form):
             not_loaded_jobs = []
             build_branches = []
 
-            while True:
-                layout_item = self.content.takeAt(0)
-                if not layout_item:
-                    break
-
-                print("removed widget")
-                layout_item.widget().deleteLater()
+            clear_layout(self.content)
 
             for job in self.server.monitored_jobs:
                 if job.branches is None:

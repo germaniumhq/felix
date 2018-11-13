@@ -2,7 +2,7 @@ from typing import Callable, TypeVar
 
 import functools
 import sys
-from PySide2.QtWidgets import QApplication, QSystemTrayIcon
+from PySide2.QtWidgets import QApplication, QSystemTrayIcon, QLayout
 from PySide2.QtCore import QMetaObject, QObject, Qt, Slot
 from PySide2.QtGui import QIcon
 from queue import Queue
@@ -75,4 +75,13 @@ def show_notification(title: str,
     global tray_icon
     assert tray_icon
     tray_icon.showMessage(title, message, icon, delay)
+
+
+def clear_layout(layout: QLayout) -> None:
+    while True:
+        layout_item = layout.takeAt(0)
+        if not layout_item:
+            break
+
+        layout_item.widget().deleteLater()
 

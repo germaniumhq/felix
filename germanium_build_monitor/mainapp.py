@@ -61,10 +61,7 @@ class JobMonitorThread(threading.Thread):
                         job.branches = updated_branches
 
                         for notification in notifications:
-                            if notification.branch.status == BuildStatus.SUCCESS:
-                                icon = icons.get_icon("success128.png")
-                            else:
-                                icon = icons.get_icon("failed128.png")
+                            icon = icons.build_status_icon(notification.branch.status)
 
                             show_notification(
                                 notification.branch.project_name,

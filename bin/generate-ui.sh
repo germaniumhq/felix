@@ -21,4 +21,5 @@ pyside2-uic ui/ErrorFrame.ui > germanium_build_monitor/ui/generated/Ui_ErrorFram
 pyside2-uic ui/JenkinsServerFrame.ui > germanium_build_monitor/ui/generated/Ui_JenkinsServerFrame.py
 pyside2-uic ui/LoadingJobFrame.ui > germanium_build_monitor/ui/generated/Ui_LoadingJobFrame.py
 pyside2-uic ui/JenkinsBuildBranchFrame.ui > germanium_build_monitor/ui/generated/Ui_JenkinsBuildBranchFrame.py
+pyside2-uic ui/SingleBuildStatusFrame.ui > germanium_build_monitor/ui/generated/Ui_SingleBuildStatusFrame.py
 

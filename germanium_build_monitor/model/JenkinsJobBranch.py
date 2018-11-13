@@ -1,10 +1,12 @@
 from typing import List
 
-from mopyx import model
+from mopyx import model, computed
 import urllib.parse
 
 from .BuildStatus import BuildStatus
 from .JenkinsJobBranchBuild import JenkinsJobBranchBuild
+
+from .Settings import settings
 
 
 @model
@@ -18,3 +20,12 @@ class JenkinsJobBranch:
         self.decoded_branch_name = urllib.parse.unquote(branch_name)
         self.status = status
         self.builds: List[JenkinsJobBranchBuild] = []
+
+    @computed
+    def last_builds(self) -> List[JenkinsJobBranchBuild]:
+        result = list(self.builds)
+        result.sort(key=lambda it: it.timestamp, reverse=True)
+
+        result = result[0:settings.last_builds_count]
+
+        return result
