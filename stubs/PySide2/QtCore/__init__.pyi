@@ -27,5 +27,12 @@ class QObject:
     pass
 
 
+class QSize:
+    def __init__(self,
+                 w: int,
+                 h: int) -> None:
+        pass
+
+
 def Slot() -> Callable[..., Callable[..., T]]:
     pass

@@ -22,3 +22,7 @@ def action(f: Callable[..., T]) -> Callable[..., T]:
 
 def model(base: Callable[..., T]) -> Callable[..., T]:
     pass
+
+
+def computed(prop: Callable[..., T]) -> T:
+    pass

@@ -12,11 +12,19 @@ class QWidget:
         pass
 
 
+class QLayoutItem:
+    def widget(self) -> QWidget:
+        pass
+
+
 class QLayout:
     def addWidget(self, widget: QWidget):
         pass
 
     def removeWidget(self, widget: QWidget):
+        pass
+
+    def takeAt(self, index: int) -> QLayoutItem:
         pass
 
 

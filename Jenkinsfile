@@ -8,14 +8,14 @@ germaniumPyExePipeline(
         "Win 32": [
             platform: "python:3.6-win32",
             prefix: "/_gbs/win32/",
-            exe: "/src/dist/germaniumsb.exe",
+            exe: "/src/dist/felixbm.exe",
             dockerTag: "germaniumhq/germanium-build-monitor:win32",
         ],
 
         "Lin 64": [
             platform: "python:3.6",
             prefix: "/_gbs/lin64/",
-            exe: "/src/dist/germaniumsb",
+            exe: "/src/dist/felixbm",
             dockerTag: "germaniumhq/germanium-build-monitor:lin64",
         ]
     ]
