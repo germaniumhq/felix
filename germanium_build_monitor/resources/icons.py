@@ -34,6 +34,19 @@ def build_status_icon(status: BuildStatus) -> QtGui.QIcon:
         raise Exception(f"Unsupported value {status}")
 
 
+def systray_status_icon(status: BuildStatus) -> QtGui.QIcon:
+    if status == BuildStatus.SUCCESS:
+        return get_icon("builds_succeding.png")
+    elif status == BuildStatus.FAILURE:
+        return get_icon("builds_failing.png")
+    elif status == BuildStatus.RUNNING:
+        return get_icon("unknown_builds_in_progress.png")
+    elif status == BuildStatus.NEVER:
+        return get_icon("never128.png")
+    else:
+        raise Exception(f"Unsupported value {status}")
+
+
 def get_icon_path(icon_name: str) -> str:
     return os.path.join(base_dir(), icon_name)
 

@@ -97,7 +97,14 @@ def main() -> None:
     app = create_qt_application()
 
     tray_icon = create_qt_tray_icon()
-    tray_icon.setIcon(icons.get_icon("favicon.ico"))
+
+    @render_call
+    def update_systray_icon():
+        # FIXME: this should check if there are builds available
+        # and show the unknown status/main application icon.
+        icon = icons.build_status_icon(BuildStatus.FAILURE)
+        tray_icon.setIcon(icon)
+
     tray_icon.show()
 
     menu = QMenu()
@@ -115,10 +122,7 @@ def main() -> None:
             menu.addSeparator()
 
             for systray_item in root_model.systray.items:
-                if systray_item.status == BuildStatus.SUCCESS:
-                    icon = icons.get_icon("success128.png")
-                else:
-                    icon = icons.get_icon("failed128.png")
+                icon = icons.build_status_icon(systray_item.status)
 
                 menu.addAction(icon, systray_item.text)\
                     .triggered.connect(systray_item.action)
