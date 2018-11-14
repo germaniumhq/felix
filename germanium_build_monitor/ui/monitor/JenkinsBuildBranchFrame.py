@@ -28,5 +28,5 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
         def update_last_builds():
             clear_layout(self.previous_builds_container)
 
-            for build in branch.last_builds:
+            for build in reversed(branch.last_builds):
                 self.previous_builds_container.addWidget(SingleBuildStatusFrame(build))

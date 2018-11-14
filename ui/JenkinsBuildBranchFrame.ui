@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>464</width>
-    <height>216</height>
+    <height>74</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,12 +54,12 @@
        <number>0</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="spacing">
-         <number>6</number>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
         <property name="leftMargin">
-         <number>6</number>
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
         </property>
         <item>
          <widget class="QLabel" name="status_icon_label">
@@ -70,15 +70,42 @@
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
           <item>
-           <widget class="QLabel" name="project_name_label">
-            <property name="styleSheet">
-             <string notr="true">font-weight: bold</string>
-            </property>
-            <property name="text">
-             <string>project</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="project_name_label">
+              <property name="styleSheet">
+               <string notr="true">font-weight: bold</string>
+              </property>
+              <property name="text">
+               <string>project</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="previous_builds_container">
+              <property name="leftMargin">
+               <number>4</number>
+              </property>
+             </layout>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QLabel" name="branch_name_label">
@@ -92,19 +119,6 @@
           </item>
          </layout>
         </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </item>
       <item>
@@ -115,13 +129,6 @@
         <property name="rightMargin">
          <number>6</number>
         </property>
-        <item>
-         <layout class="QHBoxLayout" name="previous_builds_container">
-          <property name="leftMargin">
-           <number>4</number>
-          </property>
-         </layout>
-        </item>
         <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -148,8 +155,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>frame</zorder>
-  <zorder>time_label</zorder>
  </widget>
  <resources/>
  <connections/>

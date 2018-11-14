@@ -140,7 +140,6 @@ def main() -> None:
 
     @render_call
     def start_monitoring_threads():
-        print("start dem threads: {RootModel.root_model.servers}")
         for server in RootModel.root_model.servers:
             if server in monitoring_threads:
                 return

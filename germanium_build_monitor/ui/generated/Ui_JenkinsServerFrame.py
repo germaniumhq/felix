@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/JenkinsServerFrame.ui',
 # licensing of 'ui/JenkinsServerFrame.ui' applies.
 #
-# Created: Tue Nov 13 06:20:14 2018
+# Created: Wed Nov 14 08:55:57 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
