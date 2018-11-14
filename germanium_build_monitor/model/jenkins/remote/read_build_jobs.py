@@ -40,15 +40,16 @@ def read_single_job_branch(project_name: str, job: Any) -> JenkinsJobBranch:
             build_status = BuildStatus.SUCCESS
 
         # FIXME: duration, and estimatedDuration also available
-
-        build_timestamp = build["building"]
+        build_building = build["building"]
+        build_timestamp = build["timestamp"]
         build_url = build["url"]
         build_name = build["displayName"]
 
         build = JenkinsJobBranchBuild(name=build_name,
                                       status=build_status,
                                       url=build_url,
-                                      timestamp=build_timestamp)
+                                      timestamp=build_timestamp,
+                                      building=build_building)
         branch.builds.append(build)
 
     return branch

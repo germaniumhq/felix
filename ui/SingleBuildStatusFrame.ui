@@ -31,6 +31,9 @@
    </property>
    <item>
     <widget class="QLabel" name="icon">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>icon</string>
      </property>

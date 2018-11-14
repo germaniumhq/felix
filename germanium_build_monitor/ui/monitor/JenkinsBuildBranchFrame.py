@@ -1,4 +1,5 @@
 from mopyx import render_call
+import arrow
 
 from PySide2.QtWidgets import QWidget
 from PySide2.QtCore import QSize
@@ -30,3 +31,8 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
 
             for build in reversed(branch.last_builds):
                 self.previous_builds_container.addWidget(SingleBuildStatusFrame(build))
+
+        @render_call
+        def update_time():
+            time = arrow.get(branch.last_build_timestamp / 1000.0).humanize()
+            self.time_label.setText(time)

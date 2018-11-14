@@ -29,3 +29,8 @@ class JenkinsJobBranch:
         result = result[0:Settings.settings.last_builds_count]
 
         return result
+
+    @computed
+    def last_build_timestamp(self) -> int:
+        return max([build.timestamp for build in self.builds])
+
