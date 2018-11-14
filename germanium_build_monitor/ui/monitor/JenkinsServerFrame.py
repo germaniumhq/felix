@@ -45,6 +45,9 @@ class JenkinsServerFrame(QWidget, Ui_Form):
             for job in not_loaded_jobs:
                 self.content.addWidget(LoadingJobFrame(job))
 
+            build_branches.sort(key=lambda it: it.last_build_timestamp,
+                                reverse=True)
+
             # FIXME: sort by last build time
             for branch in build_branches:
                 self.content.addWidget(JenkinsBuildBranchFrame(branch))
