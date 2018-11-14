@@ -3,7 +3,7 @@ from mopyx import render
 
 from germanium_build_monitor.ui.generated.Ui_MainDialog import Ui_Dialog
 
-from germanium_build_monitor.model.RootModel import root_model
+from germanium_build_monitor.model import RootModel
 
 main_dialog = None
 
@@ -20,7 +20,7 @@ class MainDialog(QDialog, Ui_Dialog):
 
     @render
     def update_current_view(self):
-        if not root_model.servers:
+        if not RootModel.root_model.servers:
             self.content.set(NewStartFrame())
         else:
             self.content.set(ServersOverviewFrame())

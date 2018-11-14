@@ -1,7 +1,8 @@
 from mopyx import model, action
 
-from .Settings import settings
 from .SystrayItem import SystrayItem
+
+from germanium_build_monitor.model import Settings
 
 
 @model
@@ -25,6 +26,6 @@ class Systray:
         for request in unique_requests:
             self.items.insert(0, request)
 
-        if len(self.items) > settings.systray_items_count:
-            del self.items[settings.systray_items_count:]
+        if len(self.items) > Settings.settings.systray_items_count:
+            del self.items[Settings.settings.systray_items_count:]
 

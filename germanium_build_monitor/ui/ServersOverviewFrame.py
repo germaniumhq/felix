@@ -3,7 +3,7 @@ from PySide2.QtWidgets import QWidget
 
 from germanium_build_monitor.ui.generated.Ui_ServersOverviewFrame import Ui_Form
 from germanium_build_monitor.ui.monitor.JenkinsServerFrame import JenkinsServerFrame
-from germanium_build_monitor.model.RootModel import root_model
+from germanium_build_monitor.model import RootModel
 
 
 class ServersOverviewFrame(QWidget, Ui_Form):
@@ -15,6 +15,5 @@ class ServersOverviewFrame(QWidget, Ui_Form):
 
     @render
     def load_from_model(self):
-        print("new server")
-        for server in root_model.servers:
+        for server in RootModel.root_model.servers:
             self.content.addWidget(JenkinsServerFrame(server))

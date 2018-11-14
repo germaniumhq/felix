@@ -6,7 +6,7 @@ from PySide2.QtWidgets import QDialog
 
 from germanium_build_monitor.ui.generated.Ui_AddJobsFromServerDialog import Ui_Dialog
 
-from germanium_build_monitor.model.RootModel import root_model
+from germanium_build_monitor.model import RootModel
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
 from germanium_build_monitor.model.JenkinsMonitoredJob import JenkinsMonitoredJob
 from germanium_build_monitor.model.JenkinsFolder import JenkinsFolder
@@ -75,7 +75,7 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
             )
             server.monitored_jobs.append(monitored_job)
 
-        root_model.servers.append(server)
+        RootModel.root_model.servers.append(server)
 
         self.close()
 

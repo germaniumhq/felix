@@ -16,7 +16,10 @@ from germanium_build_monitor.ui.core import \
     show_notification, \
     ui_thread
 
-from germanium_build_monitor.model.RootModel import root_model
+from germanium_build_monitor.model import RootModel
+from germanium_build_monitor.model import Settings
+from germanium_build_monitor.model import persistence
+
 from germanium_build_monitor.model.BuildStatus import BuildStatus
 from germanium_build_monitor.model.SystrayItem import SystrayItem
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
@@ -32,6 +35,7 @@ monitoring_threads: Dict[JenkinsServer, Any] = dict()
 
 def exit_application():
     monitoring_threads.clear()
+    persistence.persist_state(RootModel.root_model, Settings.settings)
     sys.exit(0)
 
 
@@ -78,9 +82,9 @@ class JobMonitorThread(threading.Thread):
                                 lambda: subprocess.Popen(["google-chrome", notification.build.url])
                             )
 
-                            root_model.systray.add_request(systray_item)
+                            RootModel.root_model.systray.add_request(systray_item)
 
-                        root_model.systray.flush_requests()
+                        RootModel.root_model.systray.flush_requests()
                     except Exception:
                         traceback.print_exc()
 
@@ -94,8 +98,9 @@ menu = None
 
 
 def main() -> None:
-    app = create_qt_application()
+    RootModel.root_model, Settings.settings = persistence.load_state()
 
+    app = create_qt_application()
     tray_icon = create_qt_tray_icon()
 
     @render_call
@@ -118,10 +123,10 @@ def main() -> None:
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
             .triggered.connect(MainDialog.instance().show)
 
-        if root_model.systray.items:
+        if RootModel.root_model.systray.items:
             menu.addSeparator()
 
-            for systray_item in root_model.systray.items:
+            for systray_item in RootModel.root_model.systray.items:
                 icon = icons.build_status_icon(systray_item.status)
 
                 menu.addAction(icon, systray_item.text)\
@@ -135,7 +140,8 @@ def main() -> None:
 
     @render_call
     def start_monitoring_threads():
-        for server in root_model.servers:
+        print("start dem threads: {RootModel.root_model.servers}")
+        for server in RootModel.root_model.servers:
             if server in monitoring_threads:
                 return
 

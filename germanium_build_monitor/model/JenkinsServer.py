@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict, Any
 from mopyx import model
 import jenkins
 
@@ -23,16 +23,28 @@ class JenkinsServer:
 
         self.monitored_jobs: List[JenkinsMonitoredJob] = []
 
-    def as_dict(self):
+    def as_dict(self) -> Dict[str, Any]:
         return {
             "name": self.name,
-            "type": "JenkinsServer",
-
             "url": self.url,
             "use_authentication": self.use_authentication,
             "user": self.user,
             "password": self.password,
+            "monitored_jobs": [job.as_dict() for job in self.monitored_jobs]
         }
+
+    def from_dict(d) -> 'JenkinsServer':
+        result = JenkinsServer(
+            d['name'],
+            d['url'],
+            d['use_authentication'],
+            d['user'],
+            d['password']
+        )
+
+        result.monitored_jobs = [JenkinsMonitoredJob.from_dict(mj) for mj in d['monitored_jobs']]
+
+        return result
 
 
 def jenkins_server(server: JenkinsServer) -> jenkins.Jenkins:

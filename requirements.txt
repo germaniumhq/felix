@@ -1,3 +1,4 @@
 PySide2
 mopyx==0.5.3
 python-jenkins
+PyYAML >=3.12, <3.13
