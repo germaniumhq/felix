@@ -18,5 +18,7 @@ germaniumPyExePipeline(
             exe: "/src/dist/felixbm",
             dockerTag: "germaniumhq/germanium-build-monitor:lin64",
         ]
-    ]
+    ],
+
+    publishAnsiblePlay: "bin/publish.yml",
 )
