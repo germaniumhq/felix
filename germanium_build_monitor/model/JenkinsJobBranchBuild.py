@@ -10,11 +10,9 @@ class JenkinsJobBranchBuild:
                  status: BuildStatus,
                  url: str,
                  timestamp: int,
-                 building: bool):
+                 building: bool) -> None:
         self.name = name
         self.status = status
         self.url = url
         self.timestamp = timestamp
         self.building = building
-
-        print(timestamp)

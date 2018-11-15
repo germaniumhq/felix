@@ -22,17 +22,17 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
         self.branch_name_label.setText(branch.decoded_branch_name)
 
         @render_call
-        def update_status_icon():
+        def update_status_icon() -> None:
             self.status_icon_label.setPixmap(build_status_icon(branch.status).pixmap(QSize(24, 24)))
 
         @render_call
-        def update_last_builds():
+        def update_last_builds() -> None:
             clear_layout(self.previous_builds_container)
 
             for build in reversed(branch.last_builds):
                 self.previous_builds_container.addWidget(SingleBuildStatusFrame(build))
 
         @render_call
-        def update_time():
+        def update_time() -> None:
             time = arrow.get(branch.last_build_timestamp / 1000.0).humanize()
             self.time_label.setText(time)

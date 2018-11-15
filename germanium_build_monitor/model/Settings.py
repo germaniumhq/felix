@@ -1,3 +1,4 @@
+from typing import Dict, Any
 from mopyx import model
 
 
@@ -7,12 +8,12 @@ class Settings:
                  systray_items_count: int = 2,
                  main_grid_columns: int = 3,
                  last_builds_count: int = 5,
-        ):
+                 ) -> None:
         self.systray_items_count: int = systray_items_count
         self.main_grid_columns: int = main_grid_columns
         self.last_builds_count: int = last_builds_count
 
-    def as_dict(self):
+    def as_dict(self) -> Dict[str, Any]:
         return {
             "systray_items_count": self.systray_items_count,
             "main_grid_columns": self.main_grid_columns,

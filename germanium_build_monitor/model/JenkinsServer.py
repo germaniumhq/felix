@@ -33,6 +33,7 @@ class JenkinsServer:
             "monitored_jobs": [job.as_dict() for job in self.monitored_jobs]
         }
 
+    @staticmethod
     def from_dict(d) -> 'JenkinsServer':
         result = JenkinsServer(
             d['name'],

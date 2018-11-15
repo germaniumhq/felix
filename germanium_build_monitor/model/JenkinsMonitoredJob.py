@@ -19,6 +19,7 @@ class JenkinsMonitoredJob:
             "full_name": self.full_name,
         }
 
+    @staticmethod
     def from_dict(d) -> 'JenkinsMonitoredJob':
         return JenkinsMonitoredJob(
             name=d["name"],
