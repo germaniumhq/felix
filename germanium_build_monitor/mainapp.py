@@ -107,7 +107,7 @@ def main() -> None:
     def update_systray_icon():
         # FIXME: this should check if there are builds available
         # and show the unknown status/main application icon.
-        icon = icons.build_status_icon(BuildStatus.FAILURE)
+        icon = icons.aggregate_status_icon(RootModel.root_model)
         tray_icon.setIcon(icon)
 
     tray_icon.show()

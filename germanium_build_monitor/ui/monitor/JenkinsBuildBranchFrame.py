@@ -6,7 +6,7 @@ from PySide2.QtCore import QSize
 
 from germanium_build_monitor.ui.generated.Ui_JenkinsBuildBranchFrame import Ui_Form
 from germanium_build_monitor.model.JenkinsJobBranch import JenkinsJobBranch
-from germanium_build_monitor.resources.icons import branch_status_icon
+from germanium_build_monitor.resources.icons import aggregate_status_icon
 from germanium_build_monitor.ui.core import clear_layout
 
 from .SingleBuildStatusFrame import SingleBuildStatusFrame
@@ -23,7 +23,7 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
 
         @render_call
         def update_status_icon() -> None:
-            self.status_icon_label.setPixmap(branch_status_icon(branch).pixmap(QSize(24, 24)))
+            self.status_icon_label.setPixmap(aggregate_status_icon(branch).pixmap(QSize(24, 24)))
 
         @render_call
         def update_last_builds() -> None:

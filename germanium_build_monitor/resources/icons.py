@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Union
 import os
 
 from PySide2 import QtGui
@@ -6,6 +6,7 @@ from PySide2 import QtGui
 from germanium_build_monitor.resources import base_dir
 from germanium_build_monitor.model.BuildStatus import BuildStatus
 from germanium_build_monitor.model.JenkinsJobBranch import JenkinsJobBranch
+from germanium_build_monitor.model.RootModel import RootModel
 
 
 icon_cache: Dict[str, QtGui.QIcon] = dict()
@@ -35,16 +36,9 @@ def build_status_icon(status: BuildStatus) -> QtGui.QIcon:
         raise Exception(f"Unsupported value {status}")
 
 
-def branch_status_icon(branch: JenkinsJobBranch) -> QtGui.QIcon:
+def aggregate_status_icon(branch: Union[JenkinsJobBranch, RootModel]) -> QtGui.QIcon:
     if branch.status != BuildStatus.RUNNING:
         return build_status_icon(branch.status)
-
-    if branch.last_known_status == BuildStatus.SUCCESS:
-        return get_icon("success_builds_in_progress.png")
-    elif branch.last_known_status == BuildStatus.FAILURE:
-        return get_icon("failed_builds_in_progress.png")
-    elif branch.last_known_status == BuildStatus.NEVER:
-        return get_icon("unknown_builds_in_progress.png")
 
     return get_icon("unknown_builds_in_progress.png")
 
