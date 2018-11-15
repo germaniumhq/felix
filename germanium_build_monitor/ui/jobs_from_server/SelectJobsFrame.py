@@ -125,7 +125,7 @@ class SelectJobsFrame(QWidget, Ui_Form):
     def update_node_data(self,
                          child_node: QTreeWidgetItem,
                          item: Union[JenkinsJob, JenkinsFolder]):
-        icon = "job24.png" if isinstance(item, JenkinsJob) else "folder24.png"
+        icon = "job.png" if isinstance(item, JenkinsJob) else "folder.png"
         child_node.setText(0, item.name)
         child_node.setIcon(0, get_icon(icon))
         child_node.setCheckState(0, as_qt_selection(item.selected))

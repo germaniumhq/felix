@@ -34,6 +34,10 @@ def build_status_icon(status: BuildStatus) -> QtGui.QIcon:
         raise Exception(f"Unsupported value {status}")
 
 
+# def branch_status_icon(branch: JenkinsJobBranch) -> QtGui.QIcon:
+#    pass
+
+
 def systray_status_icon(status: BuildStatus) -> QtGui.QIcon:
     if status == BuildStatus.SUCCESS:
         return get_icon("builds_succeding.png")

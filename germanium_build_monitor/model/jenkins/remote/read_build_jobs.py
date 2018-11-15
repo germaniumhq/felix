@@ -24,12 +24,10 @@ def read_build_job_branches(project_name: str,
 
 def read_single_job_branch(project_name: str, job: Any) -> JenkinsJobBranch:
     branch_name = job["name"]
-    status = status_from_color(job["color"])
 
     branch = JenkinsJobBranch(
         project_name=project_name,
-        branch_name=branch_name,
-        status=status)
+        branch_name=branch_name)
 
     for build in job["builds"]:
         if build["building"]:
