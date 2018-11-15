@@ -20,7 +20,6 @@ from germanium_build_monitor.model import RootModel
 from germanium_build_monitor.model import Settings
 from germanium_build_monitor.model import persistence
 
-from germanium_build_monitor.model.BuildStatus import BuildStatus
 from germanium_build_monitor.model.SystrayItem import SystrayItem
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
 
