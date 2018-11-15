@@ -2,10 +2,10 @@ from typing import Dict, Any
 
 from mopyx import render_call, action
 import sys
-import subprocess
 import traceback
 import threading
 import time
+import webbrowser
 
 from PySide2.QtWidgets import QMenu
 
@@ -78,7 +78,7 @@ class JobMonitorThread(threading.Thread):
                                 key,
                                 notification.branch.status,
                                 f"{key}{notification.build.name}",
-                                lambda: subprocess.Popen(["google-chrome", notification.build.url])
+                                lambda: webbrowser.open(notification.build.url)
                             )
 
                             RootModel.root_model.systray.add_request(systray_item)

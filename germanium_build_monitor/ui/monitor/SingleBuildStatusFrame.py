@@ -1,7 +1,7 @@
 from mopyx import render_call
+import webbrowser
 
 from PySide2.QtWidgets import QWidget
-from PySide2.QtCore import QSize
 
 from germanium_build_monitor.ui.generated.Ui_SingleBuildStatusFrame import Ui_Form
 
@@ -18,8 +18,13 @@ class SingleBuildStatusFrame(QWidget, Ui_Form):
 
         self.setupUi(self)
 
+        self.icon.clicked.connect(self.open_build)
+
         @render_call
         def update_label():
-            pixmap = build_status_icon(self.build.status).pixmap(QSize(16, 16))
-            self.icon.setPixmap(pixmap)
+            self.icon.setIcon(build_status_icon(self.build.status))
             self.icon.setToolTip(self.build.name)
+
+    def open_build(self) -> None:
+        webbrowser.open(self.build.url)
+

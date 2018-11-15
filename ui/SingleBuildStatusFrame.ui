@@ -30,12 +30,16 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="icon">
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
+    <widget class="QToolButton" name="icon">
+     <property name="styleSheet">
+      <string notr="true">padding: 0;
+border: none</string>
      </property>
      <property name="text">
-      <string>icon</string>
+      <string>...</string>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

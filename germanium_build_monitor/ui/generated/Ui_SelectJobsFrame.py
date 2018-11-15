@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/SelectJobsFrame.ui',
 # licensing of 'ui/SelectJobsFrame.ui' applies.
 #
-# Created: Wed Nov 14 08:55:56 2018
+# Created: Thu Nov 15 06:35:25 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
