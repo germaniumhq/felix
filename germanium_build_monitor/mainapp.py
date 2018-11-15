@@ -9,7 +9,7 @@ import webbrowser
 
 from PySide2.QtWidgets import QMenu
 
-from germanium_build_monitor.ui.MainDialog import MainDialog
+from germanium_build_monitor.ui.MainWindow import MainWindow
 from germanium_build_monitor.ui.core import \
     create_qt_application, \
     create_qt_tray_icon, \
@@ -108,6 +108,10 @@ def main() -> None:
         # FIXME: this should check if there are builds available
         # and show the unknown status/main application icon.
         icon = icons.aggregate_status_icon(RootModel.root_model)
+
+        if not icon:
+            icon = icons.get_icon("favicon.ico")
+
         tray_icon.setIcon(icon)
 
     tray_icon.show()
@@ -115,13 +119,13 @@ def main() -> None:
     menu = QMenu()
 
     # We need to create the instance outside so it gets its own renderer
-    MainDialog.instance()
+    MainWindow.instance()
 
     @render_call
     def render_context_menu():
         menu.clear()
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
-            .triggered.connect(MainDialog.instance().show)
+            .triggered.connect(MainWindow.instance().show)
 
         if RootModel.root_model.systray.items:
             menu.addSeparator()

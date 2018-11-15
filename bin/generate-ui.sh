@@ -3,6 +3,7 @@ cd $(readlink -f "$(dirname "$0")/..")
 pyside2-uic ui/AddServerDialog.ui > germanium_build_monitor/ui/generated/Ui_AddServerDialog.py
 pyside2-uic ui/AddJobsFromServer.ui > germanium_build_monitor/ui/generated/Ui_AddJobsFromServerDialog.py
 pyside2-uic ui/MainDialog.ui > germanium_build_monitor/ui/generated/Ui_MainDialog.py
+pyside2-uic ui/MainWindow.ui > germanium_build_monitor/ui/generated/Ui_MainWindow.py
 
 pyside2-uic ui/NewStartFrame.ui > germanium_build_monitor/ui/generated/Ui_NewStartFrame.py
 pyside2-uic ui/ServersOverviewFrame.ui > germanium_build_monitor/ui/generated/Ui_ServersOverviewFrame.py
