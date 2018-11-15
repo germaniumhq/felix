@@ -31,7 +31,7 @@ class AddJobsFromServerDialog(QDialog, Ui_Dialog):
 
         self.model = ServerDialogModel(
             server=model,
-            root_folder=JenkinsFolder(parent=None, name="__root__"))
+            root_folder=JenkinsFolder(parent=None, name=f"All {model.name}"))
 
         self.setupUi(self)
 

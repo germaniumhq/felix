@@ -96,19 +96,13 @@ class SelectJobsFrame(QWidget, Ui_Form):
 
     @render
     def update_root_level(self):
-        for sub_folder in self.model.folders:
-            child_node = create_node(sub_folder)
+        child_node = create_node(self.model)
+        self.tree_widget.addTopLevelItem(child_node)
 
-            self.tree_widget.addTopLevelItem(child_node)
-            self.update_node_data(child_node, sub_folder)
+        self.update_node_data(child_node, self.model)
+        self.update_folder_level(child_node, self.model)
 
-            self.update_folder_level(child_node, sub_folder)
-
-        for job in self.model.jobs:
-            child_node = create_node(job)
-
-            self.tree_widget.addTopLevelItem(child_node)
-            self.update_node_data(child_node, job)
+        self.tree_widget.expandAll()
 
     @render
     def update_folder_level(self,
@@ -119,6 +113,7 @@ class SelectJobsFrame(QWidget, Ui_Form):
             parent_node.addChild(child_node)
 
             self.update_node_data(child_node, sub_folder)
+            self.update_folder_level(child_node, sub_folder)
 
         for job in folder.jobs:
             child_node = create_node(job)
