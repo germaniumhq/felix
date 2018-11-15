@@ -34,5 +34,9 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
 
         @render_call
         def update_time() -> None:
+            if branch.last_build_timestamp is None:
+                self.time_label.setText("<i>not run</i>")
+                return
+
             time = arrow.get(branch.last_build_timestamp / 1000.0).humanize()
             self.time_label.setText(time)

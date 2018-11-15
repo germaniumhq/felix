@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from mopyx import model, computed
 import urllib.parse
@@ -31,6 +31,9 @@ class JenkinsJobBranch:
         return result
 
     @computed
-    def last_build_timestamp(self) -> int:
+    def last_build_timestamp(self) -> Optional[int]:
+        if not self.builds:
+            return None
+
         return max([build.timestamp for build in self.builds])
 
