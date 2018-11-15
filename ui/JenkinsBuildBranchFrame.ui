@@ -64,7 +64,7 @@
         <item>
          <widget class="QLabel" name="status_icon_label">
           <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+           <cursorShape>ArrowCursor</cursorShape>
           </property>
           <property name="text">
            <string>icon</string>
@@ -81,7 +81,7 @@
             <item>
              <widget class="QLabel" name="project_name_label">
               <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
+               <cursorShape>ArrowCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">font-weight: bold</string>
@@ -116,7 +116,7 @@
           <item>
            <widget class="QLabel" name="branch_name_label">
             <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
+             <cursorShape>ArrowCursor</cursorShape>
             </property>
             <property name="styleSheet">
              <string notr="true">font-style: italic</string>
@@ -153,6 +153,9 @@
         </item>
         <item>
          <widget class="QLabel" name="time_label">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>time</string>
           </property>

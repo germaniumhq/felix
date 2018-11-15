@@ -69,7 +69,8 @@ class JobMonitorThread(threading.Thread):
                             show_notification(
                                 notification.branch.project_name,
                                 notification.branch.decoded_branch_name,
-                                icon
+                                icon,
+                                Settings.settings.notification_display_time * 1000
                             )
 
                             key = f"{notification.branch.project_name} "\

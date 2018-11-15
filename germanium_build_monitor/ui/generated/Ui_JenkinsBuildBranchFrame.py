@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/JenkinsBuildBranchFrame.ui',
 # licensing of 'ui/JenkinsBuildBranchFrame.ui' applies.
 #
-# Created: Thu Nov 15 06:35:27 2018
+# Created: Thu Nov 15 06:47:11 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,7 +30,7 @@ class Ui_Form(object):
         self.horizontalLayout_4.setContentsMargins(2, -1, 2, -1)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.status_icon_label = QtWidgets.QLabel(self.frame)
-        self.status_icon_label.setCursor(QtCore.Qt.PointingHandCursor)
+        self.status_icon_label.setCursor(QtCore.Qt.ArrowCursor)
         self.status_icon_label.setObjectName("status_icon_label")
         self.horizontalLayout_4.addWidget(self.status_icon_label)
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -39,7 +39,7 @@ class Ui_Form(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.project_name_label = QtWidgets.QLabel(self.frame)
-        self.project_name_label.setCursor(QtCore.Qt.PointingHandCursor)
+        self.project_name_label.setCursor(QtCore.Qt.ArrowCursor)
         self.project_name_label.setStyleSheet("font-weight: bold")
         self.project_name_label.setObjectName("project_name_label")
         self.horizontalLayout_2.addWidget(self.project_name_label)
@@ -51,7 +51,7 @@ class Ui_Form(object):
         self.horizontalLayout_2.addLayout(self.previous_builds_container)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.branch_name_label = QtWidgets.QLabel(self.frame)
-        self.branch_name_label.setCursor(QtCore.Qt.PointingHandCursor)
+        self.branch_name_label.setCursor(QtCore.Qt.ArrowCursor)
         self.branch_name_label.setStyleSheet("font-style: italic")
         self.branch_name_label.setObjectName("branch_name_label")
         self.verticalLayout.addWidget(self.branch_name_label)
@@ -63,6 +63,7 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
         self.time_label = QtWidgets.QLabel(self.frame)
+        self.time_label.setCursor(QtCore.Qt.PointingHandCursor)
         self.time_label.setObjectName("time_label")
         self.horizontalLayout_3.addWidget(self.time_label)
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)

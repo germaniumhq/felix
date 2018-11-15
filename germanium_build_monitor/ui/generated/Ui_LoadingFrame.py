@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/LoadingFrame.ui',
 # licensing of 'ui/LoadingFrame.ui' applies.
 #
-# Created: Thu Nov 15 06:35:26 2018
+# Created: Thu Nov 15 06:47:11 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
