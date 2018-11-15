@@ -8,7 +8,7 @@ packages = find_packages()
 
 setup(
     name='germanium_build_monitor',
-    version='1.0.0',
+    version='0.1.master',
     description='germanium_build_monitor',
     long_description=readme,
     author='Bogdan Mustiata',
@@ -19,7 +19,12 @@ setup(
             "germanium_build_monitor = germanium_build_monitor.mainapp:main"
         ]
     },
-    install_requires=[],
+    install_requires=[
+        "PySide2",
+        "mopyx==0.5.3",
+        "python-jenkins",
+        "PyYAML >=3.12, <3.13",
+        "arrow >= 0.12.1, < 0.13"],
     packages=packages,
     package_data={
         '': ['*.txt', '*.rst']

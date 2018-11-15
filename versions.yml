@@ -1,5 +1,5 @@
 version:
-  version: $(version-manager --tag)
+  version: $(version-manager --tag 0.0.0-master)
   files:
     setup.py: version='**VERSION**',
 requirements:
