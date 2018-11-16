@@ -1,5 +1,3 @@
-from typing import Dict, Any
-
 from mopyx import render_call, action
 import sys
 import traceback
@@ -26,16 +24,9 @@ from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_s
 from germanium_build_monitor.model.jenkins.remote.read_build_jobs import read_build_job_branches
 from germanium_build_monitor.model.jenkins.operations import compare_branches
 
+from germanium_build_monitor.actions import exit_application, monitoring_threads
+
 import germanium_build_monitor.resources.icons as icons
-
-
-monitoring_threads: Dict[JenkinsServer, Any] = dict()
-
-
-def exit_application():
-    monitoring_threads.clear()
-    persistence.persist_state(RootModel.root_model, Settings.settings)
-    sys.exit(0)
 
 
 class JobMonitorThread(threading.Thread):

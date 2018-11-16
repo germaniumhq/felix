@@ -26,44 +26,44 @@
      <x>0</x>
      <y>0</y>
      <width>459</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionMinimize"/>
+    <addaction name="minimize_action"/>
     <addaction name="separator"/>
-    <addaction name="actionE_xit"/>
+    <addaction name="exit_action"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionAbout_Felix_Build_Monitor"/>
-    <addaction name="actionAbout_Qt"/>
+    <addaction name="about_felix_action"/>
+    <addaction name="about_qt_action"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionAbout_Felix_Build_Monitor">
+  <action name="about_felix_action">
    <property name="text">
-    <string>About Felix Build Monitor</string>
+    <string>&amp;About Felix Build Monitor</string>
    </property>
   </action>
-  <action name="actionAbout_Qt">
+  <action name="about_qt_action">
    <property name="text">
-    <string>About Qt</string>
+    <string>About &amp;Qt</string>
    </property>
   </action>
-  <action name="actionMinimize">
+  <action name="minimize_action">
    <property name="text">
-    <string>Minimize</string>
+    <string>&amp;Minimize</string>
    </property>
   </action>
-  <action name="actionE_xit">
+  <action name="exit_action">
    <property name="text">
     <string>E&amp;xit</string>
    </property>

@@ -4,6 +4,7 @@ from PySide2.QtWidgets import QMainWindow
 from germanium_build_monitor.ui.generated.Ui_MainWindow import Ui_MainWindow
 
 from germanium_build_monitor.model import RootModel
+from germanium_build_monitor.ui import help_show
 
 main_window = None
 
@@ -15,6 +16,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.content = WidgetSwitcher(self.current_view)
+
+        self.minimize_action.triggered.connect(self.hide)
+        self.exit_action.triggered.connect(exit_application)
+        self.about_felix_action.triggered.connect(lambda: help_show.help_about(self))
+        self.about_qt_action.triggered.connect(lambda: help_show.help_about_qt(self))
 
         self.update_current_view()
 
@@ -44,3 +50,4 @@ from .ServersOverviewFrame import ServersOverviewFrame
 from .WidgetSwitcher import WidgetSwitcher
 from .NewStartFrame import NewStartFrame
 
+from germanium_build_monitor.actions import exit_application

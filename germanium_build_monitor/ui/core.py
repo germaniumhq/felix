@@ -85,3 +85,16 @@ def clear_layout(layout: QLayout) -> None:
 
         layout_item.widget().deleteLater()
 
+
+def _(callable: Callable[..., T]) -> Callable[[], T]:
+    """
+    Make a new callable that ignores all its parameters, and just calls the
+    given callable.
+    :param callable:
+    :return:
+    """
+    def ignore_args(*args, **kw):
+        return callable()
+
+    return ignore_args
+
