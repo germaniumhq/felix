@@ -1,20 +1,21 @@
 from typing import Any, List
 
+from germanium_build_monitor.model.JenkinsMonitoredJob import JenkinsMonitoredJob
 from germanium_build_monitor.model.JenkinsJobBranch import JenkinsJobBranch
 from germanium_build_monitor.model.JenkinsJobBranchBuild import JenkinsJobBranchBuild
 from germanium_build_monitor.model.BuildStatus import BuildStatus
 
 
-def read_build_job_branches(project_name: str,
+def read_build_job_branches(monitored_job: JenkinsMonitoredJob,
                             result: Any) -> List[JenkinsJobBranch]:
 
     if result["_class"] == "org.jenkinsci.plugins.workflow.job.WorkflowJob":
-        return [read_single_job_branch(project_name, result)]
+        return [read_single_job_branch(monitored_job, result)]
     elif result["_class"] == "org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject":
         branches = []
 
         for job in result["jobs"]:
-            branch = read_single_job_branch(project_name, job)
+            branch = read_single_job_branch(monitored_job, job)
             branches.append(branch)
 
         return branches
@@ -22,11 +23,11 @@ def read_build_job_branches(project_name: str,
         raise Exception("Unsupported job type: " + str(result))
 
 
-def read_single_job_branch(project_name: str, job: Any) -> JenkinsJobBranch:
+def read_single_job_branch(monitored_job: JenkinsMonitoredJob, job: Any) -> JenkinsJobBranch:
     branch_name = job["name"]
 
     branch = JenkinsJobBranch(
-        project_name=project_name,
+        monitored_job=monitored_job,
         branch_name=branch_name)
 
     for build in job["builds"]:

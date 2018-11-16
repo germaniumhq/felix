@@ -11,7 +11,7 @@ class TestAllJobsReading(unittest.TestCase):
     Attempt at reading the jobs from the Jenkins json
     """
 
-    def test_read_all_jobs(self):
+    def test_read_all_jobs(self) -> None:
         """
         Read dem data.
         """

@@ -9,7 +9,7 @@ def base_dir(sub_path=""):
     # pth is set by pyinstaller with the folder where the application
     # will be unpacked.
     if 'pth' in globals():
-        return os.path.join(pth, sub_path)
+        return os.path.join(pth, sub_path)  # NOQA
 
     return os.path.abspath(os.path.dirname(__file__))
 
@@ -40,6 +40,8 @@ def help_about(parent: QWidget) -> None:
                           Released under license AGPL v3.
 
                           (c) 2017-2018 Germanium HQ e.U. All rights reserved.
+
+                          Icons created by Nishat Tasnim Onu <nishattasnimonu@gmail.com>.
 
                           Made with passion in Austria.
                       """))

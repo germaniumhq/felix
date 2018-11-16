@@ -5,6 +5,7 @@ import urllib.parse
 
 from .BuildStatus import BuildStatus
 from .JenkinsJobBranchBuild import JenkinsJobBranchBuild
+from .JenkinsMonitoredJob import JenkinsMonitoredJob
 
 from germanium_build_monitor.model import Settings
 
@@ -12,9 +13,9 @@ from germanium_build_monitor.model import Settings
 @model
 class JenkinsJobBranch:
     def __init__(self,
-                 project_name: str,
+                 monitored_job: JenkinsMonitoredJob,
                  branch_name: str) -> None:
-        self.project_name = project_name
+        self.parent_monitored_job = monitored_job
         self.branch_name = branch_name
         self.decoded_branch_name = urllib.parse.unquote(branch_name)
         self.builds: List[JenkinsJobBranchBuild] = []
@@ -27,7 +28,14 @@ class JenkinsJobBranch:
         return result
 
     @computed
+    def project_name(self) -> str:
+        return self.parent_monitored_job.name
+
+    @computed
     def status(self) -> BuildStatus:
+        if self.is_ignored:
+            return BuildStatus.IGNORED
+
         if not self.sorted_builds:
             return BuildStatus.NEVER
 
@@ -43,6 +51,10 @@ class JenkinsJobBranch:
                 return build.status
 
         return BuildStatus.NEVER
+
+    @computed
+    def is_ignored(self) -> bool:
+        return self.branch_name in self.parent_monitored_job.ignored_branches
 
     @computed
     def last_builds(self) -> List[JenkinsJobBranchBuild]:

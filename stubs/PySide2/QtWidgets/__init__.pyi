@@ -86,7 +86,7 @@ class QSystemTrayIcon:
         pass
 
 
-class QDialog:
+class QDialog(QWidget):
     def __init__(self,
                  parent: Optional['QDialog'] = None):
         self.modal: bool
@@ -193,3 +193,13 @@ class QMessageBox(QDialog):
                  button_ids: int) -> None:
         pass
 
+    @staticmethod
+    def aboutQt(parent: QWidget,
+                title: str) -> None:
+        pass
+
+    @staticmethod
+    def about(parent: QWidget,
+              title: str,
+              text: str) -> None:
+        pass

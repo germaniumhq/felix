@@ -5,6 +5,7 @@ from germanium_build_monitor.ui.generated.Ui_MainWindow import Ui_MainWindow
 
 from germanium_build_monitor.model import RootModel
 from germanium_build_monitor.ui import help_show
+from germanium_build_monitor.resources.icons import get_icon
 
 main_window = None
 
@@ -14,6 +15,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
 
         self.setupUi(self)
+
+        self.setWindowIcon(get_icon("favicon.ico"))
 
         self.content = WidgetSwitcher(self.current_view)
 

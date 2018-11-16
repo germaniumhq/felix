@@ -41,7 +41,7 @@ class JobMonitorThread(threading.Thread):
             for job in self.server.monitored_jobs:
                 print(f"scanning: {job.name}")
                 result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
-                updated_branches = read_build_job_branches(job.name, result)
+                updated_branches = read_build_job_branches(job, result)
 
                 @ui_thread
                 @action
