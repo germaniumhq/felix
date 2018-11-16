@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/JenkinsBuildBranchFrame.ui',
 # licensing of 'ui/JenkinsBuildBranchFrame.ui' applies.
 #
-# Created: Fri Nov 16 05:21:43 2018
+# Created: Fri Nov 16 06:50:18 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,12 +43,6 @@ class Ui_Form(object):
         self.project_name_label.setStyleSheet("font-weight: bold")
         self.project_name_label.setObjectName("project_name_label")
         self.horizontalLayout_2.addWidget(self.project_name_label)
-        self.ignore_branch_button = QtWidgets.QToolButton(self.frame)
-        self.ignore_branch_button.setStyleSheet("padding: 0;")
-        self.ignore_branch_button.setCheckable(True)
-        self.ignore_branch_button.setChecked(False)
-        self.ignore_branch_button.setObjectName("ignore_branch_button")
-        self.horizontalLayout_2.addWidget(self.ignore_branch_button)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.previous_builds_container = QtWidgets.QHBoxLayout()
@@ -56,11 +50,20 @@ class Ui_Form(object):
         self.previous_builds_container.setObjectName("previous_builds_container")
         self.horizontalLayout_2.addLayout(self.previous_builds_container)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.ignore_branch_button = QtWidgets.QToolButton(self.frame)
+        self.ignore_branch_button.setStyleSheet("padding: 0;")
+        self.ignore_branch_button.setCheckable(True)
+        self.ignore_branch_button.setChecked(False)
+        self.ignore_branch_button.setObjectName("ignore_branch_button")
+        self.horizontalLayout_5.addWidget(self.ignore_branch_button)
         self.branch_name_label = QtWidgets.QLabel(self.frame)
         self.branch_name_label.setCursor(QtCore.Qt.ArrowCursor)
         self.branch_name_label.setStyleSheet("font-style: italic")
         self.branch_name_label.setObjectName("branch_name_label")
-        self.verticalLayout.addWidget(self.branch_name_label)
+        self.horizontalLayout_5.addWidget(self.branch_name_label)
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.horizontalLayout_4.addLayout(self.verticalLayout)
         self.verticalLayout_2.addLayout(self.horizontalLayout_4)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -82,6 +85,7 @@ class Ui_Form(object):
         Form.setWindowTitle(QtWidgets.QApplication.translate("Form", "Form", None, -1))
         self.status_icon_label.setText(QtWidgets.QApplication.translate("Form", "icon", None, -1))
         self.project_name_label.setText(QtWidgets.QApplication.translate("Form", "project", None, -1))
+        self.ignore_branch_button.setToolTip(QtWidgets.QApplication.translate("Form", "Ignore this branch from the total build status.", None, -1))
         self.ignore_branch_button.setText(QtWidgets.QApplication.translate("Form", "...", None, -1))
         self.branch_name_label.setText(QtWidgets.QApplication.translate("Form", "branch", None, -1))
         self.time_label.setText(QtWidgets.QApplication.translate("Form", "time", None, -1))

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/MainDialog.ui',
 # licensing of 'ui/MainDialog.ui' applies.
 #
-# Created: Fri Nov 16 05:21:41 2018
+# Created: Fri Nov 16 06:50:16 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

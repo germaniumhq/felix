@@ -26,7 +26,7 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
 
         @render_call
         def update_status_icon() -> None:
-            self.status_icon_label.setPixmap(aggregate_status_icon(branch).pixmap(QSize(24, 24)))
+            self.status_icon_label.setPixmap(aggregate_status_icon(branch).pixmap(QSize(32, 32)))
 
         @render_call
         def update_last_builds() -> None:
