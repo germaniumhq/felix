@@ -31,7 +31,9 @@ def build_status_icon(status: BuildStatus) -> QtGui.QIcon:
     elif status == BuildStatus.RUNNING:
         return get_icon("unknown_builds_in_progress.png")
     elif status == BuildStatus.NEVER:
-        return get_icon("never128.png")
+        return get_icon("build_ignored.png")
+    elif status == BuildStatus.IGNORED:
+        return get_icon("build_ignored.png")
     else:
         raise Exception(f"Unsupported value {status}")
 

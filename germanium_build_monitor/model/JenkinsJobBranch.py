@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from mopyx import model, computed
+from mopyx import model, computed, action
 import urllib.parse
 
 from .BuildStatus import BuildStatus
@@ -55,6 +55,10 @@ class JenkinsJobBranch:
     @computed
     def is_ignored(self) -> bool:
         return self.branch_name in self.parent_monitored_job.ignored_branches
+
+    @action
+    def set_ignored(self, ignored: bool) -> None:
+        self.parent_monitored_job.set_ignored_branch(self, ignored)
 
     @computed
     def last_builds(self) -> List[JenkinsJobBranchBuild]:

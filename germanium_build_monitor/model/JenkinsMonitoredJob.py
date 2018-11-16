@@ -1,5 +1,5 @@
 from typing import List, Optional, Dict, Any, Set
-from mopyx import model
+from mopyx import model, action
 
 
 @model
@@ -12,6 +12,15 @@ class JenkinsMonitoredJob:
         self.full_name: str = full_name if full_name else name
         self.branches: Optional[List[JenkinsJobBranch]] = None
         self.ignored_branches: Set[str] = ignored_branches if ignored_branches else set()
+
+    @action
+    def set_ignored_branch(self, branch, ignored: bool) -> None:
+        if ignored:
+            self.ignored_branches.add(branch.branch_name)
+        else:
+            self.ignored_branches.remove(branch.branch_name)
+
+        self.ignored_branches = self.ignored_branches
 
     def as_dict(self) -> Dict[str, Any]:
         return {
