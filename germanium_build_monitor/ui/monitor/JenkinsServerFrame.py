@@ -4,6 +4,7 @@ from PySide2.QtWidgets import QWidget
 
 from germanium_build_monitor.ui.generated.Ui_JenkinsServerFrame import Ui_Form
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.model import Settings
 from germanium_build_monitor.ui.core import clear_layout
 
 from .LoadingJobFrame import LoadingJobFrame
@@ -47,6 +48,8 @@ class JenkinsServerFrame(QWidget, Ui_Form):
 
             build_branches.sort(key=lambda it: it.last_build_timestamp if it.last_build_timestamp else 0,
                                 reverse=True)
+
+            build_branches = build_branches[0:Settings.settings.main_page_items]
 
             # FIXME: sort by last build time
             for branch in build_branches:
