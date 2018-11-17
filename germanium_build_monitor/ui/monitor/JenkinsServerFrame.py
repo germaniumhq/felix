@@ -29,7 +29,6 @@ class JenkinsServerFrame(QWidget, Ui_Form):
 
         @render_call
         def update_branches() -> None:
-            print("update branches called")
             not_loaded_jobs = []
             build_branches = []
 

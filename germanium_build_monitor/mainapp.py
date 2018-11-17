@@ -1,4 +1,4 @@
-from mopyx import render_call, action, use_locks
+from mopyx import render_call, action
 import sys
 import traceback
 import threading
@@ -89,7 +89,6 @@ menu = None
 
 
 def main() -> None:
-    use_locks(True)
     RootModel.root_model, Settings.settings = persistence.load_state()
 
     app = create_qt_application()
