@@ -1,5 +1,5 @@
 PySide2
-mopyx==0.5.3
+mopyx >= 1.0.0, < 1.1.0
 python-jenkins
 PyYAML >=3.12, <3.13
 arrow >= 0.12.1, < 0.13

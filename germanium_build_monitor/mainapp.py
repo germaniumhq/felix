@@ -41,11 +41,12 @@ class JobMonitorThread(threading.Thread):
             for job in self.server.monitored_jobs:
                 print(f"scanning: {job.name}")
                 result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
-                updated_branches = read_build_job_branches(job, result)
 
                 @ui_thread
                 @action
-                def update_results(job, updated_branches) -> None:
+                def update_results(job, result) -> None:
+                    updated_branches = read_build_job_branches(job, result)
+
                     try:
                         if job.branches is None:
                             job.branches = updated_branches
@@ -79,7 +80,7 @@ class JobMonitorThread(threading.Thread):
                     except Exception:
                         traceback.print_exc()
 
-                update_results(job, updated_branches)
+                update_results(job, result)
 
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
