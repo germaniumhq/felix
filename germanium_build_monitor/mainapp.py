@@ -1,3 +1,4 @@
+from typing import Any, List, Tuple
 from mopyx import render_call, action
 import sys
 import traceback
@@ -19,6 +20,7 @@ from germanium_build_monitor.model import Settings
 from germanium_build_monitor.model import persistence
 
 from germanium_build_monitor.model.SystrayItem import SystrayItem
+from germanium_build_monitor.model.JenkinsMonitoredJob import JenkinsMonitoredJob
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
 
 from germanium_build_monitor.model.jenkins.remote.read_build_jobs import read_build_job_branches
@@ -38,19 +40,23 @@ class JobMonitorThread(threading.Thread):
     def run(self) -> None:
         print(f"Server {self.server.name} is being monitored")
         while self.server in monitoring_threads:
-            for job in self.server.monitored_jobs:
-                print(f"scanning: {job.name}")
-                result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
+            registered_updates: List[Tuple[JenkinsMonitoredJob, Any]] = []
 
-                @ui_thread
-                @action
-                def update_results(job, result) -> None:
+            for job in self.server.monitored_jobs:
+                print(f"read job {job.name}")
+                result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
+                registered_updates.append((job, result))
+
+            @ui_thread
+            @action
+            def update_results(updates: List[Tuple[JenkinsMonitoredJob, Any]]) -> None:
+                for job, result in updates:
                     updated_branches = read_build_job_branches(job, result)
 
                     try:
                         if job.branches is None:
                             job.branches = updated_branches
-                            return
+                            continue
 
                         notifications = compare_branches(job.branches, updated_branches)
                         job.branches = updated_branches
@@ -75,12 +81,13 @@ class JobMonitorThread(threading.Thread):
                             )
 
                             RootModel.root_model.systray.add_request(systray_item)
-
-                        RootModel.root_model.systray.flush_requests()
                     except Exception:
                         traceback.print_exc()
 
-                update_results(job, result)
+                RootModel.root_model.systray.flush_requests()
+
+            update_results(registered_updates)
+            registered_updates = []
 
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
