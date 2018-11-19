@@ -1,4 +1,6 @@
 from mopyx import render_call, action
+from mopyx.util import merge_model
+
 import sys
 import traceback
 import threading
@@ -53,7 +55,7 @@ class JobMonitorThread(threading.Thread):
                             return
 
                         notifications = compare_branches(job.branches, updated_branches)
-                        job.branches = updated_branches
+                        merge_model(job.branches, updated_branches)
 
                         for notification in notifications:
                             icon = icons.build_status_icon(notification.branch.status)
