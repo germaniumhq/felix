@@ -55,7 +55,9 @@ class JobMonitorThread(threading.Thread):
                             return
 
                         notifications = compare_branches(job.branches, updated_branches)
-                        merge_model(job.branches, updated_branches)
+
+                        if not merge_model(job.branches, updated_branches):
+                            job.branches = updated_branches
 
                         for notification in notifications:
                             icon = icons.build_status_icon(notification.branch.status)
