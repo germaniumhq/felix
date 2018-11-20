@@ -7,16 +7,16 @@ with open('README.rst') as readme_file:
 packages = find_packages()
 
 setup(
-    name='germanium_build_monitor',
+    name='felixbm',
     version='0.1.master',
-    description='germanium_build_monitor',
+    description='Felix Build Monitor - a Jenkins monitoring tool.',
     long_description=readme,
     author='Bogdan Mustiata',
     author_email='bogdan.mustiata@gmail.com',
     license='BSD',
     entry_points={
         "console_scripts": [
-            "germanium_build_monitor = germanium_build_monitor.mainapp:main"
+            "felixbm = germanium_build_monitor.mainapp:main"
         ]
     },
     install_requires=[
@@ -26,6 +26,7 @@ setup(
         "PyYAML >=3.12, <3.13",
         "arrow >= 0.12.1, < 0.13"],
     packages=packages,
+    url="https://germaniumhq.com/felix-build-monitor/",
     package_data={
         '': ['*.txt', '*.rst']
     })

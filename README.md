@@ -1,10 +1,5 @@
-# germanium_build_monitor
+# Felix Build Monitor
 
-germanium_build_monitor program.
+A build monitor for Jenkins.
 
-## Installation
-
-```sh
-pip install germanium_build_monitor
-```
-
+![Screenshot](doc/screenshot.png)

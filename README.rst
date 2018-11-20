@@ -1,11 +1,9 @@
-germanium\_build\_monitor
-=========================
+Felix Build Monitor
+===================
 
-germanium\_build\_monitor program.
+A build monitor for Jenkins.
 
-Installation
-------------
+.. figure:: doc/screenshot.png
+   :alt: Screenshot
 
-.. code:: sh
-
-    pip install germanium_build_monitor
+   Screenshot
