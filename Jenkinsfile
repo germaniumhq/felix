@@ -2,6 +2,7 @@ germaniumPyExePipeline(
     name: "germanium-build-monitor",
     repo: [
         "git@bitbucket.org:bmustiata/germanium-build-monitor.git",
+        "git@github.com:germaniumhq/felix.git",
     ],
 
     binaries: [
