@@ -12,6 +12,7 @@ class JenkinsMonitoredJob:
         self.full_name: str = full_name if full_name else name
         self.branches: Optional[List[JenkinsJobBranch]] = None
         self.ignored_branches: Set[str] = ignored_branches if ignored_branches else set()
+        self.url: str = ""  # needs to be fetched from builds
 
     @action
     def set_ignored_branch(self, branch, ignored: bool) -> None:

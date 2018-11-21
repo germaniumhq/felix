@@ -8,9 +8,11 @@ from germanium_build_monitor.model.BuildStatus import BuildStatus
 
 def read_build_job_branches(monitored_job: JenkinsMonitoredJob,
                             result: Any) -> List[JenkinsJobBranch]:
+    monitored_job.url = result["url"]
 
     if result["_class"] == "org.jenkinsci.plugins.workflow.job.WorkflowJob":
         return [read_single_job_branch(monitored_job, result)]
+
     elif result["_class"] == "org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject":
         branches = []
 
@@ -25,10 +27,12 @@ def read_build_job_branches(monitored_job: JenkinsMonitoredJob,
 
 def read_single_job_branch(monitored_job: JenkinsMonitoredJob, job: Any) -> JenkinsJobBranch:
     branch_name = job["name"]
+    url = job["url"]
 
     branch = JenkinsJobBranch(
         monitored_job=monitored_job,
-        branch_name=branch_name)
+        branch_name=branch_name,
+        url=url)
 
     for build in job["builds"]:
         if build["building"]:

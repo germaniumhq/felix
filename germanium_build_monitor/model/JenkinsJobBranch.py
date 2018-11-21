@@ -14,11 +14,13 @@ from germanium_build_monitor.model import Settings
 class JenkinsJobBranch:
     def __init__(self,
                  monitored_job: JenkinsMonitoredJob,
-                 branch_name: str) -> None:
+                 branch_name: str,
+                 url: str) -> None:
         self.parent_monitored_job = monitored_job
         self.branch_name = branch_name
         self.decoded_branch_name = urllib.parse.unquote(branch_name)
         self.builds: List[JenkinsJobBranchBuild] = []
+        self.url: str = url
 
     @computed
     def sorted_builds(self) -> List[JenkinsJobBranchBuild]:

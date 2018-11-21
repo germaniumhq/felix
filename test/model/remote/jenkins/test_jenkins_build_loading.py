@@ -24,7 +24,8 @@ class TestJenkinsJobLoading(unittest.TestCase):
         Try to fetch the builds from one of dem previously saved JSON files.
         """
         result = load_result("jd_build_initial.json")
-        branches = read_build_job_branches(JenkinsMonitoredJob("jd"), result)
+        monitored_job = JenkinsMonitoredJob("jd")
+        branches = read_build_job_branches(monitored_job, result)
 
         self.assertTrue(branches)
         self.assertEqual(2, len(branches))
@@ -32,6 +33,8 @@ class TestJenkinsJobLoading(unittest.TestCase):
         self.assertEqual("feature/wut", branches[0].decoded_branch_name)
         self.assertEqual(BuildStatus.FAILURE, branches[0].status)
         self.assertEqual(1, len(branches[0].builds))
+        self.assertEqual("http://localhost:8080/job/jenkins-demo/job/feature%252Fwut/", branches[0].url)
+        self.assertEqual("http://localhost:8080/job/jenkins-demo/", monitored_job.url)
 
         self.assertEqual("master", branches[1].decoded_branch_name)
         self.assertEqual(BuildStatus.SUCCESS, branches[1].status)
@@ -60,7 +63,12 @@ class TestJenkinsJobLoading(unittest.TestCase):
         Try to fetch the builds from one of dem previously saved JSON files.
         """
         result = load_result("ww_build_initial.json")
-        branches = read_build_job_branches(JenkinsMonitoredJob("ww"), result)
+
+        monitored_job = JenkinsMonitoredJob("ww")
+        branches = read_build_job_branches(monitored_job, result)
+
+        self.assertEqual("http://localhost:8080/job/ww/", branches[0].url)
+        self.assertEqual("http://localhost:8080/job/ww/", monitored_job.url)
 
         self.assertTrue(branches)
         self.assertEqual(1, len(branches))
