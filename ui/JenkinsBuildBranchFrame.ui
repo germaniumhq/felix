@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>464</width>
-    <height>74</height>
+    <height>83</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -79,15 +79,20 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QLabel" name="project_name_label">
+             <widget class="QToolButton" name="project_name_button">
               <property name="cursor">
-               <cursorShape>ArrowCursor</cursorShape>
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
-               <string notr="true">font-weight: bold</string>
+               <string notr="true">border: none;
+padding: 0;
+font-weight: bold;</string>
               </property>
               <property name="text">
                <string>project</string>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextOnly</enum>
               </property>
              </widget>
             </item>
@@ -135,17 +140,35 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="branch_name_label">
+             <widget class="QToolButton" name="branch_name_button">
               <property name="cursor">
-               <cursorShape>ArrowCursor</cursorShape>
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
-               <string notr="true">font-style: italic</string>
+               <string notr="true">padding: 0;
+border: none;
+font-style: italic;</string>
               </property>
               <property name="text">
                <string>branch</string>
               </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextOnly</enum>
+              </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>

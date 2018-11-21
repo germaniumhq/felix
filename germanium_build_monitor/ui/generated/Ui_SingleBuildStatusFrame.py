@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/SingleBuildStatusFrame.ui',
 # licensing of 'ui/SingleBuildStatusFrame.ui' applies.
 #
-# Created: Wed Nov 21 05:46:53 2018
+# Created: Wed Nov 21 06:55:10 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

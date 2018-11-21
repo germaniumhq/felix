@@ -8,6 +8,7 @@ from germanium_build_monitor.ui.generated.Ui_JenkinsBuildBranchFrame import Ui_F
 from germanium_build_monitor.model.JenkinsJobBranch import JenkinsJobBranch
 from germanium_build_monitor.resources.icons import aggregate_status_icon, get_icon
 from germanium_build_monitor.ui.core import clear_layout
+import webbrowser
 
 from .SingleBuildStatusFrame import SingleBuildStatusFrame
 
@@ -18,8 +19,17 @@ class JenkinsBuildBranchFrame(QWidget, Ui_Form):
 
         self.setupUi(self)
 
-        self.project_name_label.setText(branch.project_name)
-        self.branch_name_label.setText(branch.decoded_branch_name)
+        self.project_name_button.setText(branch.project_name)
+        self.branch_name_button.setText(branch.decoded_branch_name)
+
+        def open_project():
+            webbrowser.open(branch.parent_monitored_job.url)
+
+        def open_branch():
+            webbrowser.open(branch.url)
+
+        self.project_name_button.clicked.connect(open_project)
+        self.branch_name_button.clicked.connect(open_branch)
 
         self.ignore_branch_button.setIcon(get_icon("build_ignored.png"))
         self.ignore_branch_button.toggled.connect(branch.set_ignored)
