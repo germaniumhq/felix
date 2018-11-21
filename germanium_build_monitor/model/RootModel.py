@@ -16,6 +16,7 @@ class RootModel:
     def __init__(self) -> None:
         super().__init__()
 
+        self.search_text: str = ""
         self.servers: List[JenkinsServer] = []
         self.systray: Systray = Systray()
 
@@ -57,6 +58,7 @@ class RootModel:
 
     def as_dict(self) -> Dict[str, Any]:
         return {
+            "search_text": self.search_text,
             "servers": [server.as_dict() for server in self.servers]
         }
 
@@ -64,6 +66,7 @@ class RootModel:
     def from_dict(d) -> 'RootModel':
         result = RootModel()
 
+        result.search_text = d.get("search_text", "")
         result.servers = [JenkinsServer.from_dict(s) for s in d['servers']]
 
         return result

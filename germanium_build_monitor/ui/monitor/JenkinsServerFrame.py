@@ -4,11 +4,20 @@ from PySide2.QtWidgets import QWidget
 
 from germanium_build_monitor.ui.generated.Ui_JenkinsServerFrame import Ui_Form
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer
+from germanium_build_monitor.model.JenkinsJobBranch import JenkinsJobBranch
 from germanium_build_monitor.model import Settings
+from germanium_build_monitor.model import RootModel
 from germanium_build_monitor.ui.core import clear_layout
 
 from .LoadingJobFrame import LoadingJobFrame
 from .JenkinsBuildBranchFrame import JenkinsBuildBranchFrame
+
+
+def filter_branch(branch: JenkinsJobBranch) -> bool:
+    search_text = RootModel.root_model.search_text
+
+    return search_text in branch.parent_monitored_job.name or \
+        search_text in branch.decoded_branch_name
 
 
 class JenkinsServerFrame(QWidget, Ui_Form):
@@ -47,6 +56,8 @@ class JenkinsServerFrame(QWidget, Ui_Form):
 
             build_branches.sort(key=lambda it: it.last_build_timestamp if it.last_build_timestamp else 0,
                                 reverse=True)
+
+            build_branches = list(filter(filter_branch, build_branches))
 
             build_branches = build_branches[0:Settings.settings.main_page_items]
 
