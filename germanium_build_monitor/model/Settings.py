@@ -5,7 +5,7 @@ from mopyx import model
 @model
 class Settings:
     def __init__(self,
-                 systray_items_count: int = 2,
+                 systray_items_count: int = 10,
                  main_page_items: int = 100,
                  last_builds_count: int = 5,
                  notification_display_time: int = 8,
