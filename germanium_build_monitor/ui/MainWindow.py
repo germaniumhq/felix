@@ -17,6 +17,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.setWindowIcon(get_icon("favicon.ico"))
+        self.setWindowTitle("Felix Build Monitor - master")
 
         self.content = WidgetSwitcher(self.current_view)
 
