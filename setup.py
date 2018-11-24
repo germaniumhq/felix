@@ -8,7 +8,7 @@ packages = find_packages()
 
 setup(
     name='felixbm',
-    version='0.1.master',
+    version='master',
     description='Felix Build Monitor - a Jenkins monitoring tool.',
     long_description=readme,
     author='Bogdan Mustiata',
@@ -21,7 +21,7 @@ setup(
     },
     install_requires=[
         "PySide2",
-        "mopyx==0.5.3",
+        "mopyx >= 1.1.0, < 1.2.0",
         "python-jenkins",
         "PyYAML >=3.12, <3.13",
         "arrow >= 0.12.1, < 0.13"],
