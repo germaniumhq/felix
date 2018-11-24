@@ -20,6 +20,7 @@ from germanium_build_monitor.model import RootModel
 from germanium_build_monitor.model import Settings
 from germanium_build_monitor.model import persistence
 
+from germanium_build_monitor.model.BuildStatus import BuildStatus
 from germanium_build_monitor.model.SystrayItem import SystrayItem
 from germanium_build_monitor.model.JenkinsServer import JenkinsServer, jenkins_server
 
@@ -60,6 +61,9 @@ class JobMonitorThread(threading.Thread):
                             job.branches = updated_branches
 
                         for notification in notifications:
+                            if notification.branch.status == BuildStatus.IGNORED:
+                                continue
+
                             icon = icons.build_status_icon(notification.branch.status)
 
                             show_notification(
