@@ -60,11 +60,13 @@ class JobMonitorThread(threading.Thread):
 
             self.error_shown = True
 
-            QMessageBox.critical(MainWindow.instance(),
+            QMessageBox.critical(
+                MainWindow.instance(),
                 f"Failure monitoring {job.name}",
                 f"Failure monitoring {job.name} on {self.server.name} "
                 f"at {self.server.url}, after {job.failed_count} tries. "
                 "Felix will now exit.")
+
             exit_application()
 
         @ui_thread

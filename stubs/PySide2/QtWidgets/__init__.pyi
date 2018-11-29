@@ -190,7 +190,7 @@ class QMessageBox(QDialog):
     def critical(parent: QDialog,
                  title: str,
                  description: str,
-                 button_ids: int) -> None:
+                 button_ids: Optional[int] = None) -> None:
         pass
 
     @staticmethod
