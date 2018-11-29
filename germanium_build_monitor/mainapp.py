@@ -30,6 +30,7 @@ from germanium_build_monitor.model.jenkins.operations import compare_branches
 from germanium_build_monitor.actions import exit_application, monitoring_threads
 
 import germanium_build_monitor.resources.icons as icons
+from PySide2.QtWidgets import QMessageBox
 
 
 class JobMonitorThread(threading.Thread):
@@ -37,58 +38,91 @@ class JobMonitorThread(threading.Thread):
                  server: JenkinsServer):
         super().__init__()
         self.server = server
+        self.error_shown = False
 
     def run(self) -> None:
         print(f"Server {self.server.name} is being monitored")
+
+        @ui_thread
+        @action
+        def update_failed_count(job, successful: bool) -> None:
+            if successful:
+                job.failed_count = 0
+                return
+
+            job.failed_count += 1
+
+            if job.failed_count < Settings.settings.maximum_failed_count:
+                return
+
+            if self.error_shown:
+                return
+
+            self.error_shown = True
+
+            QMessageBox.critical(MainWindow.instance(),
+                f"Failure monitoring {job.name}",
+                f"Failure monitoring {job.name} on {self.server.name} "
+                f"at {self.server.url}, after {job.failed_count} tries. "
+                "Felix will now exit.")
+            exit_application()
+
+        @ui_thread
+        @action
+        def update_results(job, result) -> None:
+            updated_branches = read_build_job_branches(job, result)
+
+            try:
+                if job.branches is None:
+                    job.branches = updated_branches
+                    return
+
+                notifications = compare_branches(job.branches, updated_branches)
+
+                if not merge_model(job.branches, updated_branches):
+                    job.branches = updated_branches
+
+                for notification in notifications:
+                    if notification.branch.status == BuildStatus.IGNORED:
+                        continue
+
+                    icon = icons.build_status_icon(notification.branch.status)
+
+                    show_notification(
+                        notification.branch.project_name,
+                        notification.branch.decoded_branch_name,
+                        icon,
+                        Settings.settings.notification_display_time * 1000
+                    )
+
+                    key = f"{notification.branch.project_name} "\
+                          f"({notification.branch.decoded_branch_name}) "
+                    systray_item = SystrayItem(
+                        key,
+                        notification.branch.status,
+                        f"{key}{notification.build.name}",
+                        lambda: webbrowser.open(notification.build.url)
+                    )
+
+                    RootModel.root_model.systray.add_request(systray_item)
+
+                RootModel.root_model.systray.flush_requests()
+
+                update_failed_count(job, True)
+            except Exception:  # UI Exception
+                traceback.print_exc()
+                update_failed_count(job, False)
+
         while self.server in monitoring_threads:
             for job in self.server.monitored_jobs:
-                print(f"scanning: {job.name}")
-                result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
+                try:
+                    print(f"scanning: {job.name}")
+                    result = jenkins_server(self.server).get_job_info(job.full_name, depth="2")
 
-                @ui_thread
-                @action
-                def update_results(job, result) -> None:
-                    updated_branches = read_build_job_branches(job, result)
-
-                    try:
-                        if job.branches is None:
-                            job.branches = updated_branches
-                            return
-
-                        notifications = compare_branches(job.branches, updated_branches)
-
-                        if not merge_model(job.branches, updated_branches):
-                            job.branches = updated_branches
-
-                        for notification in notifications:
-                            if notification.branch.status == BuildStatus.IGNORED:
-                                continue
-
-                            icon = icons.build_status_icon(notification.branch.status)
-
-                            show_notification(
-                                notification.branch.project_name,
-                                notification.branch.decoded_branch_name,
-                                icon,
-                                Settings.settings.notification_display_time * 1000
-                            )
-
-                            key = f"{notification.branch.project_name} "\
-                                  f"({notification.branch.decoded_branch_name}) "
-                            systray_item = SystrayItem(
-                                key,
-                                notification.branch.status,
-                                f"{key}{notification.build.name}",
-                                lambda: webbrowser.open(notification.build.url)
-                            )
-
-                            RootModel.root_model.systray.add_request(systray_item)
-
-                        RootModel.root_model.systray.flush_requests()
-                    except Exception:
-                        traceback.print_exc()
-
-                update_results(job, result)
+                except Exception:
+                    update_failed_count(job, False)
+                else:
+                    update_results(job, result)
 
             time.sleep(10)
         print(f"Stopped monitoring {self.server.name}")
