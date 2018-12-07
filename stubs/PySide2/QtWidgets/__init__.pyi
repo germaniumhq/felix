@@ -8,6 +8,9 @@ class QObject:
 
 
 class QWidget:
+    def activateWindow(self):
+        pass
+
     def deleteLater(self):
         pass
 
