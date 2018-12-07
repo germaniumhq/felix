@@ -157,11 +157,15 @@ def main() -> None:
     # We need to create the instance outside so it gets its own renderer
     MainWindow.instance()
 
+    def show_main_window() -> None:
+        MainWindow.instance().show()
+        MainWindow.instance().activateWindow()
+
     @render_call
     def render_context_menu():
         menu.clear()
         menu.addAction(icons.get_icon("favicon.ico"), "Main Window") \
-            .triggered.connect(MainWindow.instance().show)
+            .triggered.connect(show_main_window)
 
         if RootModel.root_model.systray.items:
             menu.addSeparator()
